@@ -19,4 +19,11 @@ public class HelloController {
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
+
+    @FXML
+    protected void userLogin() {
+        // Todo: Code to handle the login button press
+        System.out.println("Login button clicked!");
+    }
+
 }

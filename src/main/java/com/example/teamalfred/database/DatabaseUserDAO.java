@@ -24,13 +24,11 @@ public class DatabaseUserDAO implements IUserDAO {
             Statement insertStatement = connection.createStatement();
             String insertQuery = "INSERT INTO users (firstName, lastName, mobile, email, password) VALUES "
                     + "('Josh', 'Madams', '0412345678', 'josh@madams.com', 'password123'), "
-                    + "('Adam', 'Cummins', '0442115891', 'adams@cummins.com', 'password1234', )"
-                    + "('Philip', 'Mouton', '0433123456', 'philip@mouton.com', 'password12345', )"
+                    + "('Adam', 'Cummins', '0442115891', 'adams@cummins.com', 'password1234'),"
+                    + "('Philip', 'Mouton', '0433123456', 'philip@mouton.com', 'password12345'),"
                     + "('Justin', 'Coglan', '0411555999', 'justin@coglan.com', 'password123456'), "
                     + "('Felix', 'Nguyen', '0422555999', 'felix@nguyen.com', 'password1234567')";
             insertStatement.execute(insertQuery);
-
-
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -53,6 +51,4 @@ public class DatabaseUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
-
-
 }
