@@ -1,4 +1,4 @@
-package com.example.teamalfred;
+package com.example.teamalfred.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
