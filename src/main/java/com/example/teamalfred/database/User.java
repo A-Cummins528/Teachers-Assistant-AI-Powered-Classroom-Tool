@@ -6,6 +6,7 @@ public class User {
     private String lastName;
     private String email;
     private String mobile;
+    private String username;
 
     public User(String firstName, String lastName, String email, String mobil) {
         this.firstName = firstName;
@@ -57,4 +58,8 @@ public class User {
     public String getFullName() {
         return firstName + " " + lastName;
     }
+
+    public void setUsername(String username) {this.username = username; }
+
+    public String getUsername(String username) {return this.username; }
 }
