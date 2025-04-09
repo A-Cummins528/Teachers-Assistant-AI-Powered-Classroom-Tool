@@ -3,6 +3,8 @@ module com.example.teamalfred {
     requires javafx.fxml;
     requires javafx.web;
 
+    requires java.sql;
+
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
@@ -13,4 +15,8 @@ module com.example.teamalfred {
 
     opens com.example.teamalfred to javafx.fxml;
     exports com.example.teamalfred;
+    exports com.example.teamalfred.controller;
+    opens com.example.teamalfred.controller to javafx.fxml;
+    exports com.example.teamalfred.database;
+    opens com.example.teamalfred.database to javafx.fxml;
 }
