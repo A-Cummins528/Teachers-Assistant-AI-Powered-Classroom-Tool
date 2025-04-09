@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768" prefWidth="1366" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.teamalfred.controllers.HelloController">
+    <center>
+        <AnchorPane prefHeight="768.0" prefWidth="791.0" BorderPane.alignment="CENTER">
+            <children>
+                <AnchorPane layoutX="805.0" prefHeight="768.0" prefWidth="550.0">
+                    <children>
+                  <Rectangle arcHeight="40.0" arcWidth="40.0" fill="WHITE" height="370.0" layoutX="93.0" layoutY="199.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="365.0" />
+                        <Label alignment="CENTER" layoutX="184.0" layoutY="216.0" prefHeight="94.0" prefWidth="183.0" text="Sign in" textAlignment="CENTER">
+                            <font>
+                                <Font name="Al Nile Bold" size="38.0" />
+                            </font>
+                        </Label>
+                        <PasswordField fx:id="password" layoutX="110.0" layoutY="378.0" prefHeight="40.0" prefWidth="330.0" promptText="Password" style="-fx-background-radius: 30; -fx-background-color: #D3D3D3;" />
+                        <TextField fx:id="usernameLogin" layoutX="110.0" layoutY="317.0" prefHeight="40.0" prefWidth="330.0" promptText="Username" style="-fx-background-radius: 30; -fx-background-color: #D3D3D3;" />
+                        <Button fx:id="loginButton" layoutX="183.0" layoutY="449.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1c2832; -fx-background-radius: 30;" text="Login" textFill="WHITE">
+                     <font>
+                        <Font name="Al Nile Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="220.0" layoutY="501.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF;" text="Forgot Password" textFill="#9a8d8d">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Button>
+                        <Label fx:id="failedLogin" alignment="CENTER" contentDisplay="CENTER" layoutX="227.0" layoutY="293.0" textAlignment="CENTER" wrapText="true" />
+                    </children>
+                </AnchorPane>
+            <AnchorPane prefHeight="768.0" prefWidth="821.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1c2832" height="750.0" layoutX="7.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="552.0" />
+                  <Rectangle arcHeight="300.0" arcWidth="300.0" fill="#1c2832" height="750.0" layoutX="411.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="390.0" />
+                  <Label layoutX="204.0" layoutY="181.0" text="AcademiAI" textFill="WHITE">
+                     <font>
+                        <Font name="Al Bayan Bold" size="80.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="206.0" layoutY="291.0" prefHeight="60.0" prefWidth="410.0" text="Simplify your classroom, amplify your impact" textAlignment="CENTER" textFill="#aeadad">
+                     <font>
+                        <Font name="Al Nile" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="364.0" layoutY="403.0" text="New here?" textFill="WHITE">
+                     <font>
+                        <Font name="Al Bayan Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="loginButton1" layoutX="321.0" layoutY="452.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1c2832; -fx-background-radius: 30; -fx-border-color: #ffffff; -fx-border-style: solid; -fx-border-radius: 30;" text="SIGN UP" textFill="WHITE">
+                     <font>
+                        <Font name="Al Nile Bold" size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
