@@ -1,16 +1,18 @@
 package com.example.teamalfred.database;
 
 import java.sql.*;
+import java.io.File;
 
 public class DatabaseUserDAO implements IUserDAO {
     private Connection connection;
     private static String getUserByEmail = "SELECT * FROM users WHERE email = ?";
 
     public DatabaseUserDAO() {
-        System.out.println("howdy 1");
         connection = DatabaseConnection.getInstance();
-        createTable();
-        insertSampleData();
+
+        //FOR TESTING ONLY - UNCOMMENT IF DB FILE IS EMPTY
+        //createTable();
+        //insertSampleData();
 
 
     }
@@ -18,9 +20,9 @@ public class DatabaseUserDAO implements IUserDAO {
     // creates sample users === FOR TESTING ONLY
     private void insertSampleData() {
         try {
-            Statement clearStatement = connection.createStatement();
-            String clearQuery = "DELETE FROM users";
-            clearStatement.execute(clearQuery);
+            //Statement clearStatement = connection.createStatement();
+           // String clearQuery = "DELETE FROM users";
+            //clearStatement.execute(clearQuery);
             Statement insertStatement = connection.createStatement();
             String insertQuery = "INSERT INTO users (firstName, lastName, mobile, email, password) VALUES "
                     + "('Josh', 'Madams', '0412345678', 'josh@madams.com', 'password123'), "
@@ -29,6 +31,7 @@ public class DatabaseUserDAO implements IUserDAO {
                     + "('Justin', 'Coglan', '0411555999', 'justin@coglan.com', 'password123456'), "
                     + "('Felix', 'Nguyen', '0422555999', 'felix@nguyen.com', 'password1234567')";
             insertStatement.execute(insertQuery);
+            System.out.println("Absolute DB Path: " + new java.io.File("database.db").getAbsolutePath());
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -78,12 +81,23 @@ public class DatabaseUserDAO implements IUserDAO {
 
     }
 
+    // add user to database method
     public void addUser(User user) {
-        // SQL query to insert data from user object
-        String insertQuery = "INSERT INTO users (firstName, lastName, mobile, email, password) VALUES "
-                + "('" + user.getFirstName() + "','" + user.getLastName() + "','" + user.getMobile() + "','" + user.getEmail() + "','" + user.getPassword() + "')";
 
+        try {
+            String insertQuery = "INSERT INTO users (firstName, lastName, mobile, email, password) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery);
+            stmt.setString(1, user.getFirstName());
+            stmt.setString(2, user.getLastName());
+            stmt.setString(3, user.getMobile());
+            stmt.setString(4, user.getEmail());
+            stmt.setString(5, user.getPassword());
+            // Print out all users in the table now
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
 
     // Creates default EMPTY user table to start the database
     private void createTable() {
