@@ -1,5 +1,6 @@
-package com.example.teamalfred;
+package com.example.teamalfred.controllers;
 
+import com.example.teamalfred.Main;
 import com.example.teamalfred.database.DatabaseUserDAO;
 import com.example.teamalfred.database.IUserDAO;
 import javafx.event.ActionEvent;
@@ -58,7 +59,7 @@ public class HelloController {
             // Load the Signup.fxml file
             System.out.println(getClass().getResource("/com/example/teamalfred/LogIn.fxml"));
 
-            FXMLLoader loaderb = new FXMLLoader(getClass().getResource("SignUp.fxml"));
+            FXMLLoader loaderb = new FXMLLoader(getClass().getResource("/com/example/teamalfred/SignUp.fxml"));
             Parent root = loaderb.load();
 
             // Create a new scene with the loaded FXML
