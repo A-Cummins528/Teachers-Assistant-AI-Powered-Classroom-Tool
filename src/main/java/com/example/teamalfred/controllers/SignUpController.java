@@ -21,7 +21,14 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
 
+
+// SIGN UP PAGE CONTROLLER ## DO NOT TOUCH - JOSH
+
 public class SignUpController {
+
+    // initial values from input elements in fxml scene
+
+    // userDAO for database entry
     private IUserDAO userDAO;
 
     private User createUser;
@@ -38,8 +45,6 @@ public class SignUpController {
     @FXML
     private PasswordField passwordSignupConfirm;
     @FXML
-    private TextField username;
-    @FXML
     private Label invalidFirstname;
     @FXML
     private Label invalidLastname;
@@ -50,31 +55,39 @@ public class SignUpController {
     @FXML
     private Label invalidPassword;
 
-
+    // default connection variable for database
     private Connection connection;
 
 
-
+    // signup controller constructor
     public SignUpController() {
+        // initiate connect to database
         connection = DatabaseConnection.getInstance();
-        System.out.println("Signup controller...");
     }
 
+    // public user signup function (linked to signup button)
     public void userSignup(ActionEvent event) throws IOException {
         checkUserSignup();
 
     }
 
+    // private user signup function
     private void checkUserSignup() throws IOException {
         Main m = new Main();
+
+        // initial variables for new user info, all run through input validation methods
         String userFirstname = validateFirstname();
         String userLastname = validateLastname();
         String userMobile = validateMobile();
         String userEmail = emailSignup.getText().toString();
         String password = passwordSignup.getText().toString();
+
+        // create new user object with user info
         createUser = new User(userFirstname, userLastname, userEmail, userMobile, password);
-        createUser.printUserInfo();
+        // create new userDAO object
         userDAO = new DatabaseUserDAO();
+
+        // call addUser method in databaseUserDAO and parse in the new createUser (object of new user info)
         userDAO.addUser(createUser);
 
     }
