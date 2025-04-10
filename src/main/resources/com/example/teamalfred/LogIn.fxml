@@ -55,7 +55,7 @@
                         <Font name="Al Bayan Bold" size="19.0" />
                      </font>
                   </Label>
-                  <Button fx:id="loginButton1" layoutX="321.0" layoutY="452.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1c2832; -fx-background-radius: 30; -fx-border-color: #ffffff; -fx-border-style: solid; -fx-border-radius: 30;" text="SIGN UP" textFill="WHITE">
+                  <Button fx:id="loginButton1" layoutX="321.0" layoutY="452.0" mnemonicParsing="false" onAction="#handleSignUp" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1c2832; -fx-background-radius: 30; -fx-border-color: #ffffff; -fx-border-style: solid; -fx-border-radius: 30;" text="SIGN UP" textFill="WHITE">
                      <font>
                         <Font name="Al Nile Bold" size="16.0" />
                      </font>
