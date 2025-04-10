@@ -3,6 +3,7 @@ package com.example.teamalfred.controllers;
 import com.example.teamalfred.Main;
 import com.example.teamalfred.database.DatabaseUserDAO;
 import com.example.teamalfred.database.IUserDAO;
+import com.example.teamalfred.database.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+//Main Controller - Josh
+// DO NOT TOUCH
+
 import java.io.IOException;
 
 public class HelloController {
@@ -25,31 +29,51 @@ public class HelloController {
     }
     @FXML
     private Label welcomeText;
-
     @FXML
     private Button loginButton;
     @FXML
     private Label failedLogin;
     @FXML
-    private TextField usernameLogin;
+    private TextField emailLogin;
     @FXML
     private PasswordField password;
 
     public void userLogin(ActionEvent event) throws IOException {
-        checkLogin();
+        boolean login = checkLogin();
     }
 
-    private void checkLogin() throws IOException {
+    // Check Login method - Josh
+    private boolean checkLogin() throws IOException {
         Main m = new Main();
-        if(usernameLogin.getText().toString().equals("javacoding") && password.getText().toString().equals("123")) {
-            failedLogin.setText("Success!");
-
-        }
-        else if(usernameLogin.getText().toString().isEmpty() && password.getText().toString().isEmpty()) {
+        // get user inputs
+        if (emailLogin.getText().toString().isEmpty() && password.getText().toString().isEmpty()) {
+            // if either input empty, login failed, returns false/
             failedLogin.setText("All below fields are mandatory.");
         } else {
-            failedLogin.setText("Invalid credentials.");
+            // Search db for user email, if email not found, null is returned
+            User user = userDAO.getUser(emailLogin.getText().toString());
+            // if user email found
+            if (user != null) {
+                // check if input password is equal to password of email in database
+                if (user.getPassword().equals(password.getText().toString())) {
+                    failedLogin.setText("Success!");
+                    return true;
+                }
+            }
+            // Either email not found or password didn't match email.
+
         }
+        resetInputs();
+        return false;
+    }
+
+    // method to reset input values
+
+    private void resetInputs() throws IOException{
+        // resets both input boxes in the event of a failed login
+        emailLogin.setText("");
+        password.setText("");
+
     }
 
     @FXML
