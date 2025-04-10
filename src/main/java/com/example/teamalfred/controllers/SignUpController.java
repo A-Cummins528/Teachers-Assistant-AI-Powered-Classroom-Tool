@@ -5,6 +5,7 @@ import com.example.teamalfred.database.DatabaseConnection;
 import com.example.teamalfred.database.DatabaseUserDAO;
 import com.example.teamalfred.database.IUserDAO;
 import com.example.teamalfred.database.User;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -78,7 +80,8 @@ public class SignUpController {
         // initial variables for new user info, all run through input validation methods
         String userFirstname = validateFirstname();
         String userLastname = validateLastname();
-        String userMobile = validateMobile();
+        //String userMobile = validateMobile();
+        String userMobile = "123";
         String userEmail = emailSignup.getText().toString();
         String password = passwordSignup.getText().toString();
 
@@ -156,12 +159,10 @@ public class SignUpController {
      }
 
 
-
     @FXML
     private void handleLoginRedirect(ActionEvent event) {
         try {
-            // Load the Signup.fxml file
-
+            // Load the LogIn.fxml file in the background
             FXMLLoader loaderc = new FXMLLoader(getClass().getResource("/com/example/teamalfred/LogIn.fxml"));
             Parent root = loaderc.load();
 
@@ -171,13 +172,27 @@ public class SignUpController {
             // Get the current stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Set the new scene on the stage
-            stage.setScene(scene);
-            stage.show();
+            // Apply fade-out effect for the current scene
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(300), stage.getScene().getRoot());
+            fadeOut.setFromValue(1.0);
+            fadeOut.setToValue(0.0);
+
+            fadeOut.setOnFinished(e -> {
+                // Switch the scene after the fade-out is complete
+                stage.setScene(scene);
+
+                // Apply fade-in effect for the new scene
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(300), scene.getRoot());
+                fadeIn.setFromValue(0.0);
+                fadeIn.setToValue(1.0);
+                fadeIn.play();
+            });
+
+            fadeOut.play();
+
         } catch (IOException e) {
             e.printStackTrace();
             // Handle the exception appropriately
         }
-
     }
 }
