@@ -22,7 +22,7 @@
                             </font>
                         </Label>
                         <PasswordField fx:id="password" layoutX="110.0" layoutY="378.0" prefHeight="40.0" prefWidth="330.0" promptText="Password" style="-fx-background-radius: 30; -fx-background-color: #D3D3D3;" />
-                        <TextField fx:id="usernameLogin" layoutX="110.0" layoutY="317.0" prefHeight="40.0" prefWidth="330.0" promptText="Username" style="-fx-background-radius: 30; -fx-background-color: #D3D3D3;" />
+                        <TextField fx:id="emailLogin" layoutX="110.0" layoutY="317.0" prefHeight="40.0" prefWidth="330.0" promptText="Email" style="-fx-background-radius: 30; -fx-background-color: #D3D3D3;" />
                         <Button fx:id="loginButton" layoutX="183.0" layoutY="449.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1c2832; -fx-background-radius: 30;" text="Login" textFill="WHITE">
                      <font>
                         <Font name="Al Nile Bold" size="16.0" />
