@@ -59,10 +59,15 @@ public class HelloController {
                     failedLogin.setText("Success!");
                     return true;
                 }
+            } else {
+                System.out.println("User not found :(");
+               // System.out.println(user.getEmail());
+               // System.out.println(user.getPassword());
             }
             // Either email not found or password didn't match email.
 
         }
+        failedLogin.setText("Invalid Credentials");
         resetInputs();
         return false;
     }
