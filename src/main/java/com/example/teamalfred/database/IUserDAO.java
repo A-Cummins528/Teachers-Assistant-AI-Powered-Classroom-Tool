@@ -18,6 +18,7 @@ import java.util.List;
          */
         public void deleteUser(User contact);
 
+        public User getUser(String email);
 
     }
 

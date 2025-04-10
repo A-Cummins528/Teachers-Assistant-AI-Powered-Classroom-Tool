@@ -1,5 +1,8 @@
 package com.example.teamalfred.database;
 
+
+// default user class for accounts
+
 public class User {
     private int id;
     private String firstName;
@@ -7,8 +10,8 @@ public class User {
     private String email;
     private String mobile;
     private String password;
-    private String username;
 
+    // user constructor
     public User(String firstName, String lastName, String email, String mobile, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -16,6 +19,8 @@ public class User {
         this.mobile = mobile;
         this.password = password;
     }
+
+    // methods to set and get user variables
 
     public int getId() {
         return id;
@@ -60,10 +65,6 @@ public class User {
     public String getFullName() {
         return firstName + " " + lastName;
     }
-
-    public void setUsername(String username) {this.username = username; }
-
-    public String getUsername() {return this.username; }
 
     public void setPassword(String password) {this.password = password; }
 
