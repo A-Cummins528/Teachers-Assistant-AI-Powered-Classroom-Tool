@@ -6,13 +6,15 @@ public class User {
     private String lastName;
     private String email;
     private String mobile;
+    private String password;
     private String username;
 
-    public User(String firstName, String lastName, String email, String mobil) {
+    public User(String firstName, String lastName, String email, String mobile, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.mobile = mobil;
+        this.mobile = mobile;
+        this.password = password;
     }
 
     public int getId() {
@@ -61,5 +63,13 @@ public class User {
 
     public void setUsername(String username) {this.username = username; }
 
-    public String getUsername(String username) {return this.username; }
+    public String getUsername() {return this.username; }
+
+    public void setPassword(String password) {this.password = password; }
+
+    public String getPassword() {return this.password;}
+
+    public void printUserInfo() {
+        System.out.println(this.firstName + this.lastName + " " + this.mobile + " " + this.email + " " + this.password);
+    }
 }
