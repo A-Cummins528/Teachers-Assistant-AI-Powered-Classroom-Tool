@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
     private static Stage stg;
     @Override
     public void start(Stage stage) throws IOException {
-        System.out.println("howdy 2");
+        System.out.println(getClass().getResource("/com/example/teamalfred/LogIn.fxml"));
         stg = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("LogIn.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
@@ -21,6 +21,7 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
 
     public void changeScene(String fxml) throws IOException {
         Parent pane = FXMLLoader.load(getClass().getResource(fxml));
