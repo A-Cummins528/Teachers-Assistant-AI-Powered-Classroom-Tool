@@ -15,6 +15,7 @@ public class DatabaseUserDAO implements IUserDAO {
 
     }
 
+
     private void insertSampleData() {
         try {
             Statement clearStatement = connection.createStatement();
@@ -41,6 +42,17 @@ public class DatabaseUserDAO implements IUserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void deleteUser(User user) {}
+
+    public void updateUser(User user) {}
+
+
+    public void addUser(User user) {
+        String insertQuery = "INSERT INTO users (firstName, lastName, mobile, email, password, username) VALUES "
+                + "('" + user.getFirstName() + "','" + user.getLastName() + "','" + user.getMobile() + "','" + user.getEmail() + "','" + user.getPassword() + "','username69')";
+        System.out.println("User added!");
     }
 
     private void createTable() {
