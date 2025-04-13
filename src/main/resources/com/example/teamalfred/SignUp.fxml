@@ -58,16 +58,6 @@
                         <Font name="Al Nile" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="274.0" layoutY="404.0" text="New here?" textFill="WHITE">
-                     <font>
-                        <Font name="Al Bayan Bold" size="19.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="loginButton1" layoutX="232.0" layoutY="454.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1c2832; -fx-background-radius: 30; -fx-border-color: #ffffff; -fx-border-style: solid; -fx-border-radius: 30;" text="SIGN UP" textFill="WHITE">
-                     <font>
-                        <Font name="Al Nile Bold" size="16.0" />
-                     </font>
-                  </Button>
                </children>
             </AnchorPane>
          </children>
