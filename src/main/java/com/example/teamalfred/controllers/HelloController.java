@@ -37,13 +37,14 @@ public class HelloController {
     private TextField emailLogin;
     @FXML
     private PasswordField password;
+    private switchSceneController switchScene = new switchSceneController();
 
     public void userLogin(ActionEvent event) throws IOException {
-        boolean login = checkLogin();
+        boolean login = checkLogin(event);
     }
 
     // Check Login method - Josh
-    private boolean checkLogin() throws IOException {
+    private boolean checkLogin(ActionEvent event) throws IOException {
         Main m = new Main();
         // get user inputs
         if (emailLogin.getText().toString().isEmpty() && password.getText().toString().isEmpty()) {
@@ -57,6 +58,7 @@ public class HelloController {
                 // check if input password is equal to password of email in database
                 if (user.getPassword().equals(password.getText().toString())) {
                     failedLogin.setText("Success!");
+                    switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
                     return true;
                 }
             } else {
