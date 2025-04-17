@@ -48,11 +48,32 @@ public class DatabaseUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
-
+    // Implementation based on practical. Needs testing -Phil
+    //    public void deleteUser(User user) {
+    //        try {
+    //            PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
+    //            statement.setInt(1, user.getId());
+    //            statement.executeUpdate();
+    //        } catch (Exception e) {
+    //            e.printStackTrace();
+    //        }
+    //    }
     public void deleteUser(User user) {}
-
+    // Update User Implementation based on practical. Working on testing. -Phil
+    //    public void updateUser(User user) {
+    //        try {
+    //            PreparedStatement statement = connection.prepareStatement("UPDATE users SET firstName = ?, lastName = ?, mobile = ?, email = ? WHERE id = ?");
+    //            statement.setString(1, user.getFirstName());
+    //            statement.setString(2, user.getLastName());
+    //            statement.setString(3, user.getMobile());
+    //            statement.setString(4, user.getEmail());
+    //            statement.setInt(5, user.getId());
+    //            statement.executeUpdate();
+    //        } catch (Exception e) {
+    //            e.printStackTrace();
+    //        }
+    //    }
     public void updateUser(User user) {}
-
     // Method to search for a user by email
     public User getUser(String email) {
 
