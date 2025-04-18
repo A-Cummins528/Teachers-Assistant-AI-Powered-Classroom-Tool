@@ -13,25 +13,29 @@ public class DatabaseUserDAO implements IUserDAO {
         //FOR TESTING ONLY - UNCOMMENT IF DB FILE IS EMPTY
         //createTable();
         //insertSampleData();
+        //deleteTable();
+        //createTable();
+
 
 
     }
 
     // creates sample users === FOR TESTING ONLY
-    private void insertSampleData() {
+    private void insertSampleData(boolean populate) {
         try {
-            //Statement clearStatement = connection.createStatement();
-           // String clearQuery = "DELETE FROM users";
-            //clearStatement.execute(clearQuery);
+            Statement clearStatement = connection.createStatement();
+            String clearQuery = "DELETE FROM users";
+            clearStatement.execute(clearQuery);
             Statement insertStatement = connection.createStatement();
-            String insertQuery = "INSERT INTO users (firstName, lastName, mobile, email, password) VALUES "
-                    + "('Josh', 'Madams', '0412345678', 'josh@madams.com', 'password123'), "
-                    + "('Adam', 'Cummins', '0442115891', 'adams@cummins.com', 'password1234'),"
-                    + "('Philip', 'Mouton', '0433123456', 'philip@mouton.com', 'password12345'),"
-                    + "('Justin', 'Coglan', '0411555999', 'justin@coglan.com', 'password123456'), "
-                    + "('Felix', 'Nguyen', '0422555999', 'felix@nguyen.com', 'password1234567')";
-            insertStatement.execute(insertQuery);
-            System.out.println("Absolute DB Path: " + new java.io.File("database.db").getAbsolutePath());
+            if(populate) {
+                String insertQuery = "INSERT INTO users (firstName, lastName, mobile, email, password) VALUES "
+                        + "('Joshh', 'Madams', '0412345678', 'josh@madams.com', 'password123'), "
+                        + "('Adam', 'Cummins', '0442115891', 'adams@cummins.com', 'password1234'),"
+                        + "('Philip', 'Mouton', '0433123456', 'philip@mouton.com', 'password12345'),"
+                        + "('Justin', 'Coglan', '0411555999', 'justin@coglan.com', 'password123456'), "
+                        + "('Felix', 'Nguyen', '0422555999', 'felix@nguyen.com', 'password1234567')";
+                insertStatement.execute(insertQuery);
+            }
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -104,16 +108,17 @@ public class DatabaseUserDAO implements IUserDAO {
 
     // add user to database method
     public void addUser(User user) {
-
+        // insert user into database
         try {
             String insertQuery = "INSERT INTO users (firstName, lastName, mobile, email, password) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery);
+            System.out.println(user.getFirstName());
             stmt.setString(1, user.getFirstName());
             stmt.setString(2, user.getLastName());
             stmt.setString(3, user.getMobile());
             stmt.setString(4, user.getEmail());
             stmt.setString(5, user.getPassword());
-            // Print out all users in the table now
+            stmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
