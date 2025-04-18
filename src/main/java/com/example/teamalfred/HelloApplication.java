@@ -14,21 +14,17 @@ public class HelloApplication extends Application {
     @Override
     // Start method to begin database and login scene
     public void start(Stage stage) throws IOException {
-        System.out.println(getClass().getResource("/com/example/teamalfred/LogIn.fxml"));
+        // create initial scene
         stg = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("LogIn.fxml"));
         // default scene (login page)
         Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
-        stage.setTitle("Hello!");
+        stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
     }
 
-// change scene method to switch fxml files (change to a new page) ## DO NOT TOUCH - JOSH
-    public void changeScene(String fxml) throws IOException {
-        Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-        stg.getScene().setRoot(pane);
-    }
+
 
     // main function for program entry point.
     public static void main(String[] args) {

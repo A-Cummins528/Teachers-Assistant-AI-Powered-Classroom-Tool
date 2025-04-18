@@ -10,10 +10,15 @@
    <children>
       <AnchorPane prefHeight="40.0" prefWidth="658.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3a3e43" height="70.0" stroke="#1f1f1f" strokeType="INSIDE" strokeWidth="0.0" width="1366.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3a3e43" height="70.0" stroke="#1f1f1f" strokeType="INSIDE" strokeWidth="0.0" width="1373.0" />
             <Label layoutX="14.0" text="AcademiAI" textFill="WHITE">
                <font>
                   <Font name="Al Nile Bold" size="38.0" />
+               </font>
+            </Label>
+            <Label fx:id="displayUserName" alignment="CENTER_RIGHT" layoutX="894.0" layoutY="17.0" prefHeight="17.0" prefWidth="458.0" text="Hey there, Josh" textAlignment="RIGHT" textFill="WHITE">
+               <font>
+                  <Font name="Al Nile Bold" size="21.0" />
                </font>
             </Label>
          </children>
