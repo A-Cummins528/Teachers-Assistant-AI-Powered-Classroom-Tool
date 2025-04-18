@@ -21,10 +21,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloController {
+public class LogInController {
 
+    // initial variable declerations
     private IUserDAO userDAO;
-    public HelloController() {
+    public LogInController() {
         userDAO = new DatabaseUserDAO();
     }
     @FXML
@@ -37,8 +38,10 @@ public class HelloController {
     private TextField emailLogin;
     @FXML
     private PasswordField password;
+    // initial switch scene object created
     private switchSceneController switchScene = new switchSceneController();
 
+    // call button function
     public void userLogin(ActionEvent event) throws IOException {
         boolean login = checkLogin(event);
     }
@@ -61,14 +64,12 @@ public class HelloController {
                     switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
                     return true;
                 }
-            } else {
-                System.out.println("User not found :(");
-               // System.out.println(user.getEmail());
-               // System.out.println(user.getPassword());
+
             }
             // Either email not found or password didn't match email.
 
         }
+        // login failed
         failedLogin.setText("Invalid Credentials");
         resetInputs();
         return false;
@@ -83,29 +84,12 @@ public class HelloController {
 
     }
 
+    // function to handle signup button click action
     @FXML
+
     private void handleSignUp(ActionEvent event) {
-        try {
-            System.out.println("Handling signup...");
-            // Load the Signup.fxml file
-            System.out.println(getClass().getResource("/com/example/teamalfred/LogIn.fxml"));
+        switchScene.switchScene(event,"/com/example/teamalfred/SignUp.fxml");
 
-            FXMLLoader loaderb = new FXMLLoader(getClass().getResource("/com/example/teamalfred/SignUp.fxml"));
-            Parent root = loaderb.load();
-
-            // Create a new scene with the loaded FXML
-            Scene scene = new Scene(root);
-
-            // Get the current stage
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Set the new scene on the stage
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the exception appropriately
-        }
     }
 
 
