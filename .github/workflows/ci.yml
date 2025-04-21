@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "master" ] # Runs on pull requests targeting the 'master' branch
 
+permissions:
+  contents: read  # Allows checkout action to read repository content
+  checks: write   # Allows test reporter to write check runs
+
 jobs:
   build-and-test:
 
