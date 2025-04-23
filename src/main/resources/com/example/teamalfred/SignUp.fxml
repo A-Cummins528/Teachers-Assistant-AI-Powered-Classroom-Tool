@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768" prefWidth="1366" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.teamalfred.controllers.SignUpController">
+   <center>
+      <AnchorPane prefHeight="768.0" prefWidth="791.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="805.0" prefHeight="768.0" prefWidth="550.0">
+               <children>
+                  <Rectangle arcHeight="40.0" arcWidth="40.0" fill="WHITE" height="550.0" layoutX="77.0" layoutY="109.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="396.0" />
+                  <Label alignment="CENTER" layoutX="65.0" layoutY="128.0" prefHeight="94.0" prefWidth="420.0" text="Let's Get Started" textAlignment="CENTER">
+                     <font>
+                        <Font name="Al Nile Bold" size="38.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="firstNameSignup" layoutX="108.0" layoutY="222.0" prefHeight="40.0" prefWidth="335.0" promptText="First Name" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0f0;" />
+                  <TextField fx:id="lastNameSignup" layoutX="108.0" layoutY="282.0" prefHeight="40.0" prefWidth="335.0" promptText="Last Name" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
+                  <Button fx:id="signupButton" layoutX="181.0" layoutY="541.0" mnemonicParsing="false" onAction="#userSignup" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1c2832; -fx-background-radius: 30;" text="Sign Up" textFill="WHITE">
+                     <font>
+                        <Font name="Al Nile Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="signInSignupButton" layoutX="178.0" layoutY="611.0" mnemonicParsing="false" onAction="#handleLoginRedirect" style="-fx-background-color: #FFFFFF;" text="Already have an account? Sign In" textFill="#9a8d8d">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="failedLogin" alignment="CENTER" contentDisplay="CENTER" layoutX="227.0" layoutY="293.0" textAlignment="CENTER" wrapText="true" />
+                  <TextField fx:id="mobileSignup" layoutX="108.0" layoutY="344.0" prefHeight="40.0" prefWidth="335.0" promptText="Mobile" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
+                  <TextField fx:id="emailSignup" layoutX="108.0" layoutY="406.0" prefHeight="40.0" prefWidth="335.0" promptText="Email" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
+                  <PasswordField fx:id="passwordSignup" layoutX="108.0" layoutY="465.0" prefHeight="40.0" prefWidth="335.0" promptText="Password" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
+                  <Label fx:id="invalidFirstname" layoutX="122.0" layoutY="205.0" textFill="RED" />
+                  <Label fx:id="invalidLastname" layoutX="122.0" layoutY="262.0" textFill="RED" />
+                  <Label fx:id="invalidMobile" layoutX="122.0" layoutY="327.0" textFill="RED" />
+                  <Label fx:id="invalidEmail" layoutX="122.0" layoutY="389.0" textFill="RED" />
+                  <Label fx:id="invalidPassword" layoutX="122.0" layoutY="446.0" textFill="RED" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="768.0" prefWidth="683.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1c2832" height="750.0" layoutX="7.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="507.0" />
+                  <Rectangle arcHeight="300.0" arcWidth="300.0" fill="#1c2832" height="750.0" layoutX="264.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="390.0" />
+                  <Label layoutX="114.0" layoutY="179.0" text="AcademiAI" textFill="WHITE">
+                     <font>
+                        <Font name="Al Bayan Bold" size="80.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="116.0" layoutY="291.0" prefHeight="60.0" prefWidth="410.0" text="Simplify your classroom, amplify your impact" textAlignment="CENTER" textFill="#aeadad">
+                     <font>
+                        <Font name="Al Nile" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

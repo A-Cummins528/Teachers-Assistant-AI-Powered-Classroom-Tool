@@ -1,4 +1,4 @@
-package com.example.teamalfred.controller;
+package com.example.teamalfred.controllers;
 
 import com.example.teamalfred.Main;
 import javafx.fxml.FXML;
@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
+import com.example.teamalfred.database.User;
 
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ public class LogIn {
     @FXML
     private Label failedLogin;
     @FXML
-    private TextField usernameLogin;
+    private TextField emailLogin;
     @FXML
     private PasswordField password;
 
@@ -32,11 +33,12 @@ public class LogIn {
 
     private void checkLogin() throws IOException {
         Main m = new Main();
-        if(usernameLogin.getText().toString().equals("javacoding") && password.getText().toString().equals("123")) {
+
+        if(emailLogin.getText().toString().equals("javacoding") && password.getText().toString().equals("123")) {
             failedLogin.setText("Success!");
 
         }
-        else if(usernameLogin.getText().toString().isEmpty() && password.getText().toString().isEmpty()) {
+        else if(emailLogin.getText().toString().isEmpty() && password.getText().toString().isEmpty()) {
             failedLogin.setText("All below fields are mandatory.");
         } else {
             failedLogin.setText("Invalid credentials.");

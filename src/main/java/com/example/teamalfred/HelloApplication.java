@@ -12,21 +12,21 @@ public class HelloApplication extends Application {
 
     private static Stage stg;
     @Override
+    // Start method to begin database and login scene
     public void start(Stage stage) throws IOException {
-        System.out.println("howdy 2");
+        // create initial scene
         stg = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("Hello!");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("LogIn.fxml"));
+        // default scene (login page)
+        Scene scene = new Scene(fxmlLoader.load(), 1366, 768);
+        stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
     }
 
-    public void changeScene(String fxml) throws IOException {
-        Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-        stg.getScene().setRoot(pane);
-    }
 
+
+    // main function for program entry point.
     public static void main(String[] args) {
         launch();
     }
