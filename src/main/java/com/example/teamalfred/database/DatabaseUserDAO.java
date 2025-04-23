@@ -145,3 +145,6 @@ public class DatabaseUserDAO implements IUserDAO {
         }
     }
 }
+//TODO: This class has too many different responsibilities, begin moving out
+// schema management, testing, searching, validation, etc into other classes
+// until this class can be removed

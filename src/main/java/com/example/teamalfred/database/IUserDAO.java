@@ -21,4 +21,5 @@ import java.util.List;
         public User getUser(String email);
 
     }
-
+//TODO: This class defines the contract for all User Data Access Object operations
+// It lists what you can do with user data, not how.

@@ -12,34 +12,12 @@ import java.util.Objects; // Import Objects for equals and hashCode
  */
 public class User {
 
-    /**
-     * Unique identifier for the user. Typically assigned by the database.
-     */
+
     private int id;
-
-    /**
-     * The user's first name.
-     */
     private String firstName;
-
-    /**
-     * The user's last name.
-     */
     private String lastName;
-
-    /**
-     * The user's email address. Should be unique.
-     */
     private String email;
-
-    /**
-     * The user's mobile phone number.
-     */
     private String mobile;
-
-    /**
-     * The user's password.
-     */
     private String password; // TODO: store as a hashed password
 
     /**
@@ -221,3 +199,4 @@ public class User {
         return Objects.hash(email);
     }
 }
+// TODO: Holds the data for  asingle user (firstName, lastName, etc). Keep as is.
