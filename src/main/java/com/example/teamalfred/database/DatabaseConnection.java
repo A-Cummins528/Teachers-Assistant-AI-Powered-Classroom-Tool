@@ -85,5 +85,5 @@ public class DatabaseConnection {
         }
     }
 }
-// TODO: Throw a custome exception instead of printing errors to System.err
-// TODO: Implement closeInstance() when shutting down the application
+// TODO: Throw a custom exception instead of printing errors to System.err
+// TODO: Implement closeInstance() elsewhere when shutting down the application
