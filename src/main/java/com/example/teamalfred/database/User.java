@@ -2,6 +2,7 @@ package com.example.teamalfred.database;
 
 import java.util.Objects; // Import Objects for equals and hashCode
 
+
 /**
  * Represents a user within the system.
  * This class stores basic user information including identification,
@@ -38,6 +39,14 @@ public class User {
         this.mobile = mobile;
         this.password = password;
         // 'id' remains uninitialised, default is 0
+    }
+
+    /**
+     * Default constructor. Needed for frameworks or manual instantiation
+     * before setting fields via setters.
+     */
+    public User() {
+        // No-argument constructor
     }
 
     // --- Getters and Setters ---
