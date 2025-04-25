@@ -1,10 +1,31 @@
 package com.example.teamalfred.database;
 
 import java.sql.*;
+import java.util.Optional;
 
-public class DatabaseUserDAO implements UserDAO {
+public abstract class DatabaseUserDAO implements UserDAO {
     private Connection connection;
     private static String getUserByEmail = "SELECT * FROM users WHERE email = ?";
+
+    @Override
+    public void createUser(User user) throws SQLException {
+
+    }
+
+    @Override
+    public void updateUser(User user) throws SQLException {
+
+    }
+
+    @Override
+    public void deleteUser(int id) throws SQLException {
+
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
 
     public DatabaseUserDAO() {
         connection = DatabaseConnection.getInstance();
@@ -14,8 +35,6 @@ public class DatabaseUserDAO implements UserDAO {
         //insertSampleData();
         //deleteTable();
         //createTable();
-
-
 
     }
 
@@ -81,33 +100,33 @@ public class DatabaseUserDAO implements UserDAO {
 //    public void updateUser(User user) {}
 
 
-//    // Method to search for a user by email
-//    public User findUserByEmail(String email) {
-//
-//        try {
-//            // sets SQL query to user email search query
-//            PreparedStatement statement = connection.prepareStatement(getUserByEmail);
-//            // inserts the specific email to be searched for into query
-//            statement.setString(1, email);
-//            // stores result of query
-//            ResultSet resultSet = statement.executeQuery();
-//
-//            if(resultSet.next()) {
-//                // email found in db
-//                // new user object storing data associated with the found email
-//                User user = new User(resultSet.getString("firstName"), resultSet.getString("lastName"), resultSet.getString("mobile"), resultSet.getString("email"), resultSet.getString("password"));
-//                return user;
-//            } else {
-//                // user email not found in db return null value
-//                return null;
-//            }
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//            return null;
-//        }
-//
-//
-//    }
+    // Method to search for a user by email
+    public Optional<User> findUserByEmail(String email) {
+
+        try {
+            // sets SQL query to user email search query
+            PreparedStatement statement = connection.prepareStatement(getUserByEmail);
+            // inserts the specific email to be searched for into query
+            statement.setString(1, email);
+            // stores result of query
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()) {
+                // email found in db
+                // new user object storing data associated with the found email
+                User user = new User(resultSet.getString("firstName"), resultSet.getString("lastName"), resultSet.getString("mobile"), resultSet.getString("email"), resultSet.getString("password"));
+                return Optional.of(user);
+            } else {
+                // user email not found in db return null value
+                return null;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+
+
+    }
 
 //    // add user to database method
 //    public void createUser(User user) {

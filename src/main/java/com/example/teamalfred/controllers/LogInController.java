@@ -15,13 +15,26 @@ import javafx.scene.control.TextField;
 // DO NOT TOUCH
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
 
 public class LogInController {
 
     // initial variable declerations
     private UserDAO userDAO;
     public LogInController() {
-        userDAO = new DatabaseUserDAO();
+        userDAO = new DatabaseUserDAO() {
+            @Override
+            public Optional<User> findUserById(int id) throws SQLException {
+                return Optional.empty();
+            }
+
+            @Override
+            public List<User> getAllUsers() throws SQLException {
+                return List.of();
+            }
+        };
     }
     @FXML
     private Label welcomeText;

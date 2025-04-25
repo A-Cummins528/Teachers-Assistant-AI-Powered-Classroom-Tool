@@ -13,6 +13,9 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
 
 
 // SIGN UP PAGE CONTROLLER ## DO NOT TOUCH - JOSH
@@ -64,7 +67,7 @@ public class SignUpController {
     }
 
     // public user signup function (linked to signup button)
-    public void userSignup(ActionEvent event) throws IOException {
+    public void userSignup(ActionEvent event) throws IOException, SQLException {
         // reset mastervalidationcounter to 0
         masterValidationCounter = 0;
         checkUserSignup(event);
@@ -72,7 +75,7 @@ public class SignUpController {
     }
 
     // private user signup function
-    private void checkUserSignup(ActionEvent event) throws IOException {
+    private void checkUserSignup(ActionEvent event) throws IOException, SQLException {
         Main m = new Main();
 
         // initial variables for new user info, all run through input validation methods
@@ -91,10 +94,20 @@ public class SignUpController {
             // create new user object with user inputs
             createUser = new User(userFirstname, userLastname, userEmail, userMobile, password);
             // create new userDAO object
-            userDAO = new DatabaseUserDAO();
+            userDAO = new DatabaseUserDAO() {
+                @Override
+                public Optional<User> findUserById(int id) throws SQLException {
+                    return Optional.empty();
+                }
+
+                @Override
+                public List<User> getAllUsers() throws SQLException {
+                    return List.of();
+                }
+            };
 
             // call addUser method in databaseUserDAO and parse in the new createUser (object of new user info)
-            userDAO.addUser(createUser);
+            userDAO.createUser(createUser);
 
             // clear input fields & switch to dashboard scene
             clearInputs(true);
