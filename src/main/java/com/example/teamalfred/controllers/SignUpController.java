@@ -3,26 +3,16 @@ package com.example.teamalfred.controllers;
 import com.example.teamalfred.Main;
 import com.example.teamalfred.database.DatabaseConnection;
 import com.example.teamalfred.database.DatabaseUserDAO;
-import com.example.teamalfred.database.IUserDAO;
+import com.example.teamalfred.database.UserDAO;
 import com.example.teamalfred.database.User;
-import com.example.teamalfred.controllers.switchSceneController;
-import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Statement;
 
 
 // SIGN UP PAGE CONTROLLER ## DO NOT TOUCH - JOSH
@@ -32,7 +22,7 @@ public class SignUpController {
     // initial values from input elements in fxml scene
 
     // userDAO for database entry
-    private IUserDAO userDAO;
+    private UserDAO userDAO;
     // Master validation counter variable, starts at 0, if all 5 user inputs fields are validated, masterValidationCounter will equal 5.
     private int masterValidationCounter;
     // Master validation variable, only set to true once ALL user data is validated and account is being created

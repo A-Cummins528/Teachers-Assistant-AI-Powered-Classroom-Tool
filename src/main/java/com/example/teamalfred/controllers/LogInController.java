@@ -2,19 +2,14 @@ package com.example.teamalfred.controllers;
 
 import com.example.teamalfred.Main;
 import com.example.teamalfred.database.DatabaseUserDAO;
-import com.example.teamalfred.database.IUserDAO;
+import com.example.teamalfred.database.UserDAO;
 import com.example.teamalfred.database.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 //Main Controller - Josh
 // DO NOT TOUCH
@@ -24,7 +19,7 @@ import java.io.IOException;
 public class LogInController {
 
     // initial variable declerations
-    private IUserDAO userDAO;
+    private UserDAO userDAO;
     public LogInController() {
         userDAO = new DatabaseUserDAO();
     }
@@ -55,7 +50,7 @@ public class LogInController {
             failedLogin.setText("All below fields are mandatory.");
         } else {
             // Search db for user email, if email not found, null is returned
-            User user = userDAO.getUser(emailLogin.getText().toString());
+            User user = userDAO.findUserByEmail(emailLogin.getText().toString());
             // if user email found
             if (user != null) {
                 // check if input password is equal to password of email in database

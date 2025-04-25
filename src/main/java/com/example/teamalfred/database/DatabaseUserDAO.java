@@ -1,9 +1,8 @@
 package com.example.teamalfred.database;
 
 import java.sql.*;
-import java.io.File;
 
-public class DatabaseUserDAO implements IUserDAO {
+public class DatabaseUserDAO implements UserDAO {
     private Connection connection;
     private static String getUserByEmail = "SELECT * FROM users WHERE email = ?";
 
@@ -79,7 +78,7 @@ public class DatabaseUserDAO implements IUserDAO {
     //    }
     public void updateUser(User user) {}
     // Method to search for a user by email
-    public User getUser(String email) {
+    public User findUserByEmail(String email) {
 
         try {
             // sets SQL query to user email search query
@@ -107,7 +106,7 @@ public class DatabaseUserDAO implements IUserDAO {
     }
 
     // add user to database method
-    public void addUser(User user) {
+    public void createUser(User user) {
         // insert user into database
         try {
             String insertQuery = "INSERT INTO users (firstName, lastName, mobile, email, password) VALUES (?, ?, ?, ?, ?)";
