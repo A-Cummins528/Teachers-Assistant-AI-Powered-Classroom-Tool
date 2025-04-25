@@ -51,37 +51,37 @@ public class LogInController {
 
     // call button function
     public void userLogin(ActionEvent event) throws IOException {
-        boolean login = checkLogin(event);
+        //boolean login = checkLogin(event);
     }
 
-    // Check Login method - Josh
-    private boolean checkLogin(ActionEvent event) throws IOException {
-        Main m = new Main();
-        // get user inputs
-        if (emailLogin.getText().toString().isEmpty() && password.getText().toString().isEmpty()) {
-            // if either input empty, login failed, returns false/
-            failedLogin.setText("All below fields are mandatory.");
-        } else {
-            // Search db for user email, if email not found, null is returned
-            User user = userDAO.findUserByEmail(emailLogin.getText().toString());
-            // if user email found
-            if (user != null) {
-                // check if input password is equal to password of email in database
-                if (user.getPassword().equals(password.getText().toString())) {
-                    failedLogin.setText("Success!");
-                    switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
-                    return true;
-                }
-
-            }
-            // Either email not found or password didn't match email.
-
-        }
-        // login failed
-        failedLogin.setText("Invalid Credentials");
-        resetInputs();
-        return false;
-    }
+//    // Check Login method - Josh
+//    private boolean checkLogin(ActionEvent event) throws IOException {
+//        Main m = new Main();
+//        // get user inputs
+//        if (emailLogin.getText().toString().isEmpty() && password.getText().toString().isEmpty()) {
+//            // if either input empty, login failed, returns false/
+//            failedLogin.setText("All below fields are mandatory.");
+//        } else {
+//            // Search db for user email, if email not found, null is returned
+//            User user = userDAO.findUserByEmail(emailLogin.getText().toString());
+//            // if user email found
+//            if (user != null) {
+//                // check if input password is equal to password of email in database
+//                if (user.getPassword().equals(password.getText().toString())) {
+//                    failedLogin.setText("Success!");
+//                    switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
+//                    return true;
+//                }
+//
+//            }
+//            // Either email not found or password didn't match email.
+//
+//        }
+//        // login failed
+//        failedLogin.setText("Invalid Credentials");
+//        resetInputs();
+//        return false;
+//    }
 
     // method to reset input values
 

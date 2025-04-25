@@ -23,7 +23,7 @@ public class SqliteUserDAO implements UserDAO {
     private static final String COL_FIRST_NAME = "firstName";
     private static final String COL_LAST_NAME = "lastName";
     private static final String COL_MOBILE = "mobile";
-    private static String COL_EMAIL = "email";
+    private static final String COL_EMAIL = "email";
     private static final String COL_PASSWORD = "password";
 
 
@@ -44,6 +44,10 @@ public class SqliteUserDAO implements UserDAO {
             throw new SQLException("Database connection could not be established.");
         }
 
+        // Check if email is already registered
+        if (findUserByEmail(user.getEmail()).isPresent()) {
+            throw new SQLException("A user with this email already exists.");
+        }
 
         // Use try-with-resources for PreparedStatement (automatically closes statement)
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -52,7 +56,7 @@ public class SqliteUserDAO implements UserDAO {
             pstmt.setString(2, user.getLastName());
             pstmt.setString(3, user.getMobile());
             pstmt.setString(4, user.getEmail());
-            pstmt.setString(5, user.getPassword()); // TODO: handle password hashing securely
+            pstmt.setString(5, user.getPassword());
 
             // Execute the insert
             pstmt.executeUpdate();
@@ -82,7 +86,7 @@ public class SqliteUserDAO implements UserDAO {
             pstmt.setString(2, user.getLastName());
             pstmt.setString(3, user.getMobile());
             pstmt.setString(4, user.getEmail());
-            pstmt.setString(5, user.getPassword()); // Update password if needed
+            pstmt.setString(5, user.getPassword());
             pstmt.setInt(6, user.getId()); // Use the ID for the WHERE clause
 
             pstmt.executeUpdate();
@@ -214,13 +218,13 @@ public class SqliteUserDAO implements UserDAO {
      */
     private User mapResultSetToUser(ResultSet rs) throws SQLException {
         User user = new User();
-        // Make sure your User class has setters for these fields
         user.setId(rs.getInt(COL_ID));
         user.setFirstName(rs.getString(COL_FIRST_NAME));
         user.setLastName(rs.getString(COL_LAST_NAME));
         user.setMobile(rs.getString(COL_MOBILE));
         user.setEmail(rs.getString(COL_EMAIL));
-        user.setPassword(rs.getString(COL_PASSWORD)); // TODO: Hashing, currently retrieving raw password
+        String hashedPasswordFromDb = rs.getString(COL_PASSWORD);
+        user.setPersistedPassword(hashedPasswordFromDb);
         return user;
     }
 }

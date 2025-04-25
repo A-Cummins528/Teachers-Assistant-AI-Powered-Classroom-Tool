@@ -27,13 +27,11 @@ public class User {
      * @param plainTextPassword  The user's plaintext password (will be hashed).
      */
     public User(String firstName, String lastName, String email, String mobile, String plainTextPassword) {
-        // TODO: Basic validation can go here
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.mobile = mobile;
-        // Hash the password immediately upon creation
-        setPassword(plainTextPassword); // Use the setter which contains hashing logic
+        setFirstName(firstName);
+        setLastName(lastName);
+        setEmail(email);
+        setMobile(mobile);
+        setPassword(plainTextPassword); // Hash the password immediately upon creation
         // 'id' remains uninitialised
     }
 
@@ -56,16 +54,56 @@ public class User {
     public String getEmail() { return email; }
     public String getMobile() { return mobile; }
 
+    /**
+     * Gets the stored password hash.
+     * Note: This returns the HASH, not the original plaintext password.
+     *
+     * @return The BCrypt password hash string.
+     */
+    public String getPassword() {
+        return password;
+    }
 
 
 
     // --- Setters ---
 
     public void setId(int id) { this.id = id; }
-    public void setFirstName(String firstName) { this.firstName = firstName; }
-    public void setLastName(String lastName) { this.lastName = lastName; }
-    public void setEmail(String email) { this.email = email; }
-    public void setMobile(String mobile) { this.mobile = mobile; }
+
+    public void setFirstName(String firstName) {
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be null or empty.");
+        }
+        this.firstName = firstName.trim();
+    }
+
+    public void setLastName(String lastName) {
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be null or empty.");
+        }
+        this.lastName = lastName.trim();
+    }
+
+    public void setEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be null or empty.");
+        }
+        if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
+            throw new IllegalArgumentException("Invalid email format.");
+        }
+        this.email = email.trim();
+    }
+
+    public void setMobile(String mobile) {
+        if (mobile == null || mobile.trim().isEmpty()) {
+            throw new IllegalArgumentException("Mobile number cannot be null or empty.");
+        }
+        if (!mobile.matches("^\\+?\\d{7,15}$")) {
+            throw new IllegalArgumentException("Invalid mobile number format.");
+        }
+        this.mobile = mobile.trim();
+    }
+
 
     /**
      * Hashes the provided plaintext password using BCrypt and stores the hash.
@@ -80,6 +118,18 @@ public class User {
         // Hash the password using BCrypt with a generated salt
         // BCrypt.gensalt() generates a salt; hashpw combines password and salt
         this.password = BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+    }
+
+    /**
+     * Sets the password field directly with a pre-hashed value.
+     * This is typically used only when loading user data from the database.
+     * Avoid calling this with plaintext passwords.
+     *
+     * @param hashedPassword The already hashed password string from the database.
+     */
+    public void setPersistedPassword(String hashedPassword) {
+        // Directly set the internal field with the value from the DB
+        this.password = hashedPassword;
     }
 
 
@@ -162,11 +212,4 @@ public class User {
         // Assumes non-zero ID means it's a valid, comparable user
         return id != 0 && id == user.id;
     }
-
 }
-// TODO: Add validation for email, first, last name, password, email not null, email contains @, id is a positive int
-// Use IlleagalArgumentException for failures
-
-// Checking (when logging in)
-// Retrieve hashedPasswordFromDb for the user
-//boolean passwordMatches = BCrypt.checkpw(providedLoginPassword, hashedPasswordFromDb);
