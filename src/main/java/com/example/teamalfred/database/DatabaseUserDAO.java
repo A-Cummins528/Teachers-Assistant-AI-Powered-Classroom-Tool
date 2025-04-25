@@ -70,81 +70,10 @@ public abstract class DatabaseUserDAO implements UserDAO {
             e.printStackTrace();
         }
     }
-    // Implementation based on practical. Needs testing -Phil
-    //    public void deleteUser(User user) {
-    //        try {
-    //            PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
-    //            statement.setInt(1, user.getId());
-    //            statement.executeUpdate();
-    //        } catch (Exception e) {
-    //            e.printStackTrace();
-    //        }
-    //    }
-
-  //  public void deleteUser(User user) {}
-
-    // Update User Implementation based on practical. Working on testing. -Phil
-    //    public void updateUser(User user) {
-    //        try {
-    //            PreparedStatement statement = connection.prepareStatement("UPDATE users SET firstName = ?, lastName = ?, mobile = ?, email = ? WHERE id = ?");
-    //            statement.setString(1, user.getFirstName());
-    //            statement.setString(2, user.getLastName());
-    //            statement.setString(3, user.getMobile());
-    //            statement.setString(4, user.getEmail());
-    //            statement.setInt(5, user.getId());
-    //            statement.executeUpdate();
-    //        } catch (Exception e) {
-    //            e.printStackTrace();
-    //        }
-    //    }
-//    public void updateUser(User user) {}
 
 
-    // Method to search for a user by email
-    public Optional<User> findUserByEmail(String email) {
-
-        try {
-            // sets SQL query to user email search query
-            PreparedStatement statement = connection.prepareStatement(getUserByEmail);
-            // inserts the specific email to be searched for into query
-            statement.setString(1, email);
-            // stores result of query
-            ResultSet resultSet = statement.executeQuery();
-
-            if(resultSet.next()) {
-                // email found in db
-                // new user object storing data associated with the found email
-                User user = new User(resultSet.getString("firstName"), resultSet.getString("lastName"), resultSet.getString("mobile"), resultSet.getString("email"), resultSet.getString("password"));
-                return Optional.of(user);
-            } else {
-                // user email not found in db return null value
-                return null;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
 
 
-    }
-
-//    // add user to database method
-//    public void createUser(User user) {
-//        // insert user into database
-//        try {
-//            String insertQuery = "INSERT INTO users (firstName, lastName, mobile, email, password) VALUES (?, ?, ?, ?, ?)";
-//            PreparedStatement stmt = connection.prepareStatement(insertQuery);
-//            System.out.println(user.getFirstName());
-//            stmt.setString(1, user.getFirstName());
-//            stmt.setString(2, user.getLastName());
-//            stmt.setString(3, user.getMobile());
-//            stmt.setString(4, user.getEmail());
-//            stmt.setString(5, user.getPassword());
-//            stmt.execute();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 
     // Creates default EMPTY user table to start the database
