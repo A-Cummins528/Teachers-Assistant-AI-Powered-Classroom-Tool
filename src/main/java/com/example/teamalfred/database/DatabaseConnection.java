@@ -3,6 +3,7 @@ package com.example.teamalfred.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Provides access to a singleton database Connection instance for an SQLite database.
@@ -52,16 +53,26 @@ public class DatabaseConnection {
      *
      * @return The singleton {@link Connection} instance, or null if the connection failed on the first attempt.
      */
-    public static Connection getInstance() {
-        // Check if the instance has been initialized yet
-        if (instance == null) {
-            // If not initialized, call the private constructor to attempt connection.
-            // The constructor itself handles assigning to the 'instance' field.
-            new DatabaseConnection();
+    public static synchronized Connection getInstance() {
+        try {
+            // Check if the instance exists AND if it's closed
+            if (instance != null && instance.isClosed()) {
+                instance = null; // Set to null so a new one is created below
+            }
+
+            // If instance is null (either initially or because it was closed), create it
+            if (instance == null) {
+                String url = "jdbc:sqlite:database.db";
+                instance = DriverManager.getConnection(url);
+            }
+        } catch (SQLException sqlEx) {
+            System.err.println("Error getting/creating database connection:");
+            sqlEx.printStackTrace(); // Good to print stack trace for errors
+            instance = null; // Ensure instance is null if connection fails
         }
-        // Return the current instance (may be null if constructor failed)
         return instance;
     }
+
 
     /**
      * Closes the singleton database connection instance if it's open.
@@ -70,6 +81,7 @@ public class DatabaseConnection {
      * to release database resources. Handles potential SQLExceptions during close.
      * Sets the static instance to null after closing.
      * </p>
+     *
      * @implNote Call this when app exits.
      */
     public static void closeInstance() {
@@ -85,5 +97,6 @@ public class DatabaseConnection {
         }
     }
 }
+
 // TODO: Throw a custom exception instead of printing errors to System.err
 // TODO: Implement closeInstance() elsewhere when shutting down the application

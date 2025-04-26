@@ -17,7 +17,7 @@ public class DatabaseSchemaManager {
      *
      * @throws SQLException if the database connection cannot be established or the query fails.
      */
-    public void createTable() throws SQLException {
+    public void initializeSchema() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "firstName VARCHAR NOT NULL, " +
@@ -55,7 +55,7 @@ public class DatabaseSchemaManager {
      */
     public void resetSchema() throws SQLException {
         dropTable();
-        createTable();
+        initializeSchema();
     }
 
     /**
