@@ -1,9 +1,7 @@
 package com.example.teamalfred.controllers;
 
-import com.example.teamalfred.Main;
-import com.example.teamalfred.database.DatabaseConnection;
-import com.example.teamalfred.database.DatabaseUserDAO;
 import com.example.teamalfred.database.UserDAO;
+import com.example.teamalfred.database.SqliteUserDAO;
 import com.example.teamalfred.database.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,26 +10,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
-
-
-// SIGN UP PAGE CONTROLLER ## DO NOT TOUCH - JOSH
 
 public class SignUpController {
 
-    // initial values from input elements in fxml scene
-
-    // userDAO for database entry
-    private UserDAO userDAO;
-    // Master validation counter variable, starts at 0, if all 5 user inputs fields are validated, masterValidationCounter will equal 5.
+    private final UserDAO userDAO = new SqliteUserDAO();
     private int masterValidationCounter;
-    // Master validation variable, only set to true once ALL user data is validated and account is being created
     private boolean masterValidation = false;
 
     private User createUser;
+    private final SwitchSceneController switchScene = new SwitchSceneController();
+
     @FXML
     private TextField firstNameSignup;
     @FXML
@@ -55,179 +44,95 @@ public class SignUpController {
     @FXML
     private Label invalidPassword;
 
-    private switchSceneController switchScene = new switchSceneController();
-    // default connection variable for database
-    private Connection connection;
-
-
-    // signup controller constructor
-    public SignUpController() {
-        // initiate connect to database
-        connection = DatabaseConnection.getInstance();
-    }
-
-    // public user signup function (linked to signup button)
+    @FXML
     public void userSignup(ActionEvent event) throws IOException, SQLException {
-        // reset mastervalidationcounter to 0
         masterValidationCounter = 0;
         checkUserSignup(event);
-
     }
 
-    // private user signup function
     private void checkUserSignup(ActionEvent event) throws IOException, SQLException {
-        Main m = new Main();
-
-        // initial variables for new user info, all run through input validation methods
         String userFirstname = validateFirstname();
         String userLastname = validateLastname();
         String userMobile = validateMobile();
         String userEmail = validateEmail();
         String password = validatePassword();
-        // if masterValidationCounter == 5, all 5 input validations passed, masterValidation set to true.
-        // signup can continue
-        if(masterValidationCounter == 5) {
+
+        if (masterValidationCounter == 5) {
             masterValidation = true;
         }
-        // Reffer to above comments
-        if(masterValidation) {
-            // create new user object with user inputs
+
+        if (masterValidation) {
             createUser = new User(userFirstname, userLastname, userEmail, userMobile, password);
-            // create new userDAO object
-            userDAO = new DatabaseUserDAO() {
-                @Override
-                public Optional<User> findUserById(int id) throws SQLException {
-                    return Optional.empty();
-                }
-
-                @Override
-                public List<User> getAllUsers() throws SQLException {
-                    return List.of();
-                }
-            };
-
-            // call addUser method in databaseUserDAO and parse in the new createUser (object of new user info)
             userDAO.createUser(createUser);
 
-            // clear input fields & switch to dashboard scene
-            clearInputs(true);
+            clearInputs();
             switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
         }
     }
 
-    // Method to clear user data input
-
-    private void clearInputs(boolean all) throws IOException {
-        if(all) {
-            // clear all inputs
-            firstNameSignup.setText("");
-            lastNameSignup.setText("");
-            mobileSignup.setText("");
-            passwordSignup.setText("");
-            emailSignup.setText("");
-        }
-
+    private void clearInputs() {
+        firstNameSignup.clear();
+        lastNameSignup.clear();
+        mobileSignup.clear();
+        passwordSignup.clear();
+        emailSignup.clear();
     }
 
-
-    // Methods to validate user inputs
-    //
-    //
-
-    // Master validation method
-
-    // TO DO
-
-    // validate firstname input
-    private String validateFirstname() throws IOException {
-        // Check if first name input has only letters in it.
-        if(firstNameSignup.getText().toString().matches("[a-zA-Z]*")) {
-            // if true, name input is valid...
+    private String validateFirstname() {
+        if (firstNameSignup.getText().matches("[a-zA-Z]+")) {
             masterValidationCounter++;
-            return firstNameSignup.getText().toString();
+            return firstNameSignup.getText();
         } else {
-            // invalid input
             setInvalidLabel(invalidFirstname, true);
             return "Invalid";
         }
-     }
+    }
 
-     // Validate lastname input
-    private String validateLastname() throws IOException {
-        // Check if first name input has only letters in it.
-        if(lastNameSignup.getText().toString().matches("[a-zA-Z]*")) {
-            // if true, name input is valid...
-
+    private String validateLastname() {
+        if (lastNameSignup.getText().matches("[a-zA-Z]+")) {
             masterValidationCounter++;
-            return lastNameSignup.getText().toString();
+            return lastNameSignup.getText();
         } else {
-            // invalid input
             setInvalidLabel(invalidLastname, true);
             return "Invalid";
         }
     }
 
-    // valid mobile input
-
-    private String validateMobile() throws IOException {
-        String rawInput = mobileSignup.getText().toString();
-        // cleaned input incase user enters format: 0411 111 111 instead of 0411111111
-        String cleanedInput = rawInput.replaceAll("\\s+", ""); // remove all spaces
-        if(cleanedInput.matches("\\d*") && cleanedInput.toString().length() == 10 && cleanedInput.startsWith("04")) {
-            // Mobile is only digits, mobile is 10 digits long, mobile starts with 04
+    private String validateMobile() {
+        String cleanedInput = mobileSignup.getText().replaceAll("\\s+", "");
+        if (cleanedInput.matches("\\d{10}") && cleanedInput.startsWith("04")) {
             masterValidationCounter++;
-            return cleanedInput.toString();
+            return cleanedInput;
         }
-        // else, mobile must be invalid.
         setInvalidLabel(invalidMobile, true);
-        mobileSignup.setText("");
-        return "invalid";
+        mobileSignup.clear();
+        return "Invalid";
     }
 
-    // valid email input
-
-    private String validateEmail() throws IOException {
-        String rawInput = emailSignup.getText().toString();
-        // check if input contains @ symbol
-        if(rawInput.contains("@")) {
+    private String validateEmail() {
+        if (emailSignup.getText().contains("@")) {
             masterValidationCounter++;
-            return rawInput;
+            return emailSignup.getText().toLowerCase();
         }
-        // invalid email, set invalid email label and return invalid
         invalidEmail.setText("Invalid email");
-        return "invalid";
+        return "Invalid";
     }
 
-
-    // valid password length
-
-    private String validatePassword() throws IOException {
-        String rawInput = passwordSignup.getText().toString();
-        // check if input is 7 or more characters
-        if(rawInput.length() >= 7 ) {
+    private String validatePassword() {
+        if (passwordSignup.getText().length() >= 7) {
             masterValidationCounter++;
-            return rawInput;
-            // password is too short, return invalid
-        } else {
-            invalidPassword.setText("Password too short");
-            return "invalid";
+            return passwordSignup.getText();
         }
+        invalidPassword.setText("Password too short");
+        return "Invalid";
     }
 
+    private void setInvalidLabel(Label label, boolean set) {
+        label.setText(set ? "Invalid*" : "");
+    }
 
-     // method to update label if user input fails validation
-     private void setInvalidLabel(Label label, boolean set) throws IOException {
-        if(set) {
-            label.setText("Invalid*");
-        } else {
-            label.setText("");
-        }
-     }
-
-    // method to handle login button function
     @FXML
     private void handleLoginRedirect(ActionEvent event) {
         switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
-
     }
 }

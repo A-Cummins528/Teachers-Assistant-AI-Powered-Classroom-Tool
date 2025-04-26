@@ -13,7 +13,7 @@ public class DashboardController {
     private Label welcomeMessageLabel;
     public DashboardController() throws IOException {
     }
-    private switchSceneController switchScene = new switchSceneController();
+    private SwitchSceneController switchScene = new SwitchSceneController();
     private Connection connection;
 
     public DashboardController(Connection connection) {

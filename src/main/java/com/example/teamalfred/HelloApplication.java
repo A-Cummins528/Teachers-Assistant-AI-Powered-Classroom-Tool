@@ -23,11 +23,4 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
-
-
-    // main function for program entry point.
-    public static void main(String[] args) {
-        launch();
-    }
 }

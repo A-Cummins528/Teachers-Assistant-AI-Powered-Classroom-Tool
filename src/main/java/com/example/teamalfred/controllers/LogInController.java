@@ -1,8 +1,7 @@
 package com.example.teamalfred.controllers;
 
-import com.example.teamalfred.Main;
-import com.example.teamalfred.database.DatabaseUserDAO;
 import com.example.teamalfred.database.UserDAO;
+import com.example.teamalfred.database.SqliteUserDAO;
 import com.example.teamalfred.database.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,95 +10,112 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-//Main Controller - Josh
-// DO NOT TOUCH
-
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controller for the Login screen (Login.fxml).
+ * Handles user authentication against the database.
+ */
 public class LogInController {
 
-    // initial variable declerations
-    private UserDAO userDAO;
+    // DAO for accessing user data
+    private final UserDAO userDAO;
+    // Helper for switching scenes
+    private final SwitchSceneController switchScene = new SwitchSceneController(); // Consider renaming class to SwitchSceneController (Java convention)
+
+    @FXML private Label welcomeText; // Assuming this exists in FXML
+    @FXML private Button loginButton;
+    @FXML private Label failedLogin;
+    @FXML private TextField emailLogin;
+    @FXML private PasswordField password;
+
+    /**
+     * Constructor: Initializes the controller, creating an instance of the UserDAO.
+     * Note: Creates a direct dependency on SqliteUserDAO.
+     */
     public LogInController() {
-        userDAO = new DatabaseUserDAO() {
-            @Override
-            public Optional<User> findUserById(int id) throws SQLException {
-                return Optional.empty();
-            }
-
-            @Override
-            public List<User> getAllUsers() throws SQLException {
-                return List.of();
-            }
-        };
+        // Directly creates the DAO instance.
+        this.userDAO = new SqliteUserDAO();
     }
-    @FXML
-    private Label welcomeText;
-    @FXML
-    private Button loginButton;
-    @FXML
-    private Label failedLogin;
-    @FXML
-    private TextField emailLogin;
-    @FXML
-    private PasswordField password;
-    // initial switch scene object created
-    private switchSceneController switchScene = new switchSceneController();
 
-    // call button function
+    /**
+     * Handles the action event when the user clicks the login button.
+     * Initiates the login check process and handles potential database errors.
+     * @param event The ActionEvent triggered by the button click.
+     * @throws IOException If scene switching fails.
+     */
+    @FXML
     public void userLogin(ActionEvent event) throws IOException {
-        //boolean login = checkLogin(event);
+        try {
+            // Attempt to log the user in
+            checkLogin(event);
+        } catch (SQLException e) {
+            // Handle potential database errors during login check
+            e.printStackTrace(); // Log the error for debugging
+            failedLogin.setText("Database error. Please try again later.");
+        }
     }
 
-//    // Check Login method - Josh
-//    private boolean checkLogin(ActionEvent event) throws IOException {
-//        Main m = new Main();
-//        // get user inputs
-//        if (emailLogin.getText().toString().isEmpty() && password.getText().toString().isEmpty()) {
-//            // if either input empty, login failed, returns false/
-//            failedLogin.setText("All below fields are mandatory.");
-//        } else {
-//            // Search db for user email, if email not found, null is returned
-//            User user = userDAO.findUserByEmail(emailLogin.getText().toString());
-//            // if user email found
-//            if (user != null) {
-//                // check if input password is equal to password of email in database
-//                if (user.getPassword().equals(password.getText().toString())) {
-//                    failedLogin.setText("Success!");
-//                    switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
-//                    return true;
-//                }
-//
-//            }
-//            // Either email not found or password didn't match email.
-//
-//        }
-//        // login failed
-//        failedLogin.setText("Invalid Credentials");
-//        resetInputs();
-//        return false;
-//    }
+    /**
+     * Performs the actual login verification logic.
+     * Retrieves user input, queries the database via DAO, and checks credentials.
+     * @param event The ActionEvent from the login button (used for scene switching).
+     * @throws IOException If scene switching fails.
+     * @throws SQLException If a database error occurs during user lookup.
+     */
+    private void checkLogin(ActionEvent event) throws IOException, SQLException {
+        String email = emailLogin.getText().trim().toLowerCase(); // Get and trim email
+        String plainTextPassword = password.getText(); // Get plaintext password input
 
-    // method to reset input values
+        // Basic validation for empty fields
+        if (email.isEmpty() || plainTextPassword.isEmpty()) {
+            failedLogin.setText("Email and password fields are mandatory.");
+            return;
+        }
 
-    private void resetInputs() throws IOException{
-        // resets both input boxes in the event of a failed login
+        // Find user by email using the DAO
+        Optional<User> optionalUser = userDAO.findUserByEmail(email);
+
+        if (optionalUser.isPresent()) {
+            // User found in database
+            User user = optionalUser.get();
+
+            if (user.checkPassword(plainTextPassword)) {
+                // Password matches the stored hash
+                failedLogin.setText("Login successful!"); // Or clear the message
+                // TODO: Store user session info if needed
+                switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml"); // Switch to dashboard
+            } else {
+                // Password does NOT match the stored hash
+                failedLogin.setText("Incorrect email or password.");
+                resetInputs();
+            }
+        } else {
+            // User email not found in database
+            failedLogin.setText("Incorrect email or password.");
+            resetInputs();
+        }
+    }
+
+    /**
+     * Clears the email and password input fields.
+     */
+    private void resetInputs() {
         emailLogin.setText("");
         password.setText("");
-
     }
 
-    // function to handle signup button click action
+    /**
+     * Handles the action event for the Sign Up button/link.
+     * Switches the scene to the Sign Up view.
+     * @param event The ActionEvent triggered by the button/link click.
+     */
     @FXML
-
     private void handleSignUp(ActionEvent event) {
+        // Switch to the sign-up scene
         switchScene.switchScene(event,"/com/example/teamalfred/SignUp.fxml");
-
+        // Note: switchScene could potentially throw IOException, might need handling or declaration
     }
-
-
-
 }
