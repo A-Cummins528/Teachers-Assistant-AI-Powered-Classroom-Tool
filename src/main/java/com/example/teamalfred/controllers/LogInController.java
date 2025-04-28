@@ -5,10 +5,14 @@ import com.example.teamalfred.database.SqliteUserDAO;
 import com.example.teamalfred.database.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,9 +27,9 @@ public class LogInController {
     // DAO for accessing user data
     private final UserDAO userDAO;
     // Helper for switching scenes
-    private final SwitchSceneController switchScene = new SwitchSceneController(); // Consider renaming class to SwitchSceneController (Java convention)
+    private final SwitchSceneController switchScene = new SwitchSceneController();
 
-    @FXML private Label welcomeText; // Assuming this exists in FXML
+    @FXML private Label welcomeText;
     @FXML private Button loginButton;
     @FXML private Label failedLogin;
     @FXML private TextField emailLogin;
@@ -85,8 +89,7 @@ public class LogInController {
             if (user.checkPassword(plainTextPassword)) {
                 // Password matches the stored hash
                 failedLogin.setText("Login successful!"); // Or clear the message
-                // TODO: Store user session info if needed
-                switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml"); // Switch to dashboard
+                openDashboardWithUser(event, user); // Pass user to Dashboard
             } else {
                 // Password does NOT match the stored hash
                 failedLogin.setText("Incorrect email or password.");
@@ -97,6 +100,26 @@ public class LogInController {
             failedLogin.setText("Incorrect email or password.");
             resetInputs();
         }
+    }
+
+    /**
+     * Opens the Dashboard and passes the logged-in User object to it.
+     * @param event The ActionEvent from the login button.
+     * @param user The authenticated User object.
+     * @throws IOException If scene loading fails.
+     */
+    private void openDashboardWithUser(ActionEvent event, User user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/teamalfred/Dashboard.fxml"));
+        Parent root = loader.load();
+
+        DashboardController dashboardController = loader.getController();
+        dashboardController.setUser(user); // Pass the logged-in user to dashboard
+
+        // Set up the stage
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.setTitle("AcademiAI Dashboard");
+        stage.show();
     }
 
     /**
@@ -116,6 +139,5 @@ public class LogInController {
     private void handleSignUp(ActionEvent event) {
         // Switch to the sign-up scene
         switchScene.switchScene(event,"/com/example/teamalfred/SignUp.fxml");
-        // Note: switchScene could potentially throw IOException, might need handling or declaration
     }
 }

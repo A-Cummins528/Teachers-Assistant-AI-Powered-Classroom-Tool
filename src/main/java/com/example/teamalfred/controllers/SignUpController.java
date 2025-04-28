@@ -136,3 +136,5 @@ public class SignUpController {
         switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
     }
 }
+//TODO: Need to prevent signup with duplicate email addresses. Exception is thrown as it should, and unit test passes, but it needs to be handled here too.
+// It would be good to go back and review the unit tests and make sure we are validating input here to match expected behaviour.

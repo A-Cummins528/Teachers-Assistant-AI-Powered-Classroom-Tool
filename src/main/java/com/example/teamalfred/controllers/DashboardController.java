@@ -1,24 +1,25 @@
 package com.example.teamalfred.controllers;
 
-
-import com.example.teamalfred.database.DatabaseConnection;
+import com.example.teamalfred.database.User;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-
-
-// Controller for dashboard.fxml scene
 public class DashboardController {
-    private Label welcomeMessageLabel;
-    public DashboardController() throws IOException {
-    }
-    private SwitchSceneController switchScene = new SwitchSceneController();
-    private Connection connection;
 
-    public DashboardController(Connection connection) throws SQLException {
-        this.connection = DatabaseConnection.getInstance();
+    @FXML
+    private Label displayUserName;
+
+    private User user; // Store the user if needed later
+
+    public void setUser(User user) {
+        this.user = user;
+        if (user != null) {
+            displayUserName.setText("Hey there, " + user.getFirstName());
+        }
     }
 
+    @FXML
+    private void initialize() {
+        // Any additional initialization here
+    }
 }
