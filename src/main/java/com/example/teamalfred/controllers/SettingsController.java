@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.apache.commons.lang3.ObjectUtils;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -77,17 +78,21 @@ public class SettingsController {
         // Reffer to above comments
         if(masterValidation) {
             // create new user object with user inputs
-            createUser = new User(userFirstname, userLastname, userEmail, userMobile, password);
-            // create new userDAO object
-            userDAO = new DatabaseUserDAO();
 
+            userDAO.
+
+// Need to call the existing users DAO and use updateUser on that. Need a reference point.
             // call addUser method in databaseUserDAO and parse in the new createUser (object of new user info)
-            userDAO.addUser(createUser);
+            userDAO.updateUser(updateUser, userDAO.getUser(userEmail));
 
             // clear input fields & switch to dashboard scene
             clearInputs(true);
             switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
         }
+    }
+    private boolean CheckEmailDatabase(inputEmail, userEmail){
+        User user = userDAO.getUser(emailLogin.getText().toString());
+        return
     }
     // validate firstname input
     private String validateFirstname() throws IOException {
