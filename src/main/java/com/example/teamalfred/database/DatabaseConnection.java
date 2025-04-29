@@ -7,83 +7,115 @@ import java.sql.SQLException;
 /**
  * Provides access to a singleton database Connection instance for an SQLite database.
  * <p>
- * This class uses the Singleton design pattern to ensure only one connection
- * is created using a hardcoded database URL ("jdbc:sqlite:database.db").
+ * This class uses the Singleton design pattern. By default, it connects to
+ * "jdbc:sqlite:database.db". For testing, a different URL (like an in-memory DB)
+ * can be specified using {@link #setTestDatabaseUrl(String)}.
  * </p>
  */
 public class DatabaseConnection {
 
-    /**
-     * Holds the single, static Connection instance.
-     * Initialized only when getInstance() is first called.
-     */
+    private static final String DEFAULT_DB_URL = "jdbc:sqlite:database.db";
     private static Connection instance = null;
+    private static String activeDbUrl = null; // Store the URL of the *current* active instance
+    private static String testDbUrlOverride = null; // Holds the override URL for testing
+
+    /** Private constructor to prevent instantiation. */
+    private DatabaseConnection() {}
 
     /**
-     * Private constructor to enforce the Singleton pattern.
-     * Attempts to connect to the hardcoded SQLite database URL "jdbc:sqlite:database.db".
-     * If the connection is successful, it assigns the Connection object directly to the
-     * static {@code instance} field.
-     * If a SQLException occurs during connection, it prints the exception to System.err.
+     * Sets a specific database URL to be used for the connection, typically for testing.
+     * This URL will be used the next time {@link #getInstance()} needs to establish
+     * or re-establish a connection. Closes any existing connection to ensure the
+     * new URL is used on the next getInstance() call.
+     * Setting this to null reverts to the default URL for subsequent connections.
+     * <p>
+     * IMPORTANT: Call this BEFORE calling {@link #getInstance()} in your test setup.
+     * </p>
+     *
+     * @param url The database URL string (e.g., "jdbc:sqlite::memory:") or null to use default.
      */
-    private DatabaseConnection() {
-        // Hardcoded URL for the SQLite database file
-        String url = "jdbc:sqlite:database.db";
-        try {
-            // Attempt connection and assign directly to static field
-            instance = DriverManager.getConnection(url);
-        } catch (SQLException sqlEx) {
-            // Basic error handling: print exception to standard error
-            System.err.println(sqlEx);
-            // instance remains null if connection fails
-        }
+    public static synchronized void setTestDatabaseUrl(String url) {
+        testDbUrlOverride = url;
+        // Close existing instance, if any, to force re-creation with the potentially new URL
+        closeInstance();
     }
 
     /**
      * Retrieves the singleton database Connection instance.
      * <p>
-     * On the first call (when the internal instance is null), it triggers the private
-     * constructor to attempt database connection. Subsequent calls return the
-     * previously established instance.
-     * </p><p>
-     * Note: If the initial connection attempt in the constructor fails (due to SQLException),
-     * the internal instance remains null, and this method will return null.
+     * Connects using the URL specified by {@link #setTestDatabaseUrl(String)} if set,
+     * otherwise uses the default URL ("jdbc:sqlite:database.db").
+     * If the instance is null or closed, it attempts to establish a new connection.
      * </p>
      *
-     * @return The singleton {@link Connection} instance, or null if the connection failed on the first attempt.
+     * @return The singleton {@link Connection} instance.
+     * @throws SQLException if a database access error occurs during connection.
      */
-    public static Connection getInstance() {
-        // Check if the instance has been initialized yet
-        if (instance == null) {
-            // If not initialized, call the private constructor to attempt connection.
-            // The constructor itself handles assigning to the 'instance' field.
-            new DatabaseConnection();
+    public static synchronized Connection getInstance() throws SQLException {
+        // Determine the URL that *should* be used for a new connection
+        String targetUrl = (testDbUrlOverride != null) ? testDbUrlOverride : DEFAULT_DB_URL;
+
+        try {
+            // Reconnect if:
+            // 1. No instance exists
+            // 2. Instance is closed
+            // 3. The target URL is different from the URL of the current active instance
+            if (instance == null || instance.isClosed() || !targetUrl.equals(activeDbUrl)) {
+
+                // Close the old instance if it exists and is open (e.g., URL changed)
+                if (instance != null && !instance.isClosed()) {
+                    instance.close();
+                }
+
+                // Establish new connection with the target URL
+                // System.out.println("DEBUG: Connecting to DB: " + targetUrl); // Optional debug line
+                instance = DriverManager.getConnection(targetUrl);
+                activeDbUrl = targetUrl; // Update the URL of the active instance
+            }
+        } catch (SQLException sqlEx) {
+            System.err.println("Error getting/creating database connection for URL: " + targetUrl);
+            sqlEx.printStackTrace();
+            // Ensure instance state is consistent on error
+            instance = null;
+            activeDbUrl = null;
+            throw sqlEx; // Re-throw the exception
         }
-        // Return the current instance (may be null if constructor failed)
         return instance;
     }
 
     /**
-     * Closes the singleton database connection instance if it's open.
-     * <p>
-     * This method should be called appropriately during application shutdown
-     * to release database resources. Handles potential SQLExceptions during close.
-     * Sets the static instance to null after closing.
-     * </p>
-     * @implNote Call this when app exits.
+     * Closes the singleton database connection instance if it's open and not null.
+     * Sets the internal instance variable and active URL to null.
      */
-    public static void closeInstance() {
+    public static synchronized void closeInstance() {
         if (instance != null) {
             try {
-                instance.close();
+                if (!instance.isClosed()) {
+                    // System.out.println("DEBUG: Closing DB connection: " + activeDbUrl); // Optional debug line
+                    instance.close();
+                }
             } catch (SQLException e) {
                 System.err.println("Error closing database connection:");
                 e.printStackTrace();
             } finally {
-                instance = null; // Allow re-initialization if getInstance is called again
+                instance = null;
+                activeDbUrl = null; // Reset active URL tracking
             }
         }
     }
+
+    /**
+     * Resets the DatabaseConnection for testing.
+     * Closes any existing connection and removes the test database URL override.
+     * Subsequent calls to getInstance() will use the default URL unless
+     * setTestDatabaseUrl is called again.
+     */
+    public static synchronized void resetForTesting() {
+        closeInstance(); // Close any existing connection
+        testDbUrlOverride = null; // Remove the test URL override
+    }
 }
+
+
 // TODO: Throw a custom exception instead of printing errors to System.err
 // TODO: Implement closeInstance() elsewhere when shutting down the application

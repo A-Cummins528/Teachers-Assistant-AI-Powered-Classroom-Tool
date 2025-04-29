@@ -42,7 +42,7 @@ public class DatabaseConnectionTest {
      * Checks if the connection is not null.
      */
     @Test
-    public void testConnectionCreation() {
+    public void testConnectionCreation() throws SQLException {
         // (@BeforeEach ran, so DatabaseConnection.instance should be null here)
         Connection conn = DatabaseConnection.getInstance();
         assertNotNull(conn, "getInstance() should return a non-null connection.");

@@ -17,7 +17,7 @@ import java.io.IOException;
 // Create object using this class
 // Call method through object in each page controller
 
-public class switchSceneController {
+public class SwitchSceneController {
 
     // Main switch method
     // Provide the event (from the button being pushed) and the path example: "com.example.login.fxml"

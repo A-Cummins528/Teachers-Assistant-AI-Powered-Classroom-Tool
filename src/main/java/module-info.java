@@ -13,6 +13,7 @@ module com.example.teamalfred {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires jbcrypt;
 
     opens com.example.teamalfred to javafx.fxml;
     exports com.example.teamalfred;
