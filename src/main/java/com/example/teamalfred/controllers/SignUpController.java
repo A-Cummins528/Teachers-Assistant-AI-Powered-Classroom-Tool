@@ -46,6 +46,7 @@ public class SignUpController {
 
     @FXML
     public void userSignup(ActionEvent event) throws IOException, SQLException {
+        System.out.println("signing up!");
         masterValidationCounter = 0;
         checkUserSignup(event);
     }
@@ -67,6 +68,8 @@ public class SignUpController {
 
             clearInputs();
             switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
+        } else {
+            System.out.println("Mastervalidation FALSE");
         }
     }
 
@@ -110,9 +113,12 @@ public class SignUpController {
     }
 
     private String validateEmail() {
-        if (emailSignup.getText().contains("@")) {
-            masterValidationCounter++;
-            return emailSignup.getText().toLowerCase();
+        String email_ = emailSignup.getText().trim();
+        if (email_ != null && !email_.isEmpty()) {
+            if(email_.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
+                masterValidationCounter++;
+                return email_.toLowerCase();
+            }
         }
         invalidEmail.setText("Invalid email");
         return "Invalid";
