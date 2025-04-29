@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.teamalfred.controllers.SettingsController" prefWidth="900" prefHeight="600">
+
+    <!-- Top Bar -->
+    <top>
+        <Pane prefHeight="80" prefWidth="900" style="-fx-background-color: #1B263B;">
+            <Label text="User Profiles" layoutX="20" layoutY="25" style="-fx-text-fill: white; -fx-font-size: 24px;" />
+        </Pane>
+    </top>
+
+    <!-- Left Side Menu -->
+    <left>
+        <VBox prefWidth="200" spacing="10" alignment="TOP_CENTER" style="-fx-background-color: #16213E;">
+            <Label text="Menu" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-padding: 20px 0;" />
+            <Button text="Dashboard" prefWidth="180" />
+            <Button text="Profiles" prefWidth="180" />
+            <Button text="Settings" prefWidth="180" />
+            <Button text="Logout" prefWidth="180" />
+        </VBox>
+    </left>
+
+    <!-- Center Main Content -->
+    <center>
+        <AnchorPane style="-fx-background-color: #F5F7FA;">
+            <VBox spacing="10" alignment="CENTER" layoutX="50" layoutY="30" prefWidth="600" prefHeight="460">
+
+                <Label text="Update Your Details" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+                <TextField fx:id="firstNameSettings" promptText="First Name" />
+                <Label fx:id="invalidFirstname" textFill="red" />
+
+                <TextField fx:id="lastNameSettings" promptText="Last Name" />
+                <Label fx:id="invalidLastname" textFill="red" />
+
+                <TextField fx:id="mobileSettings" promptText="Mobile Number (10 digits, start with 04)" />
+                <Label fx:id="invalidMobile" textFill="red" />
+
+                <TextField fx:id="emailSettings" promptText="Email Address" />
+                <Label fx:id="invalidEmail" textFill="red" />
+
+                <PasswordField fx:id="passwordSettings" promptText="New Password" />
+                <PasswordField fx:id="passwordSettingsConfirm" promptText="Confirm New Password" />
+                <Label fx:id="invalidPassword" textFill="red" />
+
+                <HBox spacing="10">
+                    <Button text="Update" onAction="#updateUserDetails" />
+                    <Button text="Cancel" onAction="#handleCancel" />
+                </HBox>
+
+            </VBox>
+        </AnchorPane>
+    </center>
+
+</BorderPane>
