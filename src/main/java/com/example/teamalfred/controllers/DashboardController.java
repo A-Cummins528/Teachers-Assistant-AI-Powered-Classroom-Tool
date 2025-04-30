@@ -48,12 +48,6 @@ public class DashboardController {
 
     @FXML
     private void initialize() {
-        System.out.println("assessmentToggle: " + (assessmentToggle != null));
-        System.out.println("classManagementToggle: " + (classManagementToggle != null));
-        System.out.println("analyticsToggle: " + (analyticsToggle != null));
-        System.out.println("resourcesToggle: " + (resourcesToggle != null));
-        System.out.println("aiTutorToggle: " + (aiTutorToggle != null));
-        System.out.println("messageToggle: " + (messageToggle != null));
         // Add all navigation toggle buttons to one ToggleGroup for mutual exclusivity
         classManagementToggle.setToggleGroup(navGroup);
         assessmentToggle.setToggleGroup(navGroup);
@@ -88,7 +82,6 @@ public class DashboardController {
     private void handleNavigation(ActionEvent event) {
         // Determine which toggle was clicked
         ToggleButton clickedButton = (ToggleButton) event.getSource();
-        System.out.println("Clicked toggle: " + clickedButton.getId());
         String fxmlToLoad = null;
 
         if (clickedButton == classManagementToggle) {
