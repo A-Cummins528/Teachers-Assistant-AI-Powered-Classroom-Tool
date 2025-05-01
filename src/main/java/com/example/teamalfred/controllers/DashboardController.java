@@ -1,6 +1,7 @@
 package com.example.teamalfred.controllers;
 
 import com.example.teamalfred.database.User;
+import com.example.teamalfred.main.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
 
 import java.io.IOException;
 
@@ -25,6 +27,7 @@ public class DashboardController {
         if (user != null) {
             displayUserName.setText("Hey there, " + user.getFirstName());
         }
+        User currentUser = UserSession.getInstance().getLoggedInUser();
     }
 
     @FXML
@@ -34,6 +37,7 @@ public class DashboardController {
 
     @FXML
     private void handleGoToSettings(ActionEvent event) {
+        System.out.println("howdy");
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/teamalfred/UpdateProfilePage.fxml"));
             Parent root = loader.load();
@@ -45,8 +49,7 @@ public class DashboardController {
 
             Scene newScene = new Scene(root, stage.getScene().getWidth(), stage.getScene().getHeight());
             stage.setScene(newScene);
-            stage.show();
-        } catch (IOException e) {
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }
