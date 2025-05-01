@@ -3,6 +3,7 @@ package com.example.teamalfred.controllers;
 import com.example.teamalfred.database.UserDAO;
 import com.example.teamalfred.database.SqliteUserDAO;
 import com.example.teamalfred.database.User;
+import com.example.teamalfred.main.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
+
 
 /**
  * Controller for the Login screen (Login.fxml).
@@ -110,6 +112,9 @@ public class LogInController {
      */
     private void openDashboardWithUser(ActionEvent event, User user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/teamalfred/Dashboard.fxml"));
+        // Creates user session
+        UserSession.initSession(user);
+        System.out.println("made user session + " + user.getFirstName());
         Parent root = loader.load();
 
         DashboardController dashboardController = loader.getController();
