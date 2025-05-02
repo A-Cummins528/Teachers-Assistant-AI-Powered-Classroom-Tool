@@ -293,4 +293,26 @@ public class UserTest {
 
         assertNotEquals(user1, user2, "Two users with zero IDs should not be considered equal.");
     }
+
+    @Test
+    public void setEmail_SetsCorrectly() {
+        User user = new User();
+        user.setEmail("felix@example.com");
+        assertEquals("felix@example.com", user.getEmail());
+    }
+
+    @Test
+    public void setFirstName_SetsCorrectly() {
+        User user = new User();
+        user.setFirstName("Felix");
+        assertEquals("Felix", user.getFirstName());
+    }
+    @Test
+    public void setLastName_SetsCorrectly() {
+        User user = new User();
+        user.setLastName("Felix");
+        assertEquals("Felix", user.getLastName());
+    }
+
+
 }

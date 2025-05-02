@@ -5,11 +5,15 @@ import com.example.teamalfred.main.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import java.io.IOException;
 
 
 import java.io.IOException;
@@ -18,7 +22,22 @@ public class DashboardController {
 
     @FXML
     private Label displayUserName;
+    @FXML private StackPane contentPane;
+    // ToggleButtons for each navigation item:
+    @FXML private ToggleButton classManagementToggle;
+    @FXML private ToggleButton assessmentToggle;
+    @FXML private ToggleButton analyticsToggle;
+    @FXML private ToggleButton resourcesToggle;
+    @FXML private ToggleButton aiTutorToggle;
+    @FXML private ToggleButton messageToggle;
+    // Define styles for active/inactive toggle buttons:
+    private static final String ACTIVE_BUTTON_STYLE =
+            "-fx-background-color: lightblue; -fx-text-fill: white; -fx-alignment: center; -fx-border-radius: 4;";
+    private static final String INACTIVE_BUTTON_STYLE =
+            "-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: center; -fx-border-radius: 4;";
 
+    // ToggleGroup to make buttons exclusive
+    private ToggleGroup navGroup = new ToggleGroup();
     private final SwitchSceneController switchScene = new SwitchSceneController();
     private User currentUser;
 
@@ -32,7 +51,16 @@ public class DashboardController {
 
     @FXML
     private void initialize() {
-        // Optional: initialization logic here
+        // Add all navigation toggle buttons to one ToggleGroup for mutual exclusivity
+        classManagementToggle.setToggleGroup(navGroup);
+        assessmentToggle.setToggleGroup(navGroup);
+        analyticsToggle.setToggleGroup(navGroup);
+        resourcesToggle.setToggleGroup(navGroup);
+        aiTutorToggle.setToggleGroup(navGroup);
+        if (messageToggle != null) {  // in case "Message" toggle exists
+            messageToggle.setToggleGroup(navGroup);
+            // Optional: initialization logic here
+        }
     }
 
     @FXML
@@ -52,6 +80,58 @@ public class DashboardController {
         }catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    private void handleNavigation(ActionEvent event) {
+        // Determine which toggle was clicked
+        ToggleButton clickedButton = (ToggleButton) event.getSource();
+        String fxmlToLoad = null;
+
+        if (clickedButton == classManagementToggle) {
+            fxmlToLoad = "/com/example/teamalfred/ClassManagement.fxml";
+        } else if (clickedButton == assessmentToggle) {
+            fxmlToLoad = "/com/example/teamalfred/Assessment.fxml";
+        } else if (clickedButton == analyticsToggle) {
+            fxmlToLoad = "/com/example/teamalfred/Analytics.fxml";
+        } else if (clickedButton == resourcesToggle) {
+            fxmlToLoad = "/com/example/teamalfred/Resources.fxml";
+        } else if (clickedButton == aiTutorToggle) {
+            fxmlToLoad = "/com/example/teamalfred/AiTutor.fxml";
+        } else if (clickedButton == messageToggle) {
+            fxmlToLoad = "/com/example/teamalfred/Message.fxml";
+        }
+
+        if (fxmlToLoad != null) {
+            try {
+                // Load the FXML content for the selected section
+                Parent newContent = FXMLLoader.load(getClass().getResource(fxmlToLoad));
+                // Replace the content of the contentPane with the new content
+                contentPane.getChildren().setAll(newContent);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Update styles: highlight the active button, reset others
+        updateToggleStyles(clickedButton);
+    }
+    /** Utility method to update the background style of toggles, highlighting the active one. */
+    private void updateToggleStyles(ToggleButton activeToggle) {
+        // Set all toggles to the inactive style, then override the active one
+        classManagementToggle.setStyle(INACTIVE_BUTTON_STYLE);
+        assessmentToggle.setStyle(INACTIVE_BUTTON_STYLE);
+        analyticsToggle.setStyle(INACTIVE_BUTTON_STYLE);
+        resourcesToggle.setStyle(INACTIVE_BUTTON_STYLE);
+        aiTutorToggle.setStyle(INACTIVE_BUTTON_STYLE);
+        if (messageToggle != null) {
+            messageToggle.setStyle(INACTIVE_BUTTON_STYLE);
+        }
+        System.out.println("activeToggle == assessmentToggle? " + (activeToggle == assessmentToggle));
+        System.out.println("activeToggle == resourcesToggle? " + (activeToggle == resourcesToggle));
+        System.out.println("activeToggle == aiTutorToggle? " + (activeToggle == aiTutorToggle));
+        System.out.println("activeToggle == messageToggle? " + (activeToggle == messageToggle));
+        // Set the clicked toggle's style to the active highlight color
+        activeToggle.setStyle(ACTIVE_BUTTON_STYLE);
     }
 
     @FXML
