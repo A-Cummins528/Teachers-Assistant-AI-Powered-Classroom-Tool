@@ -11,14 +11,14 @@
 
     <!-- Top Bar -->
     <top>
-        <Pane prefHeight="80" prefWidth="900" style="-fx-background-color: #1B263B;">
+        <Pane prefHeight="80" prefWidth="900" style="-fx-background-color: #3a3e43;">
             <Label text="User Profiles" layoutX="20" layoutY="25" style="-fx-text-fill: white; -fx-font-size: 24px;" />
         </Pane>
     </top>
 
     <!-- Left Side Menu -->
     <left>
-        <VBox prefWidth="200" spacing="10" alignment="TOP_CENTER" style="-fx-background-color: #16213E;">
+        <VBox prefWidth="200" spacing="10" alignment="TOP_CENTER" style="-fx-background-color: #313439;">
             <Label text="Menu" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-padding: 20px 0;" />
             <Button text="Dashboard" prefWidth="180" />
             <Button text="Profiles" prefWidth="180" />
