@@ -51,7 +51,13 @@ public class User {
         // 'id' remains uninitialised
     }
 
-
+    /**
+     * Default constructor. Needed for frameworks or manual instantiation
+     * before setting fields via setters.
+     */
+    public User() {
+        // No-argument constructor
+    }
 
 
     // --- Getters ---
