@@ -25,8 +25,11 @@ public class DatabaseSchemaManager {
                 "firstName VARCHAR NOT NULL, " +
                 "lastName VARCHAR NOT NULL, " +
                 "mobile VARCHAR NOT NULL, " +
-                "email VARCHAR NOT NULL UNIQUE, " + // Added UNIQUE constraint for email
-                "password VARCHAR NOT NULL" +
+                "email VARCHAR NOT NULL UNIQUE, " +
+                "password VARCHAR NOT NULL, " +
+                "userType VARCHAR CHECK (userType IN ('teacher', 'student')), " + // Teacher or Student
+                "grade INTEGER, " + // Can be NULL
+                "className VARCHAR" + // Can be NULL
                 ")";
 
         Connection conn = getConnection(); // Get the shared connection
