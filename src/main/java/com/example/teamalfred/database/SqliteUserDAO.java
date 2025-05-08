@@ -25,6 +25,9 @@ public class SqliteUserDAO implements UserDAO {
     private static final String COL_MOBILE = "mobile";
     private static final String COL_EMAIL = "email";
     private static final String COL_PASSWORD = "password";
+    private static final String COL_USER_TYPE = "userType";
+    private static final String COL_GRADE = "grade";
+    private static final String COL_CLASS_NAME = "className";
 
 
     /**
@@ -34,9 +37,10 @@ public class SqliteUserDAO implements UserDAO {
      */
     @Override
     public void createUser(User user) throws SQLException {
-        //TODO:  SQL uses column names - ADJUST IF NEEDED
-        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?)",
-                TABLE_NAME, COL_FIRST_NAME, COL_LAST_NAME, COL_MOBILE, COL_EMAIL, COL_PASSWORD);
+        // Exclude the grade and className columns from the INSERT statement
+        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?)",
+                TABLE_NAME, COL_FIRST_NAME, COL_LAST_NAME, COL_MOBILE, COL_EMAIL, COL_PASSWORD,
+                COL_USER_TYPE);
 
         // Get connection for this operation
         Connection conn = DatabaseConnection.getInstance();
@@ -57,11 +61,12 @@ public class SqliteUserDAO implements UserDAO {
             pstmt.setString(3, user.getMobile());
             pstmt.setString(4, user.getEmail());
             pstmt.setString(5, user.getPassword());
+            // Convert userType to lowercase to match database constraint
+            pstmt.setString(6, user.getUserType().name().toLowerCase());
 
             // Execute the insert
             pstmt.executeUpdate();
         }
-        // No catch block here - let SQLException propagate as declared by the method
     }
 
     /**
@@ -72,9 +77,9 @@ public class SqliteUserDAO implements UserDAO {
      */
     @Override
     public void updateUser(User user) throws SQLException {
-        //TODO:  SQL uses column names - ADJUST IF NEEDED
-        String sql = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?, %s = ? WHERE %s = ?",
-                TABLE_NAME, COL_FIRST_NAME, COL_LAST_NAME, COL_MOBILE, COL_EMAIL, COL_PASSWORD, COL_ID);
+        String sql = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ? WHERE %s = ?",
+                TABLE_NAME, COL_FIRST_NAME, COL_LAST_NAME, COL_MOBILE, COL_EMAIL, COL_PASSWORD,
+                COL_USER_TYPE, COL_GRADE, COL_CLASS_NAME, COL_ID);
 
         Connection conn = DatabaseConnection.getInstance();
         if (conn == null) {
@@ -87,7 +92,10 @@ public class SqliteUserDAO implements UserDAO {
             pstmt.setString(3, user.getMobile());
             pstmt.setString(4, user.getEmail());
             pstmt.setString(5, user.getPassword());
-            pstmt.setInt(6, user.getId()); // Use the ID for the WHERE clause
+            pstmt.setString(6, user.getUserType().toString().toLowerCase());
+            pstmt.setString(7, user.getGrade());
+            pstmt.setString(8, user.getClassName());
+            pstmt.setInt(9, user.getId()); // Use the ID for the WHERE clause
 
             pstmt.executeUpdate();
         }
@@ -124,8 +132,9 @@ public class SqliteUserDAO implements UserDAO {
     @Override
     public Optional<User> findUserByEmail(String email) throws SQLException {
         // Select all columns needed to reconstruct a User object
-        String sql = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s WHERE %s = ?",
-                COL_ID, COL_FIRST_NAME, COL_LAST_NAME, COL_MOBILE, COL_EMAIL, COL_PASSWORD, TABLE_NAME, COL_EMAIL);
+        String sql = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s FROM %s WHERE %s = ?",
+                COL_ID, COL_FIRST_NAME, COL_LAST_NAME, COL_MOBILE, COL_EMAIL, COL_PASSWORD,
+                COL_USER_TYPE, COL_GRADE, COL_CLASS_NAME, TABLE_NAME, COL_EMAIL);
 
         Connection conn = DatabaseConnection.getInstance();
         if (conn == null) {
@@ -157,8 +166,9 @@ public class SqliteUserDAO implements UserDAO {
      */
     @Override
     public Optional<User> findUserById(int id) throws SQLException {
-        String sql = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s WHERE %s = ?",
-                COL_ID, COL_FIRST_NAME, COL_LAST_NAME, COL_MOBILE, COL_EMAIL, COL_PASSWORD, TABLE_NAME, COL_ID);
+        String sql = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s FROM %s WHERE %s = ?",
+                COL_ID, COL_FIRST_NAME, COL_LAST_NAME, COL_MOBILE, COL_EMAIL, COL_PASSWORD,
+                COL_USER_TYPE, COL_GRADE, COL_CLASS_NAME, TABLE_NAME, COL_ID);
 
         Connection conn = DatabaseConnection.getInstance();
         if (conn == null) {
@@ -187,8 +197,9 @@ public class SqliteUserDAO implements UserDAO {
     public List<User> getAllUsers() throws SQLException {
         List<User> users = new ArrayList<>();
         // Select all columns needed
-        String sql = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s",
-                COL_ID, COL_FIRST_NAME, COL_LAST_NAME, COL_MOBILE, COL_EMAIL, COL_PASSWORD, TABLE_NAME);
+        String sql = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s FROM %s",
+                COL_ID, COL_FIRST_NAME, COL_LAST_NAME, COL_MOBILE, COL_EMAIL, COL_PASSWORD,
+                COL_USER_TYPE, COL_GRADE, COL_CLASS_NAME, TABLE_NAME);
 
         Connection conn = DatabaseConnection.getInstance();
         if (conn == null) {
@@ -225,6 +236,9 @@ public class SqliteUserDAO implements UserDAO {
         user.setEmail(rs.getString(COL_EMAIL));
         String hashedPasswordFromDb = rs.getString(COL_PASSWORD);
         user.setPersistedPassword(hashedPasswordFromDb);
+        User.UserRole.valueOf(rs.getString(COL_USER_TYPE).toUpperCase());
+        user.setGrade(rs.getString(COL_GRADE));
+        user.setClassName(rs.getString(COL_CLASS_NAME));
         return user;
     }
 }

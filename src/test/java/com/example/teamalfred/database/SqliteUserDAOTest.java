@@ -46,7 +46,8 @@ public class SqliteUserDAOTest {
         schemaManager.resetSchema();
 
         // Create a standard user object for testing
-        testUser = new User("John", "Doe", "john.doe@example.com", "0412345678", "password123");
+        testUser = new User("John", "Doe", "john.doe@example.com", "0412345678",
+                "password123", "teacher");
     }
 
     /**
@@ -98,7 +99,8 @@ public class SqliteUserDAOTest {
         userDAO.createUser(testUser);
 
         // Act & Assert
-        User duplicateUser = new User("Jane", "Smith", "john.doe@example.com", "0487654321", "anotherPassword");
+        User duplicateUser = new User("Jane", "Smith", "john.doe@example.com",
+                "0487654321", "anotherPassword", "teacher");
         Executable action = () -> userDAO.createUser(duplicateUser);
         assertThrows(SQLException.class, action, "Creating user with duplicate email should throw SQLException.");
     }
@@ -169,6 +171,7 @@ public class SqliteUserDAOTest {
         userToUpdate.setFirstName("Johnny");
         userToUpdate.setMobile("+61499999999");
         userToUpdate.setPassword("newPassword456");
+        userToUpdate.setUserType("teacher");
 
         // Act
         userDAO.updateUser(userToUpdate);
@@ -215,8 +218,10 @@ public class SqliteUserDAOTest {
     @Test
     public void testGetAllUsers() throws SQLException {
         // Arrange
-        User user1 = new User("Alice", "Smith", "alice@example.com", "+61411111111", "passA");
-        User user2 = new User("Bob", "Jones", "bob@example.com", "+61422222222", "passB");
+        User user1 = new User("Alice", "Smith", "alice@example.com",
+                "+61411111111", "passA", "student");
+        User user2 = new User("Bob", "Jones", "bob@example.com",
+                "+61422222222", "passB", "student");
         userDAO.createUser(user1);
         userDAO.createUser(user2);
 

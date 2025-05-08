@@ -140,7 +140,7 @@ public class DatabaseSchemaManagerTest {
         }
 
         // Assert: Verify the expected columns, types, nullability, and PK
-        assertEquals(6, actualColumns.size(), "Should have 6 columns.");
+        assertEquals(9, actualColumns.size(), "Should have 9 columns.");
 
         // Check each column (using helper method)
         assertColumn(actualColumns, "id", "INTEGER", false); // PK is implicitly NOT NULL in SQLite
@@ -149,6 +149,9 @@ public class DatabaseSchemaManagerTest {
         assertColumn(actualColumns, "mobile", "VARCHAR", false);
         assertColumn(actualColumns, "email", "VARCHAR", false);
         assertColumn(actualColumns, "password", "VARCHAR", false);
+        assertColumn(actualColumns, "userType", "VARCHAR", false);
+        assertColumn(actualColumns, "grade", "INTEGER", true);
+        assertColumn(actualColumns, "className", "VARCHAR", true);
 
         // Check primary key
         assertEquals("id", primaryKeyColumn, "Primary key should be the 'id' column.");
