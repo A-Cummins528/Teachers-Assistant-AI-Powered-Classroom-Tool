@@ -27,7 +27,7 @@ public class DatabaseSchemaManager {
                 "mobile VARCHAR NOT NULL, " +
                 "email VARCHAR NOT NULL UNIQUE, " +
                 "password VARCHAR NOT NULL, " +
-                "userType VARCHAR CHECK (userType IN ('teacher', 'student')), " + // Teacher or Student
+                "userType VARCHAR NOT NULL CHECK (userType IN ('teacher', 'student')), " + // Teacher or Student
                 "grade INTEGER, " + // Can be NULL
                 "className VARCHAR" + // Can be NULL
                 ")";

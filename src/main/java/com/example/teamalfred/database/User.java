@@ -35,20 +35,16 @@ public class User {
      * @param mobile    The mobile phone number of the user.
      * @param plainTextPassword  The user's plaintext password (will be hashed).
      * @param userTypeString  The type of user as a String (e.g., "student", "teacher").
-     * @param grade     The grade of the student (can be null for teachers or if not applicable).
-     * @param className The class the user is assigned to (can be null).
      */
     public User(String firstName, String lastName, String email, String mobile, String plainTextPassword,
-                String userTypeString, String grade, String className) {
+                String userTypeString) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
         setMobile(mobile);
         setPassword(plainTextPassword);
         setUserType(userTypeString);
-        setGrade(grade);
-        setClassName(className);
-        // 'id' remains uninitialised
+        // 'id', 'grade', and 'class name' remain uninitialised
     }
 
     /**

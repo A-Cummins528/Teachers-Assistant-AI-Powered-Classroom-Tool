@@ -37,10 +37,10 @@ public class SqliteUserDAO implements UserDAO {
      */
     @Override
     public void createUser(User user) throws SQLException {
-        // ADDED new columns to INSERT statement
-        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        // Exclude the grade and className columns from the INSERT statement
+        String sql = String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?)",
                 TABLE_NAME, COL_FIRST_NAME, COL_LAST_NAME, COL_MOBILE, COL_EMAIL, COL_PASSWORD,
-                COL_USER_TYPE, COL_GRADE, COL_CLASS_NAME);
+                COL_USER_TYPE);
 
         // Get connection for this operation
         Connection conn = DatabaseConnection.getInstance();
@@ -61,14 +61,12 @@ public class SqliteUserDAO implements UserDAO {
             pstmt.setString(3, user.getMobile());
             pstmt.setString(4, user.getEmail());
             pstmt.setString(5, user.getPassword());
-            pstmt.setString(6, user.getUserType().name());
-            pstmt.setString(7, user.getGrade());
-            pstmt.setString(8, user.getClassName());
+            // Convert userType to lowercase to match database constraint
+            pstmt.setString(6, user.getUserType().name().toLowerCase());
 
             // Execute the insert
             pstmt.executeUpdate();
         }
-        // No catch block here - let SQLException propagate as declared by the method
     }
 
     /**
@@ -79,7 +77,6 @@ public class SqliteUserDAO implements UserDAO {
      */
     @Override
     public void updateUser(User user) throws SQLException {
-        //TODO:  SQL uses column names - ADJUST IF NEEDED
         String sql = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ?, %s = ? WHERE %s = ?",
                 TABLE_NAME, COL_FIRST_NAME, COL_LAST_NAME, COL_MOBILE, COL_EMAIL, COL_PASSWORD,
                 COL_USER_TYPE, COL_GRADE, COL_CLASS_NAME, COL_ID);
@@ -95,7 +92,7 @@ public class SqliteUserDAO implements UserDAO {
             pstmt.setString(3, user.getMobile());
             pstmt.setString(4, user.getEmail());
             pstmt.setString(5, user.getPassword());
-            pstmt.setString(6, user.getUserType().name());
+            pstmt.setString(6, user.getUserType().toString().toLowerCase());
             pstmt.setString(7, user.getGrade());
             pstmt.setString(8, user.getClassName());
             pstmt.setInt(9, user.getId()); // Use the ID for the WHERE clause

@@ -218,7 +218,8 @@ public class UserTest {
 
     @Test
     public void toString_IncludesExpectedFields() {
-        User user = new User("John", "Doe", "john@example.com", "+61412345678", "password123");
+        User user = new User("John", "Doe", "john@example.com",
+                "+61412345678", "password123", "teacher");
         user.setId(1);
         String result = user.toString();
         assertTrue(result.contains("id=1"));
