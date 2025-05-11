@@ -30,6 +30,8 @@ public class DashboardController {
     @FXML private ToggleButton resourcesToggle;
     @FXML private ToggleButton aiTutorToggle;
     @FXML private ToggleButton messageToggle;
+    @FXML private ToggleButton aiQuizToggle;
+
     // Define styles for active/inactive toggle buttons:
     private static final String ACTIVE_BUTTON_STYLE =
             "-fx-background-color: lightblue; -fx-text-fill: white; -fx-alignment: center; -fx-border-radius: 4;";
@@ -57,6 +59,7 @@ public class DashboardController {
         analyticsToggle.setToggleGroup(navGroup);
         resourcesToggle.setToggleGroup(navGroup);
         aiTutorToggle.setToggleGroup(navGroup);
+        aiQuizToggle.setToggleGroup(navGroup);
         if (messageToggle != null) {  // in case "Message" toggle exists
             messageToggle.setToggleGroup(navGroup);
             // Optional: initialization logic here
@@ -99,7 +102,10 @@ public class DashboardController {
             fxmlToLoad = "/com/example/teamalfred/AiTutor.fxml";
         } else if (clickedButton == messageToggle) {
             fxmlToLoad = "/com/example/teamalfred/Message.fxml";
+        } else if (clickedButton == aiQuizToggle) {
+            fxmlToLoad = "/com/example/teamalfred/AiQuiz.fxml";
         }
+
 
         if (fxmlToLoad != null) {
             try {
@@ -123,6 +129,8 @@ public class DashboardController {
         analyticsToggle.setStyle(INACTIVE_BUTTON_STYLE);
         resourcesToggle.setStyle(INACTIVE_BUTTON_STYLE);
         aiTutorToggle.setStyle(INACTIVE_BUTTON_STYLE);
+        aiQuizToggle.setStyle(INACTIVE_BUTTON_STYLE);
+
         if (messageToggle != null) {
             messageToggle.setStyle(INACTIVE_BUTTON_STYLE);
         }

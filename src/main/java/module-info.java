@@ -15,10 +15,14 @@ module com.example.teamalfred {
     requires java.desktop;
     requires jbcrypt;
 
+    requires com.google.gson;
+
     opens com.example.teamalfred to javafx.fxml;
     exports com.example.teamalfred;
     exports com.example.teamalfred.controllers;
     opens com.example.teamalfred.controllers to javafx.fxml;
     exports com.example.teamalfred.database;
     opens com.example.teamalfred.database to javafx.fxml;
+    exports com.example.teamalfred.controllers.AiQuiz;
+    opens com.example.teamalfred.controllers.AiQuiz to javafx.fxml;
 }
