@@ -6,14 +6,18 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.control.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.teamalfred.controllers.SettingsController" prefWidth="900" prefHeight="600">
+<BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.teamalfred.controllers.SettingsController"
+            prefWidth="900" prefHeight="600">
 
     <!-- Top Bar -->
     <top>
         <Pane prefHeight="80" prefWidth="900" style="-fx-background-color: #3a3e43;">
             <Label text="User Profiles" layoutX="20" layoutY="25" style="-fx-text-fill: white; -fx-font-size: 24px;" />
         </Pane>
+
+
     </top>
 
     <!-- Left Side Menu -->
@@ -53,6 +57,10 @@
                 <HBox spacing="10">
                     <Button text="Update" onAction="#updateUserDetails" />
                     <Button text="Cancel" onAction="#handleCancel" />
+                </HBox>
+                <HBox spacing="10">
+                    <Button text="A+" onAction="#increaseFontSize"/>
+                    <Button text="A-" onAction="#decreaseFontSize"/>
                 </HBox>
 
             </VBox>

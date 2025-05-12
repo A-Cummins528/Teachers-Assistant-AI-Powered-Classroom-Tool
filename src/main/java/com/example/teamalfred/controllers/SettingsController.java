@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert; // For feedback messages
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,7 +29,7 @@ public class SettingsController {
     @FXML private TextField emailSettings; // Consider making this non-editable or handle uniqueness carefully
     @FXML private PasswordField passwordSettings;
     @FXML private PasswordField passwordSettingsConfirm;
-
+    @FXML private BorderPane rootPane; // This now refers to your BorderPane root
     @FXML private Label invalidFirstname;
     @FXML private Label invalidLastname;
     @FXML private Label invalidMobile;
@@ -37,6 +38,9 @@ public class SettingsController {
     @FXML private Label invalidPasswordConfirm; // Added: Ensure this fx:id exists in your FXML
 
     private static final int MIN_REQUIRED_VALID_FIELDS = 4; // For name, lastname, mobile, email
+
+
+    private double currentFontSize = 14.0;
 
     // Call this to set the current user before showing the Settings page
     public void setCurrentUser(User user) {
@@ -255,5 +259,22 @@ public class SettingsController {
     private void handleCancel(ActionEvent event) { // Or handleGoBackToDashboard
         // Assuming Dashboard is the main screen after login
         switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
+    }
+    @FXML
+    private void increaseFontSize() {
+        currentFontSize += 2;
+        applyFontSize();
+    }
+
+    @FXML
+    private void decreaseFontSize() {
+        currentFontSize = Math.max(10, currentFontSize - 2);
+        applyFontSize();
+    }
+
+    private void applyFontSize() {
+        if (rootPane != null) {
+            rootPane.setStyle("-fx-font-size: " + currentFontSize + "px;");
+        }
     }
 }
