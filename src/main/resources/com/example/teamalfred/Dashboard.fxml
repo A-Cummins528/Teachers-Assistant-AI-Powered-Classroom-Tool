@@ -61,6 +61,14 @@
                         <Font name="Al Bayan Plain" size="19.0" />
                      </font>
                   </ToggleButton>
+                  <ToggleButton fx:id="aiQuizToggle" mnemonicParsing="false" onAction="#handleNavigation"
+                                prefHeight="26.0" prefWidth="199.0"
+                                style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: center; -fx-border-radius: 4;"
+                                text="AI Quiz" textFill="#06080a">
+                     <font>
+                        <Font name="Al Bayan Plain" size="19.0" />
+                     </font>
+                  </ToggleButton>
                </children>
             </VBox>
             <Button layoutX="74.0" layoutY="561.0" onAction="#handleGoToSettings" style="-fx-background-color: transparent;">
