@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -31,6 +32,10 @@ public class DashboardController {
     @FXML private ToggleButton aiTutorToggle;
     @FXML private ToggleButton messageToggle;
     @FXML private ToggleButton aiQuizToggle;
+    @FXML private ToggleButton settingsToggle;
+    @FXML private AnchorPane dashboardRoot; // root of the dashboard layout
+
+    private double currentFontSize = 14.0; // base font size
 
     // Define styles for active/inactive toggle buttons:
     private static final String ACTIVE_BUTTON_STYLE =
@@ -60,6 +65,8 @@ public class DashboardController {
         resourcesToggle.setToggleGroup(navGroup);
         aiTutorToggle.setToggleGroup(navGroup);
         aiQuizToggle.setToggleGroup(navGroup);
+        settingsToggle.setToggleGroup(navGroup);
+
         if (messageToggle != null) {  // in case "Message" toggle exists
             messageToggle.setToggleGroup(navGroup);
             // Optional: initialization logic here
@@ -104,7 +111,10 @@ public class DashboardController {
             fxmlToLoad = "/com/example/teamalfred/Message.fxml";
         } else if (clickedButton == aiQuizToggle) {
             fxmlToLoad = "/com/example/teamalfred/AiQuiz.fxml";
+        } else if (clickedButton == settingsToggle) {
+        fxmlToLoad = "/com/example/teamalfred/SettingsPage.fxml";
         }
+
 
 
         if (fxmlToLoad != null) {
@@ -145,5 +155,22 @@ public class DashboardController {
     @FXML
     private void handleLogout(ActionEvent event) {
         switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
+    }
+    @FXML
+    private void increaseFontSize() {
+        currentFontSize += 2;
+        applyFontSize();
+    }
+
+    @FXML
+    private void decreaseFontSize() {
+        currentFontSize = Math.max(10, currentFontSize - 2); // prevent shrinking too small
+        applyFontSize();
+    }
+
+    private void applyFontSize() {
+        if (dashboardRoot != null) {
+            dashboardRoot.setStyle("-fx-font-size: " + currentFontSize + "px;");
+        }
     }
 }
