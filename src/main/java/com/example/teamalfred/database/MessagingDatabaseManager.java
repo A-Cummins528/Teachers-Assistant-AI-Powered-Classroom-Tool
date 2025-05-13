@@ -21,7 +21,7 @@ public class MessagingDatabaseManager {
         try (Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         }
-        String sql = "CREATE TABLE IF NOT EXISTS messages (" +
+        String sqlb = "CREATE TABLE IF NOT EXISTS messages (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 "conversationID INT NOT NULL, " +
                 "senderID INT NOT NULL, " +
@@ -30,14 +30,14 @@ public class MessagingDatabaseManager {
                 "FOREIGN KEY (conversationID) REFERENCES conversations(id)" +
                 ");";
         try (Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
+            stmt.execute(sqlb);
         }
         // DO NOT close the connection here - it's managed by DatabaseConnection
         // Messages Table
     }
 
     public void dropTable() throws SQLException {
-        String sql = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        String sql = "DROP TABLE IF EXISTS " + "messages";
 
         Connection conn = getConnection(); // Get the shared connection
         // Use try-with-resources ONLY for the Statement
