@@ -277,4 +277,24 @@ public class SettingsController {
             rootPane.setStyle("-fx-font-size: " + currentFontSize + "px;");
         }
     }
+    @FXML
+    private void handleGoToDashboard(ActionEvent event) {
+        switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
+    }
+
+    @FXML
+    private void handleGoToSettings(ActionEvent event) {
+        switchScene.switchScene(event, "/com/example/teamalfred/SettingsPage.fxml");
+    }
+
+    @FXML
+    private void handleGoToProfile(ActionEvent event) {
+        switchScene.switchScene(event, "/com/example/teamalfred/UpdateProfilePage.fxml");
+    }
+
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        UserSession.clearSession(); // clear current user session
+        switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
+    }
 }

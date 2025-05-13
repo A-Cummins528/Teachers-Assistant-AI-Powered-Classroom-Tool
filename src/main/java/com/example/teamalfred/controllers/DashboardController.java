@@ -31,6 +31,8 @@ public class DashboardController {
     @FXML private ToggleButton aiTutorToggle;
     @FXML private ToggleButton messageToggle;
     @FXML private ToggleButton aiQuizToggle;
+    @FXML private ToggleButton settingsToggle;
+
 
     // Define styles for active/inactive toggle buttons:
     private static final String ACTIVE_BUTTON_STYLE =
@@ -60,6 +62,8 @@ public class DashboardController {
         resourcesToggle.setToggleGroup(navGroup);
         aiTutorToggle.setToggleGroup(navGroup);
         aiQuizToggle.setToggleGroup(navGroup);
+        settingsToggle.setToggleGroup(navGroup);
+
         if (messageToggle != null) {  // in case "Message" toggle exists
             messageToggle.setToggleGroup(navGroup);
             // Optional: initialization logic here
@@ -104,7 +108,10 @@ public class DashboardController {
             fxmlToLoad = "/com/example/teamalfred/Message.fxml";
         } else if (clickedButton == aiQuizToggle) {
             fxmlToLoad = "/com/example/teamalfred/AiQuiz.fxml";
+        } else if (clickedButton == settingsToggle) {
+        fxmlToLoad = "/com/example/teamalfred/SettingsPage.fxml";
         }
+
 
 
         if (fxmlToLoad != null) {

@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.control.*?>
 
-<BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.teamalfred.controllers.SettingsController"
-            prefWidth="900" prefHeight="600">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="rootPane" prefHeight="600" prefWidth="900" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.teamalfred.controllers.SettingsController">
 
     <!-- Top Bar -->
     <top>
         <Pane prefHeight="80" prefWidth="900" style="-fx-background-color: #3a3e43;">
-            <Label text="User Profiles" layoutX="20" layoutY="25" style="-fx-text-fill: white; -fx-font-size: 24px;" />
+            <Label layoutX="20" layoutY="25" style="-fx-text-fill: white; -fx-font-size: 24px;" text="User Profiles" />
         </Pane>
 
 
@@ -22,21 +16,21 @@
 
     <!-- Left Side Menu -->
     <left>
-        <VBox prefWidth="200" spacing="10" alignment="TOP_CENTER" style="-fx-background-color: #313439;">
-            <Label text="Menu" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-padding: 20px 0;" />
-            <Button text="Dashboard" prefWidth="180" />
-            <Button text="Profiles" prefWidth="180" />
-            <Button text="Settings" prefWidth="180" />
-            <Button text="Logout" prefWidth="180" />
+        <VBox alignment="TOP_CENTER" prefWidth="200" spacing="10" style="-fx-background-color: #313439;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 18px; -fx-padding: 20px 0;" text="Menu" />
+            <Button onAction="#handleGoToDashboard" prefWidth="180" text="Dashboard" />
+            <Button onAction="#handleGoToProfile" prefWidth="180" text="Profiles" />
+            <Button onAction="#handleGoToSettings" prefWidth="180" text="Settings" />
+            <Button onAction="#handleLogout" prefWidth="180" text="Logout" />
         </VBox>
     </left>
 
     <!-- Center Main Content -->
     <center>
         <AnchorPane style="-fx-background-color: #F5F7FA;">
-            <VBox spacing="10" alignment="CENTER" layoutX="50" layoutY="30" prefWidth="600" prefHeight="460">
+            <VBox alignment="CENTER" layoutX="50" layoutY="30" prefHeight="460" prefWidth="600" spacing="10">
 
-                <Label text="Update Your Details" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+                <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Update Your Details" />
 
                 <TextField fx:id="firstNameSettings" promptText="First Name" />
                 <Label fx:id="invalidFirstname" textFill="red" />
@@ -55,12 +49,12 @@
                 <Label fx:id="invalidPassword" textFill="red" />
 
                 <HBox spacing="10">
-                    <Button text="Update" onAction="#updateUserDetails" />
-                    <Button text="Cancel" onAction="#handleCancel" />
+                    <Button onAction="#updateUserDetails" text="Update" />
+                    <Button onAction="#handleCancel" text="Cancel" />
                 </HBox>
                 <HBox spacing="10">
-                    <Button text="A+" onAction="#increaseFontSize"/>
-                    <Button text="A-" onAction="#decreaseFontSize"/>
+                    <Button onAction="#increaseFontSize" text="A+" />
+                    <Button onAction="#decreaseFontSize" text="A-" />
                 </HBox>
 
             </VBox>
