@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -15,33 +16,49 @@
          <children>
             <AnchorPane layoutX="805.0" prefHeight="768.0" prefWidth="550.0">
                <children>
-                  <Rectangle arcHeight="40.0" arcWidth="40.0" fill="WHITE" height="550.0" layoutX="77.0" layoutY="109.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="396.0" />
-                  <Label alignment="CENTER" layoutX="65.0" layoutY="128.0" prefHeight="94.0" prefWidth="420.0" text="Let's Get Started" textAlignment="CENTER">
+                  <Rectangle arcHeight="40.0" arcWidth="40.0" fill="WHITE" height="600.0" layoutX="77.0" layoutY="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="396.0" />
+                  <Label alignment="CENTER" layoutX="65.0" layoutY="110.0" prefHeight="70.0" prefWidth="420.0" text="Let's Get Started" textAlignment="CENTER">
                      <font>
-                        <Font name="Al Nile Bold" size="38.0" />
+                        <Font name="Al Nile Bold" size="32.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="firstNameSignup" layoutX="108.0" layoutY="222.0" prefHeight="40.0" prefWidth="335.0" promptText="First Name" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0f0;" />
-                  <TextField fx:id="lastNameSignup" layoutX="108.0" layoutY="282.0" prefHeight="40.0" prefWidth="335.0" promptText="Last Name" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
-                  <Button fx:id="signupButton" layoutX="181.0" layoutY="541.0" mnemonicParsing="false" onAction="#userSignup" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1c2832; -fx-background-radius: 30;" text="Sign Up" textFill="WHITE">
+
+                  <Label fx:id="invalidFirstname" layoutX="110.0" layoutY="183.0" textFill="RED" />
+                  <TextField fx:id="firstNameSignup" layoutX="108.0" layoutY="200.0" prefHeight="35.0" prefWidth="335.0" promptText="First Name" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0f0;" />
+
+                  <Label fx:id="invalidLastname" layoutX="110.0" layoutY="238.0" textFill="RED" />
+                  <TextField fx:id="lastNameSignup" layoutX="108.0" layoutY="255.0" prefHeight="35.0" prefWidth="335.0" promptText="Last Name" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
+
+                  <Label fx:id="invalidUserType" layoutX="110.0" layoutY="293.0" textFill="RED" />
+                  <ComboBox fx:id="userTypeSignup" layoutX="108.0" layoutY="310.0" prefHeight="35.0" prefWidth="335.0" promptText="Select User Type" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
+
+                  <Label fx:id="invalidClassName" layoutX="110.0" layoutY="348.0" textFill="RED" />
+                  <TextField fx:id="classNameSignup" layoutX="108.0" layoutY="365.0" prefHeight="35.0" prefWidth="335.0" promptText="Optional - Class Name (e.g. CAB302)" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
+
+                  <Label fx:id="invalidMobile" layoutX="110.0" layoutY="403.0" textFill="RED" />
+                  <TextField fx:id="mobileSignup" layoutX="108.0" layoutY="420.0" prefHeight="35.0" prefWidth="335.0" promptText="Mobile" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
+
+                  <Label fx:id="invalidEmail" layoutX="110.0" layoutY="458.0" textFill="RED" />
+                  <TextField fx:id="emailSignup" layoutX="108.0" layoutY="475.0" prefHeight="35.0" prefWidth="335.0" promptText="Email" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
+
+                  <Label fx:id="invalidPassword" layoutX="110.0" layoutY="513.0" textFill="RED" />
+                  <PasswordField fx:id="passwordSignup" layoutX="108.0" layoutY="530.0" prefHeight="35.0" prefWidth="335.0" promptText="Password" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
+
+                  <Label fx:id="invalidPasswordConfirm" layoutX="110.0" layoutY="568.0" textFill="RED" />
+                  <PasswordField fx:id="passwordSignupConfirm" layoutX="108.0" layoutY="585.0" prefHeight="35.0" prefWidth="335.0" promptText="Confirm Password" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
+
+
+                  <Button fx:id="signupButton" layoutX="181.0" layoutY="635.0" mnemonicParsing="false" onAction="#userSignup" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1c2832; -fx-background-radius: 30;" text="Sign Up" textFill="WHITE">
                      <font>
                         <Font name="Al Nile Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="signInSignupButton" layoutX="178.0" layoutY="611.0" mnemonicParsing="false" onAction="#handleLoginRedirect" style="-fx-background-color: #FFFFFF;" text="Already have an account? Sign In" textFill="#9a8d8d">
+                  <Button fx:id="signInSignupButton" layoutX="178.0" layoutY="670.0" mnemonicParsing="false" onAction="#handleLoginRedirect" style="-fx-background-color: #FFFFFF;" text="Already have an account? Sign In" textFill="#9a8d8d">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Button>
-                  <Label fx:id="failedLogin" alignment="CENTER" contentDisplay="CENTER" layoutX="227.0" layoutY="293.0" textAlignment="CENTER" wrapText="true" />
-                  <TextField fx:id="mobileSignup" layoutX="108.0" layoutY="344.0" prefHeight="40.0" prefWidth="335.0" promptText="Mobile" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
-                  <TextField fx:id="emailSignup" layoutX="108.0" layoutY="406.0" prefHeight="40.0" prefWidth="335.0" promptText="Email" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
-                  <PasswordField fx:id="passwordSignup" layoutX="108.0" layoutY="465.0" prefHeight="40.0" prefWidth="335.0" promptText="Password" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
-                  <Label fx:id="invalidFirstname" layoutX="122.0" layoutY="205.0" textFill="RED" />
-                  <Label fx:id="invalidLastname" layoutX="122.0" layoutY="262.0" textFill="RED" />
-                  <Label fx:id="invalidMobile" layoutX="122.0" layoutY="327.0" textFill="RED" />
-                  <Label fx:id="invalidEmail" layoutX="122.0" layoutY="389.0" textFill="RED" />
-                  <Label fx:id="invalidPassword" layoutX="122.0" layoutY="446.0" textFill="RED" />
+
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="768.0" prefWidth="683.0">
