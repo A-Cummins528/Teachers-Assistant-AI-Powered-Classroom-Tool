@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -32,7 +33,9 @@ public class DashboardController {
     @FXML private ToggleButton messageToggle;
     @FXML private ToggleButton aiQuizToggle;
     @FXML private ToggleButton settingsToggle;
+    @FXML private AnchorPane dashboardRoot; // root of the dashboard layout
 
+    private double currentFontSize = 14.0; // base font size
 
     // Define styles for active/inactive toggle buttons:
     private static final String ACTIVE_BUTTON_STYLE =
@@ -152,5 +155,22 @@ public class DashboardController {
     @FXML
     private void handleLogout(ActionEvent event) {
         switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
+    }
+    @FXML
+    private void increaseFontSize() {
+        currentFontSize += 2;
+        applyFontSize();
+    }
+
+    @FXML
+    private void decreaseFontSize() {
+        currentFontSize = Math.max(10, currentFontSize - 2); // prevent shrinking too small
+        applyFontSize();
+    }
+
+    private void applyFontSize() {
+        if (dashboardRoot != null) {
+            dashboardRoot.setStyle("-fx-font-size: " + currentFontSize + "px;");
+        }
     }
 }

@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -36,6 +37,9 @@ public class SignUpController {
     @FXML private Label invalidEmail;
     @FXML private Label invalidPassword;
     @FXML private Label invalidPasswordConfirm;
+    @FXML private BorderPane signUpRoot;
+
+    private double currentFontSize = 14.0;
 
     // New Validation Labels
     @FXML private Label invalidUserType;
@@ -293,5 +297,22 @@ public class SignUpController {
     @FXML
     private void handleLoginRedirect(ActionEvent event) {
         switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
+    }
+    @FXML
+    private void increaseFontSize() {
+        currentFontSize += 2;
+        applyFontSize();
+    }
+
+    @FXML
+    private void decreaseFontSize() {
+        currentFontSize = Math.max(10, currentFontSize - 2);
+        applyFontSize();
+    }
+
+    private void applyFontSize() {
+        if (signUpRoot != null) {
+            signUpRoot.setStyle("-fx-font-size: " + currentFontSize + "px;");
+        }
     }
 }
