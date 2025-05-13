@@ -1,180 +1,216 @@
 package com.example.teamalfred.database;
 
 import java.util.Objects; // Import Objects for equals and hashCode
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  * Represents a user within the system.
- * This class stores basic user information including identification,
- * name, contact details, and credentials.
- *
- * Note: The ID is not set via the constructor and should be assigned
- * separately, typically after persistence (e.g., database insertion).
+ * Passwords are stored in a hashed format using BCrypt.
  */
 public class User {
 
-    /**
-     * Unique identifier for the user. Typically assigned by the database.
-     */
     private int id;
-
-    /**
-     * The user's first name.
-     */
     private String firstName;
-
-    /**
-     * The user's last name.
-     */
     private String lastName;
-
-    /**
-     * The user's email address. Should be unique.
-     */
     private String email;
-
-    /**
-     * The user's mobile phone number.
-     */
     private String mobile;
+    private String password; // This will store the hashed password
+    private String grade;    // Student's grade, null for teachers
+    private String className; // e.g., "CAB302"
+
+    // Define the UserRole enum
+    public enum UserRole {
+        STUDENT, TEACHER;
+    }
+    private UserRole userType;
+
 
     /**
-     * The user's password.
-     */
-    private String password; // TODO: store as a hashed password
-
-    /**
-     * Constructs a new User instance.
+     * Constructs a new User instance. Hashes the provided password.
      * The ID field is not initialised by this constructor.
      *
      * @param firstName The first name of the user. Must not be null.
      * @param lastName  The last name of the user. Must not be null.
      * @param email     The email address of the user. Should be unique and not null.
      * @param mobile    The mobile phone number of the user.
-     * @param password  The user's password (plaintext). Consider security implications.
+     * @param plainTextPassword  The user's plaintext password (will be hashed).
+     * @param userTypeString  The type of user as a String (e.g., "student", "teacher").
      */
-    public User(String firstName, String lastName, String email, String mobile, String password) {
-        // TODO: add validation for non-null parameters here
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.mobile = mobile;
-        this.password = password;
-        // 'id' remains uninitialised, default is 0
-    }
-
-    // --- Getters and Setters ---
-
-    /**
-     * Gets the unique identifier for the user.
-     *
-     * @return The user's ID.
-     */
-    public int getId() {
-        return id;
+    public User(String firstName, String lastName, String email, String mobile, String plainTextPassword,
+                String userTypeString) {
+        setFirstName(firstName);
+        setLastName(lastName);
+        setEmail(email);
+        setMobile(mobile);
+        setPassword(plainTextPassword);
+        setUserType(userTypeString);
+        // 'id', 'grade', and 'class name' remain uninitialised
     }
 
     /**
-     * Sets the unique identifier for the user.
-     * This is typically called after the user is saved to a database.
-     *
-     * @param id The unique ID to set.
+     * Default constructor. Needed for frameworks or manual instantiation
+     * before setting fields via setters.
      */
-    public void setId(int id) {
-        this.id = id;
+    public User() {
+        // No-argument constructor
     }
 
-    /**
-     * Gets the user's first name.
-     *
-     * @return The first name.
-     */
-    public String getFirstName() {
-        return firstName;
-    }
+
+    // --- Getters ---
+
+    public int getId() { return id; }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public String getEmail() { return email; }
+    public String getMobile() { return mobile; }
+    public String getGrade() { return grade; }
+    public String getClassName() { return className; }
+    public UserRole getUserType() { return userType; } // Returns the UserRole enum
+
 
     /**
-     * Sets the user's first name.
+     * Gets the stored password hash.
+     * Note: This returns the HASH, not the original plaintext password.
      *
-     * @param firstName The first name to set.
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
-     * Gets the user's last name.
-     *
-     * @return The last name.
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     * Sets the user's last name.
-     *
-     * @param lastName The last name to set.
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    /**
-     * Gets the user's email address.
-     *
-     * @return The email address.
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * Sets the user's email address.
-     *
-     * @param email The email address to set.
-     */
-    public void setEmail(String email) {
-        // TODO: Add email format validation
-        this.email = email;
-    }
-
-    /**
-     * Gets the user's mobile phone number.
-     *
-     * @return The mobile number.
-     */
-    public String getMobile() {
-        return mobile;
-    }
-
-    /**
-     * Sets the user's mobile phone number.
-     *
-     * @param mobile The mobile number to set.
-     */
-    public void setMobile(String mobile) {
-        // TODO: Add mobile number format validation if needed
-        this.mobile = mobile;
-    }
-
-    /**
-     * Gets the user's password.
-     *
-     * @return The user's plaintext password.
+     * @return The BCrypt password hash string.
      */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * Sets the user's password.
-     *
-     * @param password The plaintext password to set.
-     */
-    public void setPassword(String password) {
-        // TODO: Hash the password here instead of storing plaintext.
-        this.password = password;
+
+
+    // --- Setters ---
+
+    public void setId(int id) { this.id = id; }
+
+    public void setFirstName(String firstName) {
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be null or empty.");
+        }
+        this.firstName = firstName.trim();
     }
+
+    public void setLastName(String lastName) {
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be null or empty.");
+        }
+        this.lastName = lastName.trim();
+    }
+
+    public void setEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be null or empty.");
+        }
+        if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
+            throw new IllegalArgumentException("Invalid email format.");
+        }
+        this.email = email.trim();
+    }
+
+    public void setMobile(String mobile) {
+        if (mobile == null || mobile.trim().isEmpty()) {
+            throw new IllegalArgumentException("Mobile number cannot be null or empty.");
+        }
+        if (!mobile.matches("^\\+?\\d{7,15}$")) {
+            throw new IllegalArgumentException("Invalid mobile number format.");
+        }
+        this.mobile = mobile.trim();
+    }
+
+    /**
+     * Sets the user type from a String.
+     * Converts the string to UserRole enum.
+     *
+     * @param userTypeString The user type as a string (e.g., "student", "teacher").
+     * @throws IllegalArgumentException if the string is null, empty, or not a valid user type.
+     */
+    public void setUserType(String userTypeString) {
+        if (userTypeString == null || userTypeString.trim().isEmpty()) {
+            throw new IllegalArgumentException("User type string cannot be null or empty.");
+        }
+        try {
+            UserRole role = UserRole.valueOf(userTypeString.trim().toUpperCase());
+            setUserType(role); // Call the setter that takes UserRole enum
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid user type string: '" + userTypeString + "'. Must be 'STUDENT' or 'TEACHER' (case-insensitive).", e);
+        }
+    }
+
+    /**
+     * Sets the user type using the UserRole enum.
+     *
+     * @param userType The UserRole enum value.
+     * @throws IllegalArgumentException if userType is null.
+     */
+    public void setUserType(UserRole userType) {
+        if (userType == null) {
+            throw new IllegalArgumentException("User type (UserRole) cannot be null.");
+        }
+        this.userType = userType;
+    }
+
+    public void setGrade(String grade) {
+        // Grade can be null or empty if not applicable (e.g., for teachers)
+        // or if a student doesn't have a grade assigned yet.
+        this.grade = (grade == null) ? null : grade.trim();
+    }
+
+    public void setClassName(String className) {
+        // Class name can be null or empty if not assigned.
+        this.className = (className == null) ? null : className.trim();
+    }
+
+
+    /**
+     * Hashes the provided plaintext password using BCrypt and stores the hash.
+     *
+     * @param plainTextPassword The plaintext password to hash and store.
+     */
+    public void setPassword(String plainTextPassword) {
+        if (plainTextPassword == null || plainTextPassword.trim().isEmpty()) {
+            // Password must not be null
+            throw new IllegalArgumentException("Password cannot be empty.");
+        }
+        // Hash the password using BCrypt with a generated salt
+        // BCrypt.gensalt() generates a salt; hashpw combines password and salt
+        this.password = BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+    }
+
+    /**
+     * Sets the password field directly with a pre-hashed value.
+     * This is typically used only when loading user data from the database.
+     * Avoid calling this with plaintext passwords.
+     *
+     * @param hashedPassword The already hashed password string from the database.
+     */
+    public void setPersistedPassword(String hashedPassword) {
+        // Directly set the internal field with the value from the DB
+        this.password = hashedPassword;
+    }
+
+
+
+
+    // --- Password Checking ---
+
+    /**
+     * Checks if the provided plaintext password matches the stored hash.
+     *
+     * @param plainTextPasswordToCheck The plaintext password attempt (e.g., from a login form).
+     * @return true if the provided password matches the stored hash, false otherwise.
+     */
+    public boolean checkPassword(String plainTextPasswordToCheck) {
+        if (plainTextPasswordToCheck == null || this.password == null) {
+            return false; // Cannot check against nulls
+        }
+        // BCrypt.checkpw compares the plaintext against the stored hash
+        // It extracts the salt from this.password automatically
+        return BCrypt.checkpw(plainTextPasswordToCheck, this.password);
+    }
+
+
+
 
     // --- Utility Methods ---
 
@@ -201,23 +237,39 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
+                ", userType='" + userType + '\'' +
+                ", grade='" + grade + '\'' +
+                ", className='" + className + '\'' +
                 // Password is intentionally excluded for security
                 '}';
     }
 
     /**
-     * Generates a hash code for the User object.
-     * Based on the ID if set and non-zero, otherwise based on the email.
+     * This method returns an integer representation (a hash code) of the object's state.
      *
      * @return A hash code value for this object.
      */
     @Override
     public int hashCode() {
-        // If ID is set and non-zero, use it for hashing
-        if (id != 0) {
-            return Objects.hash(id);
-        }
-        // Fallback to email if ID is not set or zero
-        return Objects.hash(email);
+        return Objects.hash(id);
+    }
+
+    /**
+     * This method defines what it means for two distinct objects (in this case, two User objects)
+     * to be considered "logically equivalent". By default, Java's equals (inherited from the Object class)
+     * only returns true if two variables point to the exact same object in memory.
+     * <p> We override equals() to provide our own definition based on the object's state (its fields).
+     *  For a User, we decide two User objects are logically the same if they have the same id.</p>
+     *
+     * @param o A User object
+     * @return True if both User IDs are equal
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        // Assumes non-zero ID means it's a valid, comparable user
+        return id != 0 && id == user.id;
     }
 }
