@@ -49,6 +49,7 @@ public class SettingsController {
         this.currentUser = user;
         populateFields(user);
     }
+    
 
     private void populateFields(User user) {
         firstNameSettings.setText(user.getFirstName());

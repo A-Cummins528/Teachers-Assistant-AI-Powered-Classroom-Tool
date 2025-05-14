@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;">
+<AnchorPane prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="40.0" layoutY="30.0" text="Assessment View" textFill="WHITE">
          <font>
@@ -12,4 +12,13 @@
          </font>
       </Label>
    </children>
+   <!-- Assessment Section TableView for Quizzes -->
+   <TableView fx:id="quizTableView" layoutX="279.0" layoutY="136.0" prefHeight="325.0" prefWidth="585.0">
+      <columns>
+         <TableColumn fx:id="quizNameColumn" prefWidth="200.0" text="Quiz Name" />
+         <TableColumn fx:id="questionCountColumn" prefWidth="100.0" text="Questions" />
+         <TableColumn fx:id="quizAverageColumn" prefWidth="100.0" text="Average Score" />
+      </columns>
+   </TableView>
+
 </AnchorPane>

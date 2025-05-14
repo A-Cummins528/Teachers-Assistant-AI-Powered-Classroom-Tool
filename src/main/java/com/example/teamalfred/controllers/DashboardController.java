@@ -107,6 +107,7 @@ public class DashboardController {
                 Parent newContent = FXMLLoader.load(getClass().getResource(fxmlToLoad));
                 // Replace the content of the contentPane with the new content
                 contentPane.getChildren().setAll(newContent);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
