@@ -3,14 +3,15 @@ package com.example.teamalfred.controllers;
 import com.example.teamalfred.database.UserDAO;
 import com.example.teamalfred.database.SqliteUserDAO;
 import com.example.teamalfred.database.User;
-import com.example.teamalfred.main.UserSession;
+import com.example.teamalfred.main.UserSession; // Assuming you might update session
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert;
+import javafx.scene.control.Alert; // For feedback messages
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -25,24 +26,29 @@ public class SettingsController {
     @FXML private TextField firstNameSettings;
     @FXML private TextField lastNameSettings;
     @FXML private TextField mobileSettings;
-    @FXML private TextField emailSettings;
+    @FXML private TextField emailSettings; // Consider making this non-editable or handle uniqueness carefully
     @FXML private PasswordField passwordSettings;
     @FXML private PasswordField passwordSettingsConfirm;
-
+    @FXML private BorderPane rootPane; // This now refers to your BorderPane root
     @FXML private Label invalidFirstname;
     @FXML private Label invalidLastname;
     @FXML private Label invalidMobile;
     @FXML private Label invalidEmail;
     @FXML private Label invalidPassword;
-    @FXML private Label invalidPasswordConfirm;
+    @FXML private Label invalidPasswordConfirm; // Added: Ensure this fx:id exists in your FXML
 
-    private static final int MIN_REQUIRED_VALID_FIELDS = 4;
+    private static final int MIN_REQUIRED_VALID_FIELDS = 4; // For name, lastname, mobile, email
 
-    // Sets the current user and loads their data into the fields
+
+    private double currentFontSize = 14.0;
+
+    // Call this to set the current user before showing the Settings page
     public void setCurrentUser(User user) {
         this.currentUser = user;
         if (user == null) {
+            // Handle error: no user to display settings for
             System.err.println("SettingsController: currentUser is null!");
+            // Maybe redirect to login or show an error
             return;
         }
         populateFields(user);
@@ -54,6 +60,8 @@ public class SettingsController {
         lastNameSettings.setText(user.getLastName());
         mobileSettings.setText(user.getMobile());
         emailSettings.setText(user.getEmail());
+        // Password fields remain empty by default for security.
+        // User types new password if they want to change it.
     }
 
     // Runs when the user clicks 'Update'
@@ -75,13 +83,14 @@ public class SettingsController {
         String updatedEmail = validateEmail();
         if ("Invalid".equals(updatedEmail)) proceedWithUpdate = false; else validFieldsCounter++;
 
+        // Validate password only if user intends to change it (i.e., fields are not empty)
         String newPlainTextPassword = null;
         if (!passwordSettings.getText().isEmpty() || !passwordSettingsConfirm.getText().isEmpty()) {
             newPlainTextPassword = validatePassword();
             if ("Invalid".equals(newPlainTextPassword)) {
                 proceedWithUpdate = false;
             }
-        }
+        } // If both are empty, newPlainTextPassword remains null, meaning no password change
 
         if (proceedWithUpdate && validFieldsCounter >= MIN_REQUIRED_VALID_FIELDS) {
             try {
@@ -91,6 +100,7 @@ public class SettingsController {
                 userToUpdate.setLastName(updatedLastname);
                 userToUpdate.setMobile(updatedMobile);
 
+                // Email uniqueness check before setting
                 if (!currentUser.getEmail().equalsIgnoreCase(updatedEmail)) {
                     Optional<User> existingUserByNewEmail = userDAO.findUserByEmail(updatedEmail);
                     if (existingUserByNewEmail.isPresent()) {
@@ -100,6 +110,8 @@ public class SettingsController {
                 }
                 userToUpdate.setEmail(updatedEmail);
 
+
+                // Set password
                 if (newPlainTextPassword != null && !newPlainTextPassword.isEmpty()) {
                     userToUpdate.setPassword(newPlainTextPassword);
                 } else {
@@ -114,6 +126,7 @@ public class SettingsController {
                 this.currentUser = userToUpdate;
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Profile updated successfully!");
 
+
             } catch (SQLException e) {
                 e.printStackTrace();
                 if (e.getMessage().toLowerCase().contains("unique constraint failed: users.email")) {
@@ -121,9 +134,13 @@ public class SettingsController {
                 } else {
                     showAlert(Alert.AlertType.ERROR, "Update Failed", "Database error: " + e.getMessage());
                 }
-            }
+            } /*catch (IOException e) { // Only if switching scene
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Navigation Error", "Could not load the next page.");
+            }*/
         } else {
             System.out.println("Validation failed. Update cancelled.");
+            // Validation labels should already be showing errors.
         }
     }
 
@@ -214,17 +231,20 @@ public class SettingsController {
         String pass = passwordSettings.getText();
         String confirmPass = passwordSettingsConfirm.getText();
 
+        // If both fields are empty, user does not intend to change password
         if (pass.isEmpty() && confirmPass.isEmpty()) {
             setInvalidLabel(invalidPassword, false, "");
             setInvalidLabel(invalidPasswordConfirm, false, "");
             return null;
         }
 
+        // If one is empty and other is not, it's an error
         if (pass.isEmpty() || confirmPass.isEmpty()){
             setInvalidLabel(invalidPassword, true, "Both password fields required to change, or leave both empty.");
             setInvalidLabel(invalidPasswordConfirm, true, "");
             return "Invalid";
         }
+
 
         if (pass.length() < 7) {
             setInvalidLabel(invalidPassword, true, "Password min 7 characters.");
@@ -263,5 +283,42 @@ public class SettingsController {
     @FXML
     private void handleCancel(ActionEvent event) {
         switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
+    }
+    @FXML
+    private void increaseFontSize() {
+        currentFontSize += 2;
+        applyFontSize();
+    }
+
+    @FXML
+    private void decreaseFontSize() {
+        currentFontSize = Math.max(10, currentFontSize - 2);
+        applyFontSize();
+    }
+
+    private void applyFontSize() {
+        if (rootPane != null) {
+            rootPane.setStyle("-fx-font-size: " + currentFontSize + "px;");
+        }
+    }
+    @FXML
+    private void handleGoToDashboard(ActionEvent event) {
+        switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
+    }
+
+    @FXML
+    private void handleGoToSettings(ActionEvent event) {
+        switchScene.switchScene(event, "/com/example/teamalfred/SettingsPage.fxml");
+    }
+
+    @FXML
+    private void handleGoToProfile(ActionEvent event) {
+        switchScene.switchScene(event, "/com/example/teamalfred/UpdateProfilePage.fxml");
+    }
+
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        UserSession.clearSession(); // clear current user session
+        switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
     }
 }

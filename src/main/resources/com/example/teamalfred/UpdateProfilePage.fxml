@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="600" prefWidth="900" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.teamalfred.controllers.SettingsController">
+<BorderPane fx:id="rootPane" prefHeight="600" prefWidth="900" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.teamalfred.controllers.SettingsController">
 
     <!-- Top Bar -->
     <top>
@@ -23,10 +16,10 @@
     <left>
         <VBox alignment="TOP_CENTER" prefWidth="200" spacing="10" style="-fx-background-color: #313439;">
             <Label style="-fx-text-fill: white; -fx-font-size: 18px; -fx-padding: 20px 0;" text="Menu" />
-            <Button prefWidth="180" text="Dashboard" />
-            <Button prefWidth="180" text="Profiles" />
-            <Button prefWidth="180" text="Settings" />
-            <Button prefWidth="180" text="Logout" />
+            <Button onAction="#handleGoToDashboard" prefWidth="180" text="Dashboard" />
+            <Button onAction="#handleGoToProfile" prefWidth="180" text="Profiles" />
+            <Button onAction="#handleGoToSettings" prefWidth="180" text="Settings" />
+            <Button onAction="#handleLogout" prefWidth="180" text="Logout" />
         </VBox>
     </left>
 
@@ -54,6 +47,12 @@
                 <Label fx:id="invalidPassword" textFill="red" />
 
                 <HBox spacing="10">
+                    <Button onAction="#updateUserDetails" text="Update" />
+                    <Button onAction="#handleCancel" text="Cancel" />
+                </HBox>
+                <HBox spacing="10">
+                    <Button onAction="#increaseFontSize" text="A+" />
+                    <Button onAction="#decreaseFontSize" text="A-" />
                     <Button onAction="#updateUserDetails" text="Update" />
                     <Button onAction="#handleCancel" text="Cancel" />
                <Button onAction="#handleDeleteAccount" text="Delete Account" />
