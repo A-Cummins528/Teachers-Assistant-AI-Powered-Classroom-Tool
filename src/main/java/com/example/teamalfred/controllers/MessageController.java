@@ -1,21 +1,18 @@
-package com.example.teamalfred.controllers.messages;
+package com.example.teamalfred.controllers;
 
+import com.example.teamalfred.database.MessagingDatabaseManager;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.SQLException;
+
 
 public class MessageController {
+    private final MessagingDatabaseManager dbManager = new MessagingDatabaseManager();
+    @FXML private TextField messageInput;
 
     private void addConversationPreview(String name, String lastMessage, String time) {
         HBox previewBox = new HBox();  //
@@ -49,5 +46,24 @@ public class MessageController {
         // Add to left sidebar
         //conversationList.getChildren().add(previewBox);
     }
+
+    public void sendMessage() {
+        String messageContent = messageInput.getText();
+        if (messageContent == null || messageContent.trim().isEmpty()) {
+            System.out.println("Message is empty.");
+            return;
+        }
+        try {
+            int conversationId = 1; // ← Replace with the actual selected conversation
+            int senderId = 123;     // ← Replace with the actual logged-in user ID
+            dbManager.sendMessage(dbManager.getConnection(), conversationId, senderId, messageContent);
+            messageInput.clear(); // clear the input box after sending
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 }

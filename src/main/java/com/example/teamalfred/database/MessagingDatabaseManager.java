@@ -1,6 +1,7 @@
 package com.example.teamalfred.database;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -46,7 +47,7 @@ public class MessagingDatabaseManager {
         // DO NOT close the connection here - it's managed by DatabaseConnection
     }
 
-    private Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         Connection conn = DatabaseConnection.getInstance();
         // getInstance() now throws SQLException if connection fails, so null check isn't strictly needed here
         // but doesn't hurt.
@@ -60,4 +61,19 @@ public class MessagingDatabaseManager {
         }
         return conn;
     }
+
+    public void sendMessage(Connection conn, int conversationId, int senderId, String messageContent) {
+        String sql = "INSERT INTO messages (conversationID, senderID, content) VALUES (?, ?, ?)";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, conversationId);
+            stmt.setInt(2, senderId);
+            stmt.setString(3, messageContent);
+            stmt.executeUpdate();
+            System.out.println("Message sent successfully.");
+        } catch (SQLException e) {
+            System.err.println("Error sending message: " + e.getMessage());
+        }
+    }
+
 }
