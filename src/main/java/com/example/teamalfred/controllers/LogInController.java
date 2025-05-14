@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,7 +37,9 @@ public class LogInController {
     @FXML private Label failedLogin;
     @FXML private TextField emailLogin;
     @FXML private PasswordField password;
+    @FXML private BorderPane loginRoot;
 
+    private double currentFontSize = 14.0;
     /**
      * Constructor: Initializes the controller, creating an instance of the UserDAO.
      * Note: Creates a direct dependency on SqliteUserDAO.
@@ -145,5 +148,22 @@ public class LogInController {
     private void handleSignUp(ActionEvent event) {
         // Switch to the sign-up scene
         switchScene.switchScene(event,"/com/example/teamalfred/SignUp.fxml");
+    }
+    @FXML
+    private void increaseFontSize() {
+        currentFontSize += 2;
+        applyFontSize();
+    }
+
+    @FXML
+    private void decreaseFontSize() {
+        currentFontSize = Math.max(10, currentFontSize - 2);
+        applyFontSize();
+    }
+
+    private void applyFontSize() {
+        if (loginRoot != null) {
+            loginRoot.setStyle("-fx-font-size: " + currentFontSize + "px;");
+        }
     }
 }

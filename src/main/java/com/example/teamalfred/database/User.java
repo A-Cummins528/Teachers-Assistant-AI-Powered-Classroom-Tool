@@ -15,6 +15,15 @@ public class User {
     private String email;
     private String mobile;
     private String password; // This will store the hashed password
+    private String grade;    // Student's grade, null for teachers
+    private String className; // e.g., "CAB302"
+
+    // Define the UserRole enum
+    public enum UserRole {
+        STUDENT, TEACHER;
+    }
+    private UserRole userType;
+
 
     /**
      * Constructs a new User instance. Hashes the provided password.
@@ -25,14 +34,17 @@ public class User {
      * @param email     The email address of the user. Should be unique and not null.
      * @param mobile    The mobile phone number of the user.
      * @param plainTextPassword  The user's plaintext password (will be hashed).
+     * @param userTypeString  The type of user as a String (e.g., "student", "teacher").
      */
-    public User(String firstName, String lastName, String email, String mobile, String plainTextPassword) {
+    public User(String firstName, String lastName, String email, String mobile, String plainTextPassword,
+                String userTypeString) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
         setMobile(mobile);
-        setPassword(plainTextPassword); // Hash the password immediately upon creation
-        // 'id' remains uninitialised
+        setPassword(plainTextPassword);
+        setUserType(userTypeString);
+        // 'id', 'grade', and 'class name' remain uninitialised
     }
 
     /**
@@ -44,8 +56,6 @@ public class User {
     }
 
 
-
-
     // --- Getters ---
 
     public int getId() { return id; }
@@ -53,6 +63,10 @@ public class User {
     public String getLastName() { return lastName; }
     public String getEmail() { return email; }
     public String getMobile() { return mobile; }
+    public String getGrade() { return grade; }
+    public String getClassName() { return className; }
+    public UserRole getUserType() { return userType; } // Returns the UserRole enum
+
 
     /**
      * Gets the stored password hash.
@@ -102,6 +116,49 @@ public class User {
             throw new IllegalArgumentException("Invalid mobile number format.");
         }
         this.mobile = mobile.trim();
+    }
+
+    /**
+     * Sets the user type from a String.
+     * Converts the string to UserRole enum.
+     *
+     * @param userTypeString The user type as a string (e.g., "student", "teacher").
+     * @throws IllegalArgumentException if the string is null, empty, or not a valid user type.
+     */
+    public void setUserType(String userTypeString) {
+        if (userTypeString == null || userTypeString.trim().isEmpty()) {
+            throw new IllegalArgumentException("User type string cannot be null or empty.");
+        }
+        try {
+            UserRole role = UserRole.valueOf(userTypeString.trim().toUpperCase());
+            setUserType(role); // Call the setter that takes UserRole enum
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid user type string: '" + userTypeString + "'. Must be 'STUDENT' or 'TEACHER' (case-insensitive).", e);
+        }
+    }
+
+    /**
+     * Sets the user type using the UserRole enum.
+     *
+     * @param userType The UserRole enum value.
+     * @throws IllegalArgumentException if userType is null.
+     */
+    public void setUserType(UserRole userType) {
+        if (userType == null) {
+            throw new IllegalArgumentException("User type (UserRole) cannot be null.");
+        }
+        this.userType = userType;
+    }
+
+    public void setGrade(String grade) {
+        // Grade can be null or empty if not applicable (e.g., for teachers)
+        // or if a student doesn't have a grade assigned yet.
+        this.grade = (grade == null) ? null : grade.trim();
+    }
+
+    public void setClassName(String className) {
+        // Class name can be null or empty if not assigned.
+        this.className = (className == null) ? null : className.trim();
     }
 
 
@@ -180,6 +237,9 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
+                ", userType='" + userType + '\'' +
+                ", grade='" + grade + '\'' +
+                ", className='" + className + '\'' +
                 // Password is intentionally excluded for security
                 '}';
     }
