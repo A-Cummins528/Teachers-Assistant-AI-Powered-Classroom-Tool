@@ -10,8 +10,6 @@
         <Pane prefHeight="80" prefWidth="900" style="-fx-background-color: #3a3e43;">
             <Label layoutX="20" layoutY="25" style="-fx-text-fill: white; -fx-font-size: 24px;" text="User Profiles" />
         </Pane>
-
-
     </top>
 
     <!-- Left Side Menu -->
@@ -55,6 +53,7 @@
                 <HBox spacing="10">
                     <Button onAction="#increaseFontSize" text="A+" />
                     <Button onAction="#decreaseFontSize" text="A-" />
+                    <Button onAction="#handleDeleteAccount" text="Delete Account" />
                 </HBox>
 
             </VBox>
