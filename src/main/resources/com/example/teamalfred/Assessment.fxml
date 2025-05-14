@@ -1,15 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.teamalfred.controllers.AssessmentsViewController"
+            prefWidth="1167.0" prefHeight="698.0" style="-fx-background-color: #25282c;">
    <children>
-      <Label layoutX="40.0" layoutY="30.0" text="Assessment View" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="36.0" />
-         </font>
+      <Label layoutX="40.0" layoutY="30.0" text="Assessments" textFill="WHITE">
+         <font><Font name="Arial Bold" size="36.0"/></font>
       </Label>
+
+      <ComboBox fx:id="sortComboBox" layoutX="40.0" layoutY="70.0" promptText="Sort by" prefWidth="200.0"/>
+      <ComboBox fx:id="filterComboBox" layoutX="260.0" layoutY="70.0" promptText="Filter by Subject" prefWidth="200.0"/>
+
+      <TableView fx:id="assessmentTable" layoutX="40.0" layoutY="100.0" prefWidth="1087.0" prefHeight="350.0">
+         <columns>
+            <TableColumn fx:id="titleColumn" text="Assessment Name" prefWidth="250.0"/>
+            <TableColumn fx:id="subjectColumn" text="Subject" prefWidth="200.0"/>
+            <TableColumn fx:id="dueDateColumn" text="Due Date" prefWidth="150.0"/>
+            <TableColumn fx:id="statusColumn" text="Status" prefWidth="150.0"/>
+            <TableColumn fx:id="typeColumn" text="Type" prefWidth="150.0"/>
+         </columns>
+      </TableView>
+
+
+      <Button fx:id="addAssessmentBtn"
+              text="Add New Assessment"
+              layoutX="40.0"
+              layoutY="520.0"
+              prefWidth="200.0"
+              onAction="#handleAddAssessment"/>
+
+      <Button fx:id="editAssessmentBtn"
+              text="Edit Selected"
+              layoutX="480.0"
+              layoutY="520.0"
+              prefWidth="200.0"
+              onAction="#handleEditAssessment"/>
+
+      <Button fx:id="deleteAssessmentBtn"
+              text="Delete Selected"
+              layoutX="260.0"
+              layoutY="520.0"
+              prefWidth="200.0"
+              onAction="#handleDeleteAssessment"/>
    </children>
 </AnchorPane>

@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            prefWidth="1167.0" prefHeight="698.0" style="-fx-background-color: #25282c;">
    <children>
-      <Label layoutX="40.0" layoutY="30.0" text="Analytics View" textFill="WHITE">
+      <!-- Title -->
+      <Label layoutX="40.0" layoutY="30.0" text="Analytics" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="36.0" />
+            <Font name="Arial Bold" size="36.0"/>
          </font>
       </Label>
+
+      <!-- Summary Stats -->
+      <HBox layoutX="40.0" layoutY="100.0" spacing="20.0">
+         <Label text="Total Classes: 10" textFill="WHITE"/>
+         <Label text="Total Students: 150" textFill="WHITE"/>
+         <Label text="Avg. Grade: 85%" textFill="WHITE"/>
+         <Label text="Upcoming Tasks: 3" textFill="WHITE"/>
+      </HBox>
+
+      <!-- Performance Chart -->
+      <LineChart fx:id="performanceChart" layoutX="40.0" layoutY="150.0" prefWidth="1087.0" prefHeight="300.0">
+         <xAxis>
+            <CategoryAxis label="Time"/>
+         </xAxis>
+         <yAxis>
+            <NumberAxis label="Grade"/>
+         </yAxis>
+      </LineChart>
+
+      <!-- Student Performance Table -->
+      <TableView fx:id="performanceTable" layoutX="40.0" layoutY="480.0" prefWidth="1087.0" prefHeight="150.0">
+         <columns>
+            <TableColumn text="Student" prefWidth="200.0"/>
+            <TableColumn text="Assignments Completed" prefWidth="250.0"/>
+            <TableColumn text="Avg. Grade" prefWidth="150.0"/>
+            <TableColumn text="Attendance" prefWidth="150.0"/>
+         </columns>
+      </TableView>
+
+      <!-- Export Button -->
+      <Button fx:id="exportButton" text="Export" layoutX="40.0" layoutY="650.0" prefWidth="100.0"/>
    </children>
 </AnchorPane>
