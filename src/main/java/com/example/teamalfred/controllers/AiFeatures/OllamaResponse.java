@@ -1,4 +1,4 @@
-package com.example.teamalfred.controllers.AiQuiz;
+package com.example.teamalfred.controllers.AiFeatures;
 
 import com.google.gson.Gson;
 

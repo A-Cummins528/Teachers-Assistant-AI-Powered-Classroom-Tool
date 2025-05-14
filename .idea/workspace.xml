@@ -5,14 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1728cf51-1cd3-499f-bc49-5f819aa5b33e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/messages/MessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/messages/MessageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/MessagingDatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/MessagingDatabaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/Message.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/Message.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiTutorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class_management_test.db" beforeDir="false" afterPath="$PROJECT_DIR$/class_management_test.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiQuiz/AiQuizController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiQuizController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiQuiz/OllamaResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/OllamaResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiQuiz/OllamaResponseFetcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/OllamaResponseFetcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiQuiz/ResponseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/ResponseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiQuiz.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiQuiz.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiTutor.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/Dashboard.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,12 +39,12 @@
     &quot;assignee&quot;: &quot;NottTigah&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/NottTigah/TeamAlfred&quot;,
-    &quot;accountId&quot;: &quot;faf5a5ea-66f6-4f08-848e-614ace82ee18&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/NottTigah/TeamAlfred.git",
+    "accountId": "c4ad5ca2-683f-49e6-b246-322cccfc58bf"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/resources/com/example/teamalfred/Message.fxml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/resources/com/example/teamalfred/SignUp.fxml" root0="SKIP_INSPECTION" />
@@ -50,22 +54,31 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2wyvwtjvGI3f5TjItLC4GPNrcXx" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;message-system&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feature/AI-Study-Helper",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/adama/OneDrive/Documents/GitHub/TeamAlfred/src/main/resources/com/example/teamalfred",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\adama\OneDrive\Documents\GitHub\TeamAlfred\src\main\resources\com\example\teamalfred" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

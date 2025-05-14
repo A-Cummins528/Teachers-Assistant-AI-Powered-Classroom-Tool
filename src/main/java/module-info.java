@@ -23,6 +23,6 @@ module com.example.teamalfred {
     opens com.example.teamalfred.controllers to javafx.fxml;
     exports com.example.teamalfred.database;
     opens com.example.teamalfred.database to javafx.fxml;
-    exports com.example.teamalfred.controllers.AiQuiz;
-    opens com.example.teamalfred.controllers.AiQuiz to javafx.fxml;
+    exports com.example.teamalfred.controllers.AiFeatures;
+    opens com.example.teamalfred.controllers.AiFeatures to javafx.fxml;
 }
