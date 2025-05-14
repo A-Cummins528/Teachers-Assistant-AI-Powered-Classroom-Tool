@@ -53,9 +53,7 @@
                 <HBox spacing="10">
                     <Button onAction="#increaseFontSize" text="A+" />
                     <Button onAction="#decreaseFontSize" text="A-" />
-                    <Button onAction="#updateUserDetails" text="Update" />
-                    <Button onAction="#handleCancel" text="Cancel" />
-               <Button onAction="#handleDeleteAccount" text="Delete Account" />
+                    <Button onAction="#handleDeleteAccount" text="Delete Account" />
                 </HBox>
 
             </VBox>
