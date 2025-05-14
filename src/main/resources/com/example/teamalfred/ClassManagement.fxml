@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;">
+<AnchorPane prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.teamalfred.controllers.ClassManagementController">
    <children>
-      <Label layoutX="40.0" layoutY="30.0" text="Class Management View" textFill="WHITE">
+      <Label fx:id="headerLabel" layoutX="40.0" layoutY="20.0" text="Manage Attendance" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="36.0" />
+            <Font name="Arial Bold" size="28.0" />
          </font>
       </Label>
+
+      <Label layoutX="40.0" layoutY="60.0" text="Select Date:" textFill="WHITE" />
+      <DatePicker fx:id="attendanceDatePicker" layoutX="120.0" layoutY="55.0" prefWidth="180.0" />
+
+      <Label layoutX="330.0" layoutY="60.0" text="Select Class:" textFill="WHITE" />
+      <ComboBox fx:id="classSelector" layoutX="420.0" layoutY="55.0" prefWidth="200.0" />
+      <ComboBox fx:id="filterSelector" layoutX="650.0" layoutY="55.0" prefWidth="140.0" />
+      <TableView fx:id="attendanceTable" layoutX="40.0" layoutY="100.0" prefHeight="500.0" prefWidth="1087.0">
+         <columns>
+            <TableColumn fx:id="studentNameColumn" prefWidth="250.0" text="Student Name" />
+            <TableColumn fx:id="presentColumn" prefWidth="100.0" text="Present" />
+            <TableColumn fx:id="absentColumn" prefWidth="100.0" text="Absent" />
+            <TableColumn fx:id="lateColumn" prefWidth="100.0" text="Late" />
+            <TableColumn fx:id="excusedColumn" prefWidth="100.0" text="Excused" />
+            <TableColumn fx:id="notesColumn" prefWidth="437.0" text="Notes" />
+         </columns>
+      </TableView>
+
+      <Button fx:id="saveAttendanceButton" layoutX="960.0" layoutY="620.0" onAction="#handleSaveAttendance" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Save Attendance" />
+
+      <Button fx:id="clearFormButton" layoutX="840.0" layoutY="620.0" style="-fx-background-color: #f44336; -fx-text-fill: white;" text="Clear Form" />
+
+      <Button fx:id="exportReportButton" layoutX="700.0" layoutY="620.0" style="-fx-background-color: #2196f3; -fx-text-fill: white;" text="Export Report" />
    </children>
 </AnchorPane>

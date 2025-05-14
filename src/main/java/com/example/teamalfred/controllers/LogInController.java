@@ -49,6 +49,7 @@ public class LogInController {
         this.userDAO = new SqliteUserDAO();
     }
 
+
     /**
      * Handles the action event when the user clicks the login button.
      * Initiates the login check process and handles potential database errors.
