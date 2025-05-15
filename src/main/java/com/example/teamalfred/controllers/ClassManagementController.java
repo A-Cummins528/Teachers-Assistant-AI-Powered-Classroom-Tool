@@ -45,6 +45,16 @@ public class ClassManagementController implements Initializable {
     @FXML private Button saveAttendanceButton;
     @FXML private Button clearFormButton;
     @FXML private Button exportReportButton;
+    @FXML private TextField firstNameField, lastNameField, emailField;
+    @FXML private Button addStudentButton, removeStudentButton;
+    @FXML private ListView<Student> studentListView;
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
     public void setCurrentUser(User user) {
         this.currentUser = user;
@@ -52,6 +62,46 @@ public class ClassManagementController implements Initializable {
             headerLabel.setText("Welcome, " + user.getFirstName());
         }
     }
+
+    @FXML
+    private void handleAddStudent() {
+        String first = firstNameField.getText().trim();
+        String last = lastNameField.getText().trim();
+        String email = emailField.getText().trim();
+        Classroom selectedClass = classSelector.getValue();
+
+        if (first.isEmpty() || last.isEmpty() || email.isEmpty() || selectedClass == null) {
+            showAlert("Please fill all fields and select a class.");
+            return;
+        }
+
+        try {
+            Student student = new Student(first, last, email, selectedClass.getId());
+            new SqliteStudentDAO().createStudent(student);
+            loadStudentsForSelectedClass();  // refresh UI
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Failed to add student.");
+        }
+    }
+
+    @FXML
+    private void handleRemoveStudent() {
+        Student selected = studentListView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert("No student selected.");
+            return;
+        }
+
+        try {
+            new SqliteStudentDAO().deleteStudent(selected.getId());
+            loadStudentsForSelectedClass();  // refresh UI
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Failed to remove student.");
+        }
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

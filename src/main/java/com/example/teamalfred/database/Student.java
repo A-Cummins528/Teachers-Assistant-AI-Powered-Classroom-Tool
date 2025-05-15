@@ -14,6 +14,13 @@ public class Student {
         this.email = email;
         this.classId = classId;
     }
+    public Student(String firstName, String lastName, String email, int classId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.classId = classId;
+    }
+
 
     // Getters and setters...
 
