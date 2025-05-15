@@ -8,8 +8,7 @@ public class SqliteAssessmentDAO implements AssessmentDAO {
 
     private final Connection conn = DatabaseConnection.getInstance();
 
-    public SqliteAssessmentDAO() throws SQLException {
-    }
+    public SqliteAssessmentDAO() throws SQLException {}
 
     @Override
     public List<Assessment> getAllAssessments() throws SQLException {
@@ -27,19 +26,26 @@ public class SqliteAssessmentDAO implements AssessmentDAO {
                         rs.getString("type")
                 );
                 a.setId(rs.getInt("id"));
+                a.setStudentId(rs.getInt("studentId")); // 👈 Include studentId
                 list.add(a);
             }
         }
         return list;
     }
+
+    // ✅ INSERT with studentId
     public void insertAssessment(Assessment a) throws SQLException {
-        String sql = "INSERT INTO assessments (title, subject, dueDate, status, type) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseConnection.getInstance();
+             PreparedStatement stmt = conn.prepareStatement(
+                     "INSERT INTO assessments (title, subject, dueDate, status, type, studentId) VALUES (?, ?, ?, ?, ?, ?)")) {
+
             stmt.setString(1, a.getTitle());
             stmt.setString(2, a.getSubject());
             stmt.setString(3, a.getDueDate());
             stmt.setString(4, a.getStatus());
             stmt.setString(5, a.getType());
+            stmt.setInt(6, a.getStudentId());
+
             stmt.executeUpdate();
         }
     }
@@ -53,15 +59,44 @@ public class SqliteAssessmentDAO implements AssessmentDAO {
     }
 
     public void updateAssessment(Assessment a) throws SQLException {
-        String sql = "UPDATE assessments SET title = ?, subject = ?, dueDate = ?, status = ?, type = ? WHERE id = ?";
+        String sql = "UPDATE assessments SET title = ?, subject = ?, dueDate = ?, status = ?, type = ?, studentId = ? WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, a.getTitle());
             stmt.setString(2, a.getSubject());
             stmt.setString(3, a.getDueDate());
             stmt.setString(4, a.getStatus());
             stmt.setString(5, a.getType());
-            stmt.setInt(6, a.getId());
+            stmt.setInt(6, a.getStudentId()); // 👈 Include studentId
+            stmt.setInt(7, a.getId());
             stmt.executeUpdate();
         }
+    }
+
+    // ✅ NEW: Get assessments for a specific student
+    public List<Assessment> getAssessmentsByStudentId(int studentId) throws SQLException {
+        List<Assessment> list = new ArrayList<>();
+        String sql = "SELECT * FROM assessments WHERE studentId = ?";
+
+        try (Connection conn = DatabaseConnection.getInstance();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, studentId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Assessment a = new Assessment(
+                            rs.getString("title"),
+                            rs.getString("subject"),
+                            rs.getString("dueDate"),
+                            rs.getString("status"),
+                            rs.getString("type")
+                    );
+                    a.setId(rs.getInt("id"));
+                    a.setStudentId(studentId);
+                    list.add(a);
+                }
+            }
+        }
+
+        return list;
     }
 }

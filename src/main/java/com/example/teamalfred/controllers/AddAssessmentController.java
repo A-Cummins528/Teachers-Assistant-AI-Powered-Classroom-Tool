@@ -2,6 +2,7 @@ package com.example.teamalfred.controllers;
 
 import com.example.teamalfred.database.Assessment;
 import com.example.teamalfred.database.SqliteAssessmentDAO;
+import com.example.teamalfred.database.Student;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,12 +16,12 @@ import java.time.temporal.ChronoUnit;
 public class AddAssessmentController {
 
     @FXML private TextField titleField;
-    @FXML private TextField subjectField;
     @FXML private DatePicker dueDatePicker;
     @FXML private ComboBox<String> typeComboBox;
     @FXML private ComboBox<String> subjectComboBox;
 
     private final SqliteAssessmentDAO dao;
+    private Student selectedStudent;
 
     {
         try {
@@ -45,18 +46,8 @@ public class AddAssessmentController {
         String subject = subjectComboBox.getValue();
         LocalDate due = dueDatePicker.getValue();
 
-        if (due == null) {
-            showAlert("Please select a due date.");
-            return;
-        }
-
-        if (subject == null) {
-            showAlert("Please select a subject.");
-            return;
-        }
-
-        if (type == null) {
-            showAlert("Please select a type of assignment.");
+        if (selectedStudent == null) {
+            showAlert("No student selected for this assessment.");
             return;
         }
 
@@ -64,13 +55,25 @@ public class AddAssessmentController {
             showAlert("Please enter a title.");
             return;
         }
+        if (subject == null) {
+            showAlert("Please select a subject.");
+            return;
+        }
+        if (type == null) {
+            showAlert("Please select a type.");
+            return;
+        }
+        if (due == null) {
+            showAlert("Please select a due date.");
+            return;
+        }
 
         try {
-            // Parse the due date
+            // Determine status based on due date
             LocalDate today = LocalDate.now();
             long daysLate = ChronoUnit.DAYS.between(due, today);
-
             String status;
+
             if (today.isBefore(due)) {
                 status = "Due";
             } else if (daysLate <= 2) {
@@ -79,14 +82,16 @@ public class AddAssessmentController {
                 status = "Closed";
             }
 
-            // Format due date to dd/MM/yyyy
+            // Format date
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String formattedDueDate = due.format(formatter);
 
+            // Create and insert assessment
             Assessment newAssessment = new Assessment(title, subject, formattedDueDate, status, type);
+            newAssessment.setStudentId(selectedStudent.getId());
             dao.insertAssessment(newAssessment);
 
-            // Close the popup window
+            // Close the popup
             Stage stage = (Stage) titleField.getScene().getWindow();
             stage.close();
 
@@ -99,5 +104,9 @@ public class AddAssessmentController {
     private void showAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR, msg);
         alert.showAndWait();
+    }
+
+    public void setStudent(Student student) {
+        this.selectedStudent = student;
     }
 }

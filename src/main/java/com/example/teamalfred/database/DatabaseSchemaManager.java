@@ -66,6 +66,21 @@ public class DatabaseSchemaManager {
         // DO NOT close the connection here - it's managed by DatabaseConnection
     }
 
+    public void createStudentsTable() throws SQLException {
+        String sql = "CREATE TABLE IF NOT EXISTS students (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "firstName TEXT NOT NULL," +
+                "lastName TEXT NOT NULL," +
+                "email TEXT NOT NULL," +
+                "subject TEXT NOT NULL)";
+
+        Connection conn = getConnection(); // Get the shared connection
+
+        try (Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+        }
+    }
+
     public void dropTable() throws SQLException {
         String sql = "DROP TABLE IF EXISTS " + TABLE_NAME;
 

@@ -7,6 +7,7 @@ public class Assessment {
     private String dueDate;
     private String status;
     private String type;
+    private int studentId;
 
     public Assessment(String title, String subject, String dueDate, String status, String type) {
         this.title = title;
@@ -14,6 +15,13 @@ public class Assessment {
         this.dueDate = dueDate;
         this.status = status;
         this.type = type;
+    }
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
     // Getters and Setters
