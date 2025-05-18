@@ -23,5 +23,9 @@ public class Classroom {
     public String toString() {
         return name; // Useful for ComboBox display
     }
+
+    public String getClassName() {
+        return name;
+    }
 }
 
