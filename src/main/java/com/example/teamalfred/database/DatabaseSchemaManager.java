@@ -20,24 +20,53 @@ public class DatabaseSchemaManager {
      * @throws SQLException if the database connection cannot be established or the query fails.
      */
     public void initializeSchema() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "firstName VARCHAR NOT NULL, " +
-                "lastName VARCHAR NOT NULL, " +
-                "mobile VARCHAR NOT NULL, " +
-                "email VARCHAR NOT NULL UNIQUE, " +
-                "password VARCHAR NOT NULL, " +
-                "userType VARCHAR NOT NULL CHECK (userType IN ('teacher', 'student')), " + // Teacher or Student
-                "grade INTEGER, " + // Can be NULL
-                "className VARCHAR" + // Can be NULL
-                ")";
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement()) {
 
-        Connection conn = getConnection(); // Get the shared connection
-        // Use try-with-resources ONLY for the Statement
-        try (Statement stmt = conn.createStatement()) {
+            // 1. Preserve existing users table (uses TABLE_NAME constant)
+            String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "firstName VARCHAR NOT NULL, " +
+                    "lastName VARCHAR NOT NULL, " +
+                    "mobile VARCHAR NOT NULL, " +
+                    "email VARCHAR NOT NULL UNIQUE, " +
+                    "password VARCHAR NOT NULL, " +
+                    "userType VARCHAR NOT NULL CHECK (userType IN ('teacher', 'student')), " +
+                    "grade INTEGER, " +
+                    "className VARCHAR)";
             stmt.execute(sql);
+
+            // 2. Classrooms table
+            String classesTable = "CREATE TABLE IF NOT EXISTS classes (" +
+                    "class_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "class_name TEXT NOT NULL)";
+            stmt.execute(classesTable);
+
+            // 3. Students table
+            String studentsTable = "CREATE TABLE IF NOT EXISTS students (" +
+                    "student_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "first_name TEXT NOT NULL, " +
+                    "last_name TEXT NOT NULL, " +
+                    "email TEXT, " +
+                    "class_id INTEGER, " +
+                    "FOREIGN KEY (class_id) REFERENCES classes(class_id))";
+            stmt.execute(studentsTable);
+
+            // 4. Attendance table
+            String attendanceTable = "CREATE TABLE IF NOT EXISTS attendance (" +
+                    "student_id INTEGER, " +
+                    "class_id INTEGER, " +
+                    "date TEXT, " +
+                    "present BOOLEAN, " +
+                    "absent BOOLEAN, " +
+                    "late BOOLEAN, " +
+                    "excused BOOLEAN, " +
+                    "notes TEXT, " +
+                    "PRIMARY KEY (student_id, class_id, date), " +
+                    "FOREIGN KEY (student_id) REFERENCES students(student_id), " +
+                    "FOREIGN KEY (class_id) REFERENCES classes(class_id))";
+            stmt.execute(attendanceTable);
         }
-        // DO NOT close the connection here - it's managed by DatabaseConnection
     }
 
     /**

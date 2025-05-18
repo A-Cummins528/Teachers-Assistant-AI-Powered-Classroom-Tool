@@ -5,6 +5,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -48,6 +49,8 @@ public class ClassManagementController implements Initializable {
     @FXML private TextField firstNameField, lastNameField, emailField;
     @FXML private Button addStudentButton, removeStudentButton;
     @FXML private ListView<Student> studentListView;
+    @FXML private TextField newClassNameField;
+    @FXML private Button createClassButton;
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -61,6 +64,30 @@ public class ClassManagementController implements Initializable {
         if (headerLabel != null) {
             headerLabel.setText("Welcome, " + user.getFirstName());
         }
+    }
+    @FXML
+    private void handleCreateClass() {
+        String className = newClassNameField.getText().trim();
+        if (className.isEmpty()) {
+            showAlert("Class name cannot be empty.");
+            return;
+        }
+
+        try {
+            Classroom newClass = new Classroom(className);
+            ClassroomDAO dao = new SqliteClassroomDAO();
+            dao.createClassroom(newClass);
+            newClassNameField.clear();
+            refreshClassSelector();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Failed to create class.");
+        }
+    }
+
+    private void refreshClassSelector() throws SQLException {
+        List<Classroom> updated = new SqliteClassroomDAO().getAllClassrooms();
+        classSelector.setItems(FXCollections.observableArrayList(updated));
     }
 
     @FXML
@@ -77,11 +104,15 @@ public class ClassManagementController implements Initializable {
 
         try {
             Student student = new Student(first, last, email, selectedClass.getId());
-            new SqliteStudentDAO().createStudent(student);
-            loadStudentsForSelectedClass();  // refresh UI
-        } catch (SQLException e) {
+            StudentDAO dao = new SqliteStudentDAO();
+            dao.createStudent(student);
+            loadStudentsForSelectedClass(); // Refresh list
+            firstNameField.clear();
+            lastNameField.clear();
+            emailField.clear();
+        } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Failed to add student.");
+            showAlert("Failed to add student to the database.");
         }
     }
 
@@ -105,13 +136,28 @@ public class ClassManagementController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        DatabaseConnection.setDatabaseUrl("jdbc:sqlite:class_management_test.db");
+        DatabaseConnection.setDatabaseUrl("jdbc:sqlite:database.db");
         setupAttendanceTableColumns();
         setupClassSelector();
         setupFilterSelector();
         setupRowClickHandler();
         attendanceTable.setEditable(true);
         attendanceTable.setItems(filteredData);
+        try {
+            ClassroomDAO classroomDAO = new SqliteClassroomDAO();
+            List<Classroom> classrooms = classroomDAO.getAllClassrooms();
+            classSelector.setItems(FXCollections.observableArrayList(classrooms));
+
+            if (!classrooms.isEmpty()) {
+                classSelector.getSelectionModel().selectFirst();
+                loadStudentsForSelectedClass(); // Load students for that class
+            }
+            classSelector.setOnAction(e -> loadStudentsForSelectedClass());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Failed to load classes from database.");
+        }
     }
 
     private void setupAttendanceTableColumns() {
@@ -178,22 +224,53 @@ public class ClassManagementController implements Initializable {
 
     private void loadStudentsForSelectedClass() {
         Classroom selectedClass = classSelector.getValue();
-        if (selectedClass == null) return;
+        if (selectedClass == null) {
+            System.out.println("⚠ No class selected.");
+            return;
+        }
 
         try {
-            String date = attendanceDatePicker.getValue() != null ? attendanceDatePicker.getValue().toString() : "";
-            Map<Integer, AttendanceRecord> attendanceMap = attendanceDAO.getAttendanceMapForClassAndDate(selectedClass.getId(), date);
+            StudentDAO studentDAO = new SqliteStudentDAO();
+            AttendanceDAO attendanceDAO = new SqliteAttendanceDAO();
 
+            String date = attendanceDatePicker.getValue() != null
+                    ? attendanceDatePicker.getValue().toString()
+                    : "";
+
+            // Retrieve attendance records for that class on the selected date
+            Map<Integer, AttendanceRecord> attendanceMap =
+                    attendanceDAO.getAttendanceMapForClassAndDate(selectedClass.getId(), date);
+
+            // Retrieve students for the selected class
             List<Student> students = studentDAO.getStudentsByClassId(selectedClass.getId());
+
+            // Populate attendance table
             attendanceData.clear();
             for (Student s : students) {
-                AttendanceRecord record = attendanceMap.getOrDefault(s.getId(), new AttendanceRecord(false, false, false, false, ""));
-                attendanceData.add(new StudentAttendance(s.getId(), s.getFullName(), record.present, record.absent, record.late, record.excused, record.notes));
+                AttendanceRecord record = attendanceMap.getOrDefault(
+                        s.getId(),
+                        new AttendanceRecord(false, false, false, false, "")
+                );
+                attendanceData.add(new StudentAttendance(
+                        s.getId(),
+                        s.getFullName(),
+                        record.present,
+                        record.absent,
+                        record.late,
+                        record.excused,
+                        record.notes
+                ));
             }
+
+            // ✅ Populate student list view for removal
+            studentListView.setItems(FXCollections.observableArrayList(students));
+
         } catch (SQLException e) {
             e.printStackTrace();
+            showAlert("Error loading students for selected class.");
         }
     }
+
 
     @FXML
     private void handleSaveAttendance() {
@@ -238,6 +315,30 @@ public class ClassManagementController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void showCreateClassDialog() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Create New Class");
+        dialog.setHeaderText("Add a New Class");
+        dialog.setContentText("Class Name:");
+
+        dialog.showAndWait().ifPresent(name -> {
+            if (!name.trim().isEmpty()) {
+                try {
+                    ClassroomDAO dao = new SqliteClassroomDAO();
+                    dao.createClassroom(new Classroom(name.trim()));
+                    refreshClassSelector();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    showAlert("Failed to create class.");
+                }
+            } else {
+                showAlert("Class name cannot be empty.");
+            }
+        });
+    }
+
 
     public static class StudentAttendance {
         private final int studentId;

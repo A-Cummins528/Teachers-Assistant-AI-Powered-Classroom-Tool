@@ -5,6 +5,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -36,18 +37,23 @@
             <TableColumn fx:id="notesColumn" prefWidth="100.0" text="Notes" />
          </columns>
       </TableView>
-      <VBox layoutX="868.0" layoutY="131.0" prefHeight="462.0" prefWidth="160.0" spacing="10" style="-fx-background-color: white; -fx-border-color: #444; -fx-background-radius: 6;">
-      <Label text="Add New Student" />
+      <VBox layoutX="868.0" layoutY="131.0" prefHeight="462.0" prefWidth="250.0" spacing="12" style="-fx-background-color: #2e3136; -fx-border-color: #4a90e2; -fx-border-width: 2; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 15;">
+         <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Add New Student" textFill="white" />
+
          <TextField fx:id="firstNameField" promptText="First Name" />
          <TextField fx:id="lastNameField" promptText="Last Name" />
          <TextField fx:id="emailField" promptText="Email" />
-         <Button fx:id="addStudentButton" onAction="#handleAddStudent" text="Add Student" />
+         <Button fx:id="addStudentButton" onAction="#handleAddStudent" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Add Student" />
 
-         <Label text="Students in Class" />
-         <ListView fx:id="studentListView" prefHeight="236.0" prefWidth="85.0" />
-         <Button fx:id="removeStudentButton" text="Remove Selected Student" />
+         <Separator />
+
+         <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Students in Class" textFill="white" />
+         <ListView fx:id="studentListView" prefHeight="200.0" />
+         <Button fx:id="removeStudentButton" onAction="#handleRemoveStudent" style="-fx-background-color: #f44336; -fx-text-fill: white;" text="Remove Selected Student" />
       </VBox>
 
+
+      <Button layoutX="40.0" layoutY="620.0" onAction="#showCreateClassDialog" text="Create Class" />
 
       <Button fx:id="saveAttendanceButton" layoutX="960.0" layoutY="620.0" onAction="#handleSaveAttendance" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Save Attendance" />
 
