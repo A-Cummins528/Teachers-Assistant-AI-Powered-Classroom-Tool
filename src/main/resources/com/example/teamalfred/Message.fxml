@@ -17,6 +17,7 @@
 
       <!-- Top-right "New Message" button -->
       <Button fx:id="newMessageButton" layoutX="980.0" layoutY="35.0" text="New Message"
+              onAction="#handleNewMessageButton"
               style="-fx-background-color: #3a3f47; -fx-text-fill: white; -fx-font-size: 14px;"/>
 
       <!-- Main messaging layout -->

@@ -1,65 +1,78 @@
 package com.example.teamalfred.database;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import static java.sql.DriverManager.getConnection;
-
+import java.sql.*;
 
 public class MessagingDatabaseManager {
 
     public void initializeSchema() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS conversations (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "userOneID INT NOT NULL, " +
-                "userTwoID INT NOT NULL" +
-                ");";
-        Connection conn = getConnection(); // Get the shared connection
-        // Use try-with-resources ONLY for the Statement
-        try (Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
+        try (Connection conn = DatabaseConnection.getInstance();
+             Statement stmt = conn.createStatement()) {
+
+            // Enable Write-Ahead Logging for better concurrency (optional)
+            stmt.execute("PRAGMA journal_mode=WAL;");
+
+            // Create conversations table
+            String createConversations = "CREATE TABLE IF NOT EXISTS conversations (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "userOneID INT NOT NULL, " +
+                    "userTwoID INT NOT NULL" +
+                    ");";
+            stmt.execute(createConversations);
+
+            // Create messages table
+            String createMessages = "CREATE TABLE IF NOT EXISTS messages (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "conversationID INT NOT NULL, " +
+                    "senderID INT NOT NULL, " +
+                    "content TEXT NOT NULL, " +
+                    "timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, " +
+                    "FOREIGN KEY (conversationID) REFERENCES conversations(id)" +
+                    ");";
+            stmt.execute(createMessages);
+
+        } catch (SQLException e) {
+            System.err.println("Error initializing schema: " + e.getMessage());
+            throw e;
         }
-        String sqlb = "CREATE TABLE IF NOT EXISTS messages (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "conversationID INT NOT NULL, " +
-                "senderID INT NOT NULL, " +
-                "content TEXT NOT NULL, " +
-                "timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, " +
-                "FOREIGN KEY (conversationID) REFERENCES conversations(id)" +
-                ");";
-        try (Statement stmt = conn.createStatement()) {
-            stmt.execute(sqlb);
-        }
-        // DO NOT close the connection here - it's managed by DatabaseConnection
-        // Messages Table
     }
 
     public void dropTable() throws SQLException {
-        String sql = "DROP TABLE IF EXISTS " + "messages";
-
-        Connection conn = getConnection(); // Get the shared connection
-        // Use try-with-resources ONLY for the Statement
-        try (Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
+        try (Connection conn = DatabaseConnection.getInstance();
+             Statement stmt = conn.createStatement()) {
+            stmt.execute("DROP TABLE IF EXISTS messages;");
+            stmt.execute("DROP TABLE IF EXISTS conversations;");
+        } catch (SQLException e) {
+            System.err.println("Error dropping tables: " + e.getMessage());
+            throw e;
         }
-        // DO NOT close the connection here - it's managed by DatabaseConnection
     }
 
-    public Connection getConnection() throws SQLException {
-        Connection conn = DatabaseConnection.getInstance();
-        // getInstance() now throws SQLException if connection fails, so null check isn't strictly needed here
-        // but doesn't hurt.
-        if (conn == null) {
-            // This case should ideally not be reached if getInstance throws exception on failure
-            throw new SQLException("Database connection could not be established (returned null).");
+    public int createConversation(int userOneID, int userTwoID) {
+        String sql = "INSERT INTO conversations (userOneID, userTwoID) VALUES (?, ?)";
+
+        try (Connection conn = DatabaseConnection.getInstance();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setInt(1, userOneID);
+            stmt.setInt(2, userTwoID);
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating conversation failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Creating conversation failed, no ID obtained.");
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error creating conversation: " + e.getMessage());
+            return -1;
         }
-        // Check if connection is closed (optional, defensive check)
-        if (conn.isClosed()) {
-            throw new SQLException("Database connection is closed.");
-        }
-        return conn;
     }
 
     public void sendMessage(Connection conn, int conversationId, int senderId, String messageContent) {
@@ -75,5 +88,4 @@ public class MessagingDatabaseManager {
             System.err.println("Error sending message: " + e.getMessage());
         }
     }
-
 }
