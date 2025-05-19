@@ -1,4 +1,4 @@
-package com.example.teamalfred.controllers.AiQuiz;
+package com.example.teamalfred.controllers.AiFeatures;
 
 /*
 This code was based on Jollama https://github.com/aholinch/jollama/tree/main

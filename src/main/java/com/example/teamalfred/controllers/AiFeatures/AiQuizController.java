@@ -1,8 +1,5 @@
-package com.example.teamalfred.controllers.AiQuiz;
+package com.example.teamalfred.controllers.AiFeatures;
 
-import com.example.teamalfred.controllers.AiQuiz.OllamaResponse;
-import com.example.teamalfred.controllers.AiQuiz.OllamaResponseFetcher;
-import com.example.teamalfred.controllers.AiQuiz.ResponseListener;
 import com.example.teamalfred.controllers.SwitchSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,11 +17,6 @@ public class AiQuizController {
 
     @FXML
     private TextArea quizOutputArea;
-
-    @FXML
-    public void initialize() {
-        // No initialization logic needed currently
-    }
 
     /**
      * Called when the "Generate Quiz" button is clicked.

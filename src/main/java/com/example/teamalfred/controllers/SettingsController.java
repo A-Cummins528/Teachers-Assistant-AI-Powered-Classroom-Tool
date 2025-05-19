@@ -53,6 +53,7 @@ public class SettingsController {
         }
         populateFields(user);
     }
+    
 
     // Fills in the text fields with user info
     private void populateFields(User user) {

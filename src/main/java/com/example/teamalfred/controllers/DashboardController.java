@@ -123,6 +123,7 @@ public class DashboardController {
                 Parent newContent = FXMLLoader.load(getClass().getResource(fxmlToLoad));
                 // Replace the content of the contentPane with the new content
                 contentPane.getChildren().setAll(newContent);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -140,6 +141,7 @@ public class DashboardController {
         resourcesToggle.setStyle(INACTIVE_BUTTON_STYLE);
         aiTutorToggle.setStyle(INACTIVE_BUTTON_STYLE);
         aiQuizToggle.setStyle(INACTIVE_BUTTON_STYLE);
+        settingsToggle.setStyle(INACTIVE_BUTTON_STYLE);
 
         if (messageToggle != null) {
             messageToggle.setStyle(INACTIVE_BUTTON_STYLE);
