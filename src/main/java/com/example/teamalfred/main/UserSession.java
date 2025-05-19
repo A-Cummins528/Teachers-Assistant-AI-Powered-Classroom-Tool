@@ -4,7 +4,7 @@ import com.example.teamalfred.database.User;
 
 public class UserSession {
     private static UserSession instance;
-    private User loggedInUser;
+    private static User loggedInUser = null;
 
     private UserSession(User user) {
         this.loggedInUser = user;
@@ -20,7 +20,7 @@ public class UserSession {
         return instance;
     }
 
-    public User getLoggedInUser() {
+    public static User getLoggedInUser() {
         return loggedInUser;
     }
 

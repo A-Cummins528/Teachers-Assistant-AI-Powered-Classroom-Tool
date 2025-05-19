@@ -1,11 +1,13 @@
 package com.example.teamalfred.database;
 
-import java.util.Objects; // Import Objects for equals and hashCode
+import java.util.Objects;// Import Objects for equals and hashCode
+import com.example.teamalfred.database.UserDAO;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
- * Represents a user within the system.
+ * User Class, Represents a user as object within the system.
  * Passwords are stored in a hashed format using BCrypt.
+ * Also used within User Session as primary token
  */
 public class User {
 
@@ -108,14 +110,15 @@ public class User {
         this.email = email.trim();
     }
 
-    public void setMobile(String mobile) {
-        if (mobile == null || mobile.trim().isEmpty()) {
+    public void setMobile(String phone) {
+        if (phone == null || phone.trim().isEmpty()) {
             throw new IllegalArgumentException("Mobile number cannot be null or empty.");
         }
-        if (!mobile.matches("^\\+?\\d{7,15}$")) {
+        if (!phone.matches("^\\+?\\d{7,15}$")) {
+            // push thru
             throw new IllegalArgumentException("Invalid mobile number format.");
         }
-        this.mobile = mobile.trim();
+        this.mobile = phone.trim();
     }
 
     /**
