@@ -4,6 +4,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;">
    <children>
       <Label layoutX="40.0" layoutY="30.0" text="Analytics View" textFill="WHITE">
@@ -12,4 +14,13 @@
          </font>
       </Label>
    </children>
+   <!-- Analytics Section TableView for Classes -->
+   <TableView fx:id="classTableView" prefHeight="200.0" prefWidth="400.0">
+      <columns>
+         <TableColumn fx:id="classNameColumn" text="Class Name" prefWidth="150.0" />
+         <TableColumn fx:id="studentCountColumn" text="Students" prefWidth="100.0" />
+         <TableColumn fx:id="averageGradeColumn" text="Average Grade" prefWidth="150.0" />
+      </columns>
+   </TableView>
+
 </AnchorPane>
