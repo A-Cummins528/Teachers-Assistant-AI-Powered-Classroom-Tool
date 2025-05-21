@@ -14,11 +14,15 @@ import java.sql.SQLException;
  */
 public class DatabaseConnection {
 
-    private static final String DEFAULT_DB_URL = "jdbc:sqlite:database.db";
+    private static String DEFAULT_DB_URL = "jdbc:sqlite:database.db";
     private static Connection instance = null;
     private static String activeDbUrl = null; // Store the URL of the *current* active instance
     private static String testDbUrlOverride = null; // Holds the override URL for testing
 
+    public static void setDatabaseUrl(String newUrl) {
+        DEFAULT_DB_URL = newUrl;
+        instance = null; // force reconnect on next use
+    }
     /** Private constructor to prevent instantiation. */
     private DatabaseConnection() {}
 
