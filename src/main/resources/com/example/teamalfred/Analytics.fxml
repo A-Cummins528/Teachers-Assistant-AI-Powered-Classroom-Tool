@@ -4,8 +4,10 @@
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane fx:controller="com.example.teamalfred.controllers.AnalyticsController"
+        xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
             prefWidth="1167.0" prefHeight="698.0" style="-fx-background-color: #25282c;">
+
    <children>
       <!-- Title -->
       <Label layoutX="40.0" layoutY="30.0" text="Analytics" textFill="WHITE">
@@ -15,15 +17,19 @@
       </Label>
 
       <!-- Summary Stats -->
-      <HBox layoutX="40.0" layoutY="100.0" spacing="20.0">
-         <Label text="Total Classes: 10" textFill="WHITE"/>
-         <Label text="Total Students: 150" textFill="WHITE"/>
-         <Label text="Avg. Grade: 85%" textFill="WHITE"/>
-         <Label text="Upcoming Tasks: 3" textFill="WHITE"/>
-      </HBox>
+      <VBox layoutX="40.0" layoutY="100.0" spacing="10.0">
+         <Label fx:id="totalStudentsLabel" text="Total Students: ..." textFill="WHITE"/>
+         <Label fx:id="totalAssignmentsLabel" text="Total Assignments: ..." textFill="WHITE"/>
+         <Label fx:id="englishStudentsLabel" text="English Students: ..." textFill="WHITE"/>
+         <Label fx:id="mathsStudentsLabel" text="Maths Students: ..." textFill="WHITE"/>
+         <Label fx:id="scienceStudentsLabel" text="Science Students: ..." textFill="WHITE"/>
+         <Label fx:id="englishAssignmentsLabel" text="English Assignments: ..." textFill="WHITE"/>
+         <Label fx:id="mathsAssignmentsLabel" text="Maths Assignments: ..." textFill="WHITE"/>
+         <Label fx:id="scienceAssignmentsLabel" text="Science Assignments: ..." textFill="WHITE"/>
+      </VBox>
 
       <!-- Performance Chart -->
-      <LineChart fx:id="performanceChart" layoutX="40.0" layoutY="150.0" prefWidth="1087.0" prefHeight="300.0">
+      <LineChart fx:id="performanceChart" layoutX="40.0" layoutY="220.0" prefWidth="1087.0" prefHeight="250.0">
          <xAxis>
             <CategoryAxis label="Time"/>
          </xAxis>

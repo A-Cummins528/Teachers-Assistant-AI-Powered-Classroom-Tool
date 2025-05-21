@@ -38,8 +38,8 @@ public class AssessmentsViewController {
     @FXML private Button addAssessmentBtn;
     @FXML private Button deleteAssessmentBtn;
 
-    @FXML private ComboBox<String> sortComboBox;
-    @FXML private ComboBox<String> filterComboBox;
+//    @FXML private ComboBox<String> sortComboBox;
+//    @FXML private ComboBox<String> filterComboBox;
     @FXML private ListView<String> subjectListView;
     @FXML private Label studentsLabel;
     @FXML private TableView<Student> studentsTable;
@@ -69,9 +69,9 @@ public class AssessmentsViewController {
     @FXML
     public void initialize() {
 
-        sortComboBox.setItems(FXCollections.observableArrayList("Sort by Date ↑", "Sort by Date ↓"));
-        filterComboBox.setItems(FXCollections.observableArrayList("All", "English", "Maths", "Science", "History", "Geography", "Health", "Art", "Technology", "PE"));
-        filterComboBox.setValue("All");
+//        sortComboBox.setItems(FXCollections.observableArrayList("Sort by Date ↑", "Sort by Date ↓"));
+//        filterComboBox.setItems(FXCollections.observableArrayList("All", "English", "Maths", "Science", "History", "Geography", "Health", "Art", "Technology", "PE"));
+//        filterComboBox.setValue("All");
 
         //refreshTable();
 
@@ -121,6 +121,25 @@ public class AssessmentsViewController {
             }
         });
 
+    }
+
+    @FXML
+    private void handleAddAssessmentToSubject() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/teamalfred/AddAssessmentToSubjectView.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Add Assessment to Subject");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Could not open popup.");
+        }
     }
 
 

@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.12"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.teamalfred.controllers.AssessmentsViewController"
-            prefWidth="1167.0" prefHeight="698.0" style="-fx-background-color: #25282c;">
+<AnchorPane prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.teamalfred.controllers.AssessmentsViewController">
    <children>
       <Label layoutX="40.0" layoutY="30.0" text="Assessments" textFill="WHITE">
-         <font><Font name="Arial Bold" size="36.0"/></font>
+         <font><Font name="Arial Bold" size="36.0" /></font>
       </Label>
 
-      <ComboBox fx:id="sortComboBox" layoutX="40.0" layoutY="70.0" promptText="Sort by" prefWidth="200.0"/>
-      <ComboBox fx:id="filterComboBox" layoutX="260.0" layoutY="70.0" promptText="Filter by Subject" prefWidth="200.0"/>
-
-      <SplitPane layoutX="40.0" layoutY="100.0" prefWidth="1080.0" prefHeight="500.0" orientation="HORIZONTAL">
+      <SplitPane dividerPositions="0.5" layoutX="40.0" layoutY="100.0" orientation="HORIZONTAL" prefHeight="500.0" prefWidth="1080.0">
          <items>
             <!-- Left pane: List of subjects -->
-            <VBox spacing="10" prefWidth="120.0" style="-fx-background-color: #2f3136;">
-               <Label text="Subjects" textFill="WHITE"/>
-               <ListView fx:id="subjectListView" />
+            <VBox prefWidth="120.0" spacing="10" style="-fx-background-color: #2f3136;">
+               <Label text="Subjects" textFill="WHITE" />
+               <ListView fx:id="subjectListView" prefHeight="471.0" prefWidth="400.0" />
             </VBox>
 
             <!-- Right pane: List of students -->
-            <VBox spacing="10" prefWidth="830.0">
-               <Label fx:id="studentsLabel" text="Select a subject to view students." textFill="WHITE"/>
-               <TableView fx:id="studentsTable">
+            <VBox prefWidth="830.0" spacing="10">
+               <Label fx:id="studentsLabel" text="Select a subject to view students." textFill="WHITE" />
+               <TableView fx:id="studentsTable" prefHeight="264.0" prefWidth="533.0">
                   <columns>
-                     <TableColumn fx:id="studentNameColumn" text="Student Name" prefWidth="300"/>
-                     <TableColumn fx:id="emailColumn" text="Email" prefWidth="300"/>
-                     <TableColumn fx:id="addAssessmentColumn" text="Actions" prefWidth="120.0" />
+                     <TableColumn fx:id="studentNameColumn" prefWidth="300" text="Student Name" />
+                     <TableColumn fx:id="emailColumn" prefWidth="300" text="Email" />
+                     <TableColumn fx:id="addAssessmentColumn" prefWidth="120.0" text="Actions" />
                   </columns>
                </TableView>
 
                <!-- New label + table for assessments -->
-               <Label fx:id="assessmentsLabel" text="Assessments for selected student:" textFill="WHITE"/>
+               <Label fx:id="assessmentsLabel" text="Assessments for selected student:" textFill="WHITE" />
                <TableView fx:id="assessmentsTable" prefHeight="180.0">
                   <columns>
-                     <TableColumn fx:id="assessmentTitleColumn" text="Title" prefWidth="200"/>
-                     <TableColumn fx:id="assessmentSubjectColumn" text="Subject" prefWidth="150"/>
-                     <TableColumn fx:id="assessmentDueColumn" text="Due Date" prefWidth="150"/>
-                     <TableColumn fx:id="assessmentStatusColumn" text="Status" prefWidth="100"/>
+                     <TableColumn fx:id="assessmentTitleColumn" prefWidth="200" text="Title" />
+                     <TableColumn fx:id="assessmentSubjectColumn" prefWidth="150" text="Subject" />
+                     <TableColumn fx:id="assessmentDueColumn" prefWidth="150" text="Due Date" />
+                     <TableColumn fx:id="assessmentStatusColumn" prefWidth="100" text="Status" />
                   </columns>
                </TableView>
             </VBox>
          </items>
       </SplitPane>
+
+      <Button fx:id="addAssessmentToSubjectBtn"
+              text="Add Assessment to Subject"
+              layoutX="700.0"
+              layoutY="70.0"
+              onAction="#handleAddAssessmentToSubject"
+              prefWidth="250.0"/>
 
 
 <!--      <Button fx:id="addAssessmentBtn"-->

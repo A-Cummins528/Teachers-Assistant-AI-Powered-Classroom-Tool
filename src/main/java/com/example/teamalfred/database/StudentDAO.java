@@ -24,7 +24,9 @@ public class StudentDAO {
     public static List<Student> getStudentsBySubject(String subject) throws SQLException {
         List<Student> students = new ArrayList<>();
         String query = "SELECT * FROM students WHERE subject = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseConnection.getInstance();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
             stmt.setString(1, subject);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
