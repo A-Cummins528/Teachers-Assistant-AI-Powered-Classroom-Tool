@@ -20,7 +20,7 @@ public class MessageController {
     @FXML private VBox conversationList;
     @FXML private Button sendButton;
 
-    private int currentConversationId = 1;
+    private static int currentConversationId = 1;
     // Remove persistent Connection field to avoid reuse of closed connections
     // private Connection conn;  <-- removed
 
@@ -57,6 +57,11 @@ public class MessageController {
             }
         });
     }
+
+    public static void resetSession() {
+        currentConversationId = -1;
+    }
+
 
     private void loadMessages() {
         messageContainer.getChildren().clear();
@@ -123,7 +128,7 @@ public class MessageController {
                     return;
                 }
 
-                int newConversationId = dbManager.createConversation(currentUserId, targetUserId);
+                int newConversationId = dbManager.createOrGetConversation(currentUserId, targetUserId);
 
                 if (newConversationId > 0) {
                     showAlert(Alert.AlertType.INFORMATION, "Conversation Created",

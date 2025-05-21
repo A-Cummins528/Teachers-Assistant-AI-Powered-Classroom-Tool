@@ -3,6 +3,7 @@ package com.example.teamalfred.controllers;
 import com.example.teamalfred.database.UserDAO;
 import com.example.teamalfred.database.SqliteUserDAO;
 import com.example.teamalfred.database.User;
+import com.example.teamalfred.controllers.MessageController;
 import com.example.teamalfred.main.UserSession; // Assuming you might update session
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -319,6 +320,7 @@ public class SettingsController {
 
     @FXML
     private void handleLogout(ActionEvent event) {
+        MessageController.resetSession();
         UserSession.clearSession(); // clear current user session
         switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
     }
