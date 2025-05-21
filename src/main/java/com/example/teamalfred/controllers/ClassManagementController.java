@@ -55,7 +55,7 @@ public class ClassManagementController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        DatabaseConnection.setDatabaseUrl("jdbc:sqlite:class_management_test.db");
+        DatabaseConnection.setTestDatabaseUrl("jdbc:sqlite:class_management_test.db");
         setupAttendanceTableColumns();
         setupClassSelector();
         setupFilterSelector();
