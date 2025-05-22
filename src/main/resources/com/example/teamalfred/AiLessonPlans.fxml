@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.teamalfred.controllers.AiFeatures.AiLessonPlansController"
+            prefWidth="800" prefHeight="600">
+
+    <TextField fx:id="topicInput" layoutX="50" layoutY="40" prefWidth="500"
+               promptText="Enter lesson topic..." />
+
+    <Button fx:id="generateButton" layoutX="570" layoutY="40" mnemonicParsing="false"
+            onAction="#handleGenerateLessonPlan" text="Generate" />
+
+    <TextArea fx:id="lessonPlanOutput" layoutX="50" layoutY="100" prefWidth="700" prefHeight="350"
+              wrapText="true" editable="false" promptText="Lesson plan will appear here..." />
+
+    <Button fx:id="exportButton" layoutX="50" layoutY="470" mnemonicParsing="false"
+            onAction="#handleExportLessonPlan" text="Export Lesson Plan" />
+
+</AnchorPane>

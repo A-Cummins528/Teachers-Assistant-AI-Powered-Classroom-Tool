@@ -33,6 +33,7 @@ public class DashboardController {
     @FXML private ToggleButton messageToggle;
     @FXML private ToggleButton aiQuizToggle;
     @FXML private ToggleButton settingsToggle;
+    @FXML private ToggleButton aiLessonPlansToggle;
     @FXML private AnchorPane dashboardRoot; // root of the dashboard layout
 
     private double currentFontSize = 14.0; // base font size
@@ -66,6 +67,8 @@ public class DashboardController {
         aiTutorToggle.setToggleGroup(navGroup);
         aiQuizToggle.setToggleGroup(navGroup);
         settingsToggle.setToggleGroup(navGroup);
+        aiLessonPlansToggle.setToggleGroup(navGroup);
+
 
         if (messageToggle != null) {  // in case "Message" toggle exists
             messageToggle.setToggleGroup(navGroup);
@@ -113,7 +116,10 @@ public class DashboardController {
             fxmlToLoad = "/com/example/teamalfred/AiQuiz.fxml";
         } else if (clickedButton == settingsToggle) {
         fxmlToLoad = "/com/example/teamalfred/SettingsPage.fxml";
+        } else if (clickedButton == aiLessonPlansToggle) {
+        fxmlToLoad = "/com/example/teamalfred/AiLessonPlans.fxml";
         }
+
 
 
 
@@ -142,7 +148,12 @@ public class DashboardController {
         aiTutorToggle.setStyle(INACTIVE_BUTTON_STYLE);
         aiQuizToggle.setStyle(INACTIVE_BUTTON_STYLE);
         settingsToggle.setStyle(INACTIVE_BUTTON_STYLE);
+        aiLessonPlansToggle.setStyle(INACTIVE_BUTTON_STYLE);
 
+
+        if (activeToggle == aiLessonPlansToggle) {
+            activeToggle.setStyle(ACTIVE_BUTTON_STYLE);
+        }
         if (messageToggle != null) {
             messageToggle.setStyle(INACTIVE_BUTTON_STYLE);
         }
