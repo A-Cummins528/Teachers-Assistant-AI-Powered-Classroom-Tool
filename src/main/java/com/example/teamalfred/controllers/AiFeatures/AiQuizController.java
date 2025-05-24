@@ -12,14 +12,19 @@ import javafx.scene.control.TextField;
  */
 public class AiQuizController {
 
+    /** Text field for user to input the quiz topic. */
     @FXML
     private TextField topicTextField;
 
+    /** Text area to display the generated quiz and answers. */
     @FXML
     private TextArea quizOutputArea;
 
     /**
      * Called when the "Generate Quiz" button is clicked.
+     * Retrieves the topic from the user, constructs a prompt, and fetches
+     * a quiz from the LLM, displaying it in the output area.
+     * @param event The action event triggered by the button click.
      */
     @FXML
     public void onGenerateQuizClicked(ActionEvent event) {
@@ -47,6 +52,8 @@ public class AiQuizController {
 
     /**
      * Called when the "Back to Dashboard" button is clicked.
+     * Navigates the user back to the main dashboard scene.
+     * @param event The action event triggered by the button click.
      */
     @FXML
     public void onBackToDashboardClicked(ActionEvent event) {

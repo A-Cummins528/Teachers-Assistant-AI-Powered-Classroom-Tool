@@ -1,7 +1,7 @@
 package com.example.teamalfred.database;
 
 import java.util.Objects;// Import Objects for equals and hashCode
-import com.example.teamalfred.database.UserDAO;
+// com.example.teamalfred.database.UserDAO; // Not used in this class, consider removing
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -60,13 +60,52 @@ public class User {
 
     // --- Getters ---
 
+    /**
+     * Gets the unique identifier of the user.
+     * @return The user's ID.
+     */
     public int getId() { return id; }
+
+    /**
+     * Gets the first name of the user.
+     * @return The user's first name.
+     */
     public String getFirstName() { return firstName; }
+
+    /**
+     * Gets the last name of the user.
+     * @return The user's last name.
+     */
     public String getLastName() { return lastName; }
+
+    /**
+     * Gets the email address of the user.
+     * @return The user's email address.
+     */
     public String getEmail() { return email; }
+
+    /**
+     * Gets the mobile phone number of the user.
+     * @return The user's mobile number.
+     */
     public String getMobile() { return mobile; }
+
+    /**
+     * Gets the grade of the student. Returns null for teachers or if not set.
+     * @return The student's grade, or null.
+     */
     public String getGrade() { return grade; }
+
+    /**
+     * Gets the class name associated with the user (e.g., "CAB302").
+     * @return The class name, or null if not set.
+     */
     public String getClassName() { return className; }
+
+    /**
+     * Gets the type of the user (e.g., STUDENT, TEACHER).
+     * @return The user's role as a UserRole enum.
+     */
     public UserRole getUserType() { return userType; } // Returns the UserRole enum
 
 
@@ -84,8 +123,18 @@ public class User {
 
     // --- Setters ---
 
+    /**
+     * Sets the unique identifier for the user.
+     * Typically used when loading a user from a persistent store.
+     * @param id The user's ID.
+     */
     public void setId(int id) { this.id = id; }
 
+    /**
+     * Sets the first name of the user.
+     * @param firstName The user's first name. Cannot be null or empty.
+     * @throws IllegalArgumentException if firstName is null or empty.
+     */
     public void setFirstName(String firstName) {
         if (firstName == null || firstName.trim().isEmpty()) {
             throw new IllegalArgumentException("First name cannot be null or empty.");
@@ -93,6 +142,11 @@ public class User {
         this.firstName = firstName.trim();
     }
 
+    /**
+     * Sets the last name of the user.
+     * @param lastName The user's last name. Cannot be null or empty.
+     * @throws IllegalArgumentException if lastName is null or empty.
+     */
     public void setLastName(String lastName) {
         if (lastName == null || lastName.trim().isEmpty()) {
             throw new IllegalArgumentException("Last name cannot be null or empty.");
@@ -100,6 +154,11 @@ public class User {
         this.lastName = lastName.trim();
     }
 
+    /**
+     * Sets the email address of the user.
+     * @param email The user's email address. Must be a valid format and not null or empty.
+     * @throws IllegalArgumentException if email is null, empty, or invalid format.
+     */
     public void setEmail(String email) {
         if (email == null || email.trim().isEmpty()) {
             throw new IllegalArgumentException("Email cannot be null or empty.");
@@ -110,6 +169,11 @@ public class User {
         this.email = email.trim();
     }
 
+    /**
+     * Sets the mobile phone number of the user.
+     * @param phone The user's mobile number. Must be a valid format and not null or empty.
+     * @throws IllegalArgumentException if mobile number is null, empty, or invalid format.
+     */
     public void setMobile(String phone) {
         if (phone == null || phone.trim().isEmpty()) {
             throw new IllegalArgumentException("Mobile number cannot be null or empty.");
@@ -153,12 +217,20 @@ public class User {
         this.userType = userType;
     }
 
+    /**
+     * Sets the grade for the student. Can be null.
+     * @param grade The student's grade.
+     */
     public void setGrade(String grade) {
         // Grade can be null or empty if not applicable (e.g., for teachers)
         // or if a student doesn't have a grade assigned yet.
         this.grade = (grade == null) ? null : grade.trim();
     }
 
+    /**
+     * Sets the class name associated with the user. Can be null.
+     * @param className The class name (e.g., "CAB302").
+     */
     public void setClassName(String className) {
         // Class name can be null or empty if not assigned.
         this.className = (className == null) ? null : className.trim();
@@ -262,7 +334,7 @@ public class User {
      * to be considered "logically equivalent". By default, Java's equals (inherited from the Object class)
      * only returns true if two variables point to the exact same object in memory.
      * <p> We override equals() to provide our own definition based on the object's state (its fields).
-     *  For a User, we decide two User objects are logically the same if they have the same id.</p>
+     * For a User, we decide two User objects are logically the same if they have the same id.</p>
      *
      * @param o A User object
      * @return True if both User IDs are equal

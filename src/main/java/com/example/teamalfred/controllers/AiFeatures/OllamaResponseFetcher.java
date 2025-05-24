@@ -39,21 +39,37 @@ import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Fetches responses from an Ollama API endpoint.
+ * This class handles the HTTP connection and request/response lifecycle
+ * for interacting with an Ollama server.
+ */
 public class OllamaResponseFetcher {
 
+    /** User-Agent string used for HTTP requests. */
     private static final String USERAGENT = "OLLAMA FETCHER";
+    /** Logger instance for this class. */
     public static final Logger logger = Logger.getLogger(OllamaResponseFetcher.class.getName());
+    /** The base URL of the Ollama API endpoint. */
     private final String apiURL;
 
+    /**
+     * Constructs an OllamaResponseFetcher with the specified API URL.
+     * @param apiURL The base URL of the Ollama API (e.g., "http://localhost:11434/api/generate/").
+     */
     public OllamaResponseFetcher(String apiURL) {
         this.apiURL = apiURL;
     }
 
+    /**
+     * Establishes and configures an HTTP connection to the Ollama API URL.
+     * @return An HttpURLConnection object, or null if an error occurs.
+     */
     protected HttpURLConnection getConnection() {
         HttpURLConnection conn = null;
 
         try {
-            URL urlObj = new URI(apiURL).toURL(); //URL constructor is deprecated since java20
+            URL urlObj = new URI(apiURL).toURL(); // URL constructor is deprecated since java20
             conn = (HttpURLConnection)urlObj.openConnection();
             conn.setRequestProperty("User-Agent", USERAGENT);
         } catch(Exception ex){
@@ -62,6 +78,12 @@ public class OllamaResponseFetcher {
         return conn;
     }
 
+    /**
+     * Sends a JSON payload to the Ollama API and retrieves the response.
+     * This is a private helper method used by the public-facing fetch methods.
+     * @param simpleJsonObj A String containing the JSON request payload.
+     * @return An OllamaResponse object parsed from the API's JSON response, or null on error.
+     */
     private OllamaResponse fetchOllamaResponse(String simpleJsonObj) {
         HttpURLConnection conn = null;
         String output = null;
@@ -98,12 +120,21 @@ public class OllamaResponseFetcher {
                     os.close();
                 } catch(Exception ex) {}
             }
+            // Note: HttpURLConnection itself doesn't need explicit closing in finally here,
+            // as getInputStream/getOutputStream handle its lifecycle for typical cases.
+            // If it were a different resource, explicit close for 'conn' might be considered.
         }
         return response;
     }
 
+    /**
+     * Fetches a response from the Ollama API for a given model and prompt.
+     * For JSON request formatting, see <a href="https://github.com/ollama/ollama/blob/main/docs/api.md">Ollama API documentation</a>.
+     * @param model The name of the Ollama model to use (e.g., "llama3").
+     * @param prompt The user's prompt for the model.
+     * @return An OllamaResponse object, or null if an error occurs.
+     */
     public OllamaResponse fetchOllamaResponse(String model, String prompt) {
-
         // tested with model llama v3.2 -for documentation on how to format the JSON request https://github.com/ollama/ollama/blob/main/docs/api.md
         String simpleJsonObj = String.format("""
                 {
@@ -115,6 +146,14 @@ public class OllamaResponseFetcher {
         return fetchOllamaResponse(simpleJsonObj);
     }
 
+    /**
+     * Fetches an Ollama response asynchronously on a new thread.
+     * When the response is received, the onResponseReceived method of the provided
+     * listener is called.
+     * @param model The name of the Ollama model.
+     * @param prompt The user's prompt.
+     * @param responseListener The listener to be notified upon response reception.
+     */
     public void fetchAsynchronousOllamaResponse(String model, String prompt, ResponseListener responseListener) {
         Thread thread = new Thread(){
             public void run(){
@@ -125,6 +164,11 @@ public class OllamaResponseFetcher {
         thread.start();
     }
 
+    /**
+     * Reads the entire input stream from an HTTP connection and returns it as a String.
+     * @param conn The HttpURLConnection from which to read the input.
+     * @return A String containing the response body, or an empty string on error.
+     */
     protected String readConnInput(HttpURLConnection conn) {
         InputStream is = null;
         InputStreamReader isr = null;
@@ -139,7 +183,7 @@ public class OllamaResponseFetcher {
 
             while(line != null) {
                 sb.append(line);
-                sb.append("\n");
+                sb.append("\n"); // Preserve newlines, useful for formatted text responses
                 line = br.readLine();
             }
         }
@@ -153,7 +197,4 @@ public class OllamaResponseFetcher {
 
         return sb.toString();
     }
-
-
 }
-

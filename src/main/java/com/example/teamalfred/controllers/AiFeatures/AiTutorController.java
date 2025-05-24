@@ -9,11 +9,29 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the AI Tutor scene.
+ * Handles user interaction for getting AI-generated explanations or assistance on a given topic.
+ * It initializes the AI with a system prompt defining its persona and constraints.
+ */
 public class AiTutorController implements Initializable {
 
+    /** Text field for the user to input their topic or question. */
     @FXML private TextField topicTextField;
+    /** Text area to display the AI's response or assistance. */
     @FXML private TextArea promptOutputArea;
 
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * Sends an initial system prompt to the LLM to set its behavior and persona
+     * as a helpful AI assistant for high school students and teachers.
+     * The response from this initial prompt is displayed.
+     *
+     * @param location The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     * @param resources The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String fullPrompt = "You are an AI assistant designed to help high school students and teachers. " +
@@ -33,6 +51,13 @@ public class AiTutorController implements Initializable {
                 promptOutputArea.setText(response.getResponse()));
     }
 
+    /**
+     * Handles the action when the "Generate Prompt" button is clicked.
+     * Takes the user's input from the topic text field and sends it as a prompt to the LLM.
+     * The LLM's response is then displayed in the prompt output area.
+     *
+     * @param event The action event triggered by the button click.
+     */
     @FXML
     public void onGeneratePromptClicked(ActionEvent event) {
         String userInput = topicTextField.getText();
@@ -45,6 +70,12 @@ public class AiTutorController implements Initializable {
                 promptOutputArea.setText(response.getResponse()));
     }
 
+    /**
+     * Handles the action when the "Back to Dashboard" button is clicked.
+     * Navigates the user back to the main dashboard scene.
+     *
+     * @param event The action event triggered by the button click.
+     */
     @FXML
     public void onBackToDashboardClicked(ActionEvent event) {
         SwitchSceneController switcher = new SwitchSceneController();
