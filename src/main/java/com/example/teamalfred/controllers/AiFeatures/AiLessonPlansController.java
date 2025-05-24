@@ -45,7 +45,8 @@ public class AiLessonPlansController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Generating...");
             alert.setHeaderText(null);
-            alert.setContentText("Please wait while your lesson plan is being generated.");
+            alert.setContentText("Please wait while your lesson plan is being generated. " +
+                    "This might take one or two minutes depending on your hardware.");
             alert.show();
 
             executor.submit(() -> {

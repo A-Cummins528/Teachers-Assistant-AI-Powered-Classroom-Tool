@@ -22,7 +22,7 @@
             </font>
         </Label>
 
-        <TextField fx:id="topicTextField" layoutX="160.0" layoutY="95.0" prefWidth="400.0" />
+        <TextField fx:id="topicTextField" layoutX="160.0" layoutY="95.0" prefWidth="400.0" promptText="Type your question or topic here"/>
 
         <Button fx:id="generatePrompt" layoutX="580.0" layoutY="95.0" text="Send" onAction="#onGeneratePromptClicked"
                 style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
@@ -30,7 +30,17 @@
         <Button fx:id="backToDashboardButton" layoutX="720.0" layoutY="95.0" text="Back to Dashboard" onAction="#onBackToDashboardClicked"
                 style="-fx-background-color: #f44336; -fx-text-fill: white;" />
 
-        <TextArea fx:id="promptOutputArea" layoutX="40.0" layoutY="160.0" prefWidth="1087.0" prefHeight="500.0" wrapText="true"
+        <Label layoutX="40.0" layoutY="128.0"
+               text="Please note: The AI Tutor does not have the ability to handle follow up requests; be specific on the content you would like to learn about."
+               textFill="WHITE"
+               wrapText="true"
+               prefWidth="1087.0">
+            <font>
+                <Font name="Arial" size="14.0" />
+            </font>
+        </Label>
+
+        <TextArea fx:id="promptOutputArea" layoutX="40.0" layoutY="178.0" prefWidth="1087.0" prefHeight="510.0" wrapText="true"
                   style="-fx-control-inner-background: #1c2832; -fx-text-fill: white; -fx-font-size: 14px;" editable="false"/>
     </children>
 </AnchorPane>

@@ -3,6 +3,7 @@ package com.example.teamalfred.controllers.AiFeatures;
 import com.example.teamalfred.controllers.SwitchSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -35,6 +36,17 @@ public class AiQuizController {
                 + "Each question must have four answer options labeled A through D. "
                 + "At the end, include an answer key listing the correct answer for each question. "
                 + "Only include the quiz and the answer key in your response.";
+
+        // Show loading text in the TextArea
+        quizOutputArea.setText("Generating AI quiz, please wait...");
+
+        // Show a popup
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Generating...");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please wait while your AI quiz is being generated. " +
+                            "This might take one or two minutes depending on your hardware.");
+                    alert.show();
 
         class MyResponseListener implements ResponseListener {
             @Override
