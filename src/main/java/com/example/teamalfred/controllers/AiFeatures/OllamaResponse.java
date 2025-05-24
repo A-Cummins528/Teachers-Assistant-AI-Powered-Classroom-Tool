@@ -1,6 +1,7 @@
 package com.example.teamalfred.controllers.AiFeatures;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException; // Import it
 
 /**
  * Represents a response object from the Ollama API.
@@ -33,10 +34,17 @@ public class OllamaResponse {
      *
      * @param body The JSON string received from the Ollama API.
      * @return A new {@code OllamaResponse} instance populated from the JSON string.
+     * @throws JsonSyntaxException if the input body is null, empty, or malformed JSON.
      */
     public static OllamaResponse fromJson(String body) {
-        //for documentation of how to decode JSON response https://github.com/ollama/ollama/blob/main/docs/api.md
+        if (body == null || body.isEmpty()) {
+            // You can choose to trim if you also want to consider strings with only whitespace as invalid
+            // if (body == null || body.trim().isEmpty()) {
+            throw new JsonSyntaxException("Input JSON string cannot be null or empty for OllamaResponse deserialization.");
+        }
         Gson gson = new Gson();
+        // This will still throw a JsonSyntaxException if 'body' is not valid JSON (e.g., "{}a")
+        // but the check above handles the specific empty/null case.
         OllamaResponse response = gson.fromJson(body, OllamaResponse.class);
         return response;
     }
