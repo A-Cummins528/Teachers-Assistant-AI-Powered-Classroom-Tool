@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
@@ -55,12 +56,18 @@
                         <Font name="Al Bayan Plain" size="19.0" />
                      </font>
                   </ToggleButton>
+
+                  <ToggleButton fx:id="aiQuizToggle" mnemonicParsing="false" onAction="#handleNavigation" prefHeight="26.0" prefWidth="199.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: center; -fx-border-radius: 4;" text="AI Quiz" textFill="#06080a">
+                     <font>
+                        <Font name="Al Bayan Plain" size="19.0" />
+                     </font>
+                  </ToggleButton>
                   <ToggleButton fx:id="aiTutorToggle" mnemonicParsing="false" onAction="#handleNavigation" prefHeight="26.0" prefWidth="199.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: center; -fx-border-radius: 4;" text="AI Tutor" textFill="#06080a">
                      <font>
                         <Font name="Al Bayan Plain" size="19.0" />
                      </font>
                   </ToggleButton>
-                  <ToggleButton fx:id="aiQuizToggle" mnemonicParsing="false" onAction="#handleNavigation" prefHeight="26.0" prefWidth="199.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: center; -fx-border-radius: 4;" text="AI Quiz" textFill="#06080a">
+                  <ToggleButton fx:id="aiLessonPlansToggle" mnemonicParsing="false" onAction="#handleNavigation" prefHeight="26.0" prefWidth="199.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: center; -fx-border-radius: 4;" text="AI Lesson Plan" textFill="#06080a">
                      <font>
                         <Font name="Al Bayan Plain" size="19.0" />
                      </font>
@@ -74,10 +81,10 @@
             </VBox>
             <Button layoutX="74.0" layoutY="561.0" onAction="#handleGoToSettings" style="-fx-background-color: transparent;">
                <graphic>
-                  <FontIcon iconLiteral="fas-cog" iconSize="24" iconColor="white"/>
+                  <FontIcon iconColor="white" iconLiteral="fas-cog" iconSize="24" />
                </graphic>
                <tooltip>
-                  <Tooltip text="Settings"/>
+                  <Tooltip text="Settings" />
                </tooltip>
             </Button>
             <HBox layoutX="59.0" layoutY="633.0" spacing="10.0">
@@ -89,8 +96,6 @@
       </AnchorPane>
 
       <!-- 🟩 This is the fixed content area where FXML content will be loaded -->
-      <StackPane fx:id="contentPane" layoutX="200.0" layoutY="70.0"
-                 prefHeight="698.0" prefWidth="1167.0"
-                 style="-fx-background-color: #25282c;" />
+      <StackPane fx:id="contentPane" layoutX="200.0" layoutY="70.0" prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;" />
    </children>
 </AnchorPane>
