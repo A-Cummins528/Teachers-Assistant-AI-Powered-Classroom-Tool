@@ -52,7 +52,11 @@ public class SqliteAssessmentDAO implements AssessmentDAO {
 
     public void deleteAssessment(int assessmentId) throws SQLException {
         String sql = "DELETE FROM assessments WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        // ✅ Get a fresh connection every time
+        try (Connection conn = DatabaseConnection.getInstance();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setInt(1, assessmentId);
             stmt.executeUpdate();
         }
@@ -122,6 +126,16 @@ public class SqliteAssessmentDAO implements AssessmentDAO {
             }
 
             insertStmt.executeBatch();
+        }
+    }
+
+    public void deleteAssessmentsBySubject(String subject) throws SQLException {
+        String sql = "DELETE FROM assessments WHERE subject = ?";
+        try (Connection conn = DatabaseConnection.getInstance();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, subject);
+            stmt.executeUpdate();
         }
     }
 }

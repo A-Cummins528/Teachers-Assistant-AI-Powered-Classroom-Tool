@@ -140,7 +140,58 @@ public class AssessmentsViewController {
         }
     }
 
+    @FXML
+    private void handleDeleteAssessmentsBySubject() {
+        String selectedSubject = subjectListView.getSelectionModel().getSelectedItem();
 
+        if (selectedSubject == null) {
+            showAlert("Please select a subject first.");
+            return;
+        }
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Delete Confirmation");
+        confirm.setHeaderText(null);
+        confirm.setContentText("Are you sure you want to delete all assessments for subject: " + selectedSubject + "?");
+
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    dao.deleteAssessmentsBySubject(selectedSubject);
+                    showAlert("All assessments for '" + selectedSubject + "' have been deleted.");
+                    assessmentsTable.getItems().clear(); // clear the table view
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    showAlert("Error deleting assessments: " + e.getMessage());
+                }
+            }
+        });
+    }
+    @FXML
+    private void handleDeleteSelectedAssessment() {
+        Assessment selected = assessmentsTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert("Please select an assessment to delete.");
+            return;
+        }
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Delete Confirmation");
+        confirm.setHeaderText("Are you sure you want to delete this assessment?");
+        confirm.setContentText("Title: " + selected.getTitle());
+
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    dao.deleteAssessment(selected.getId());
+                    assessmentsTable.getItems().remove(selected); // Remove from UI
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    showAlert("Error deleting assessment: " + e.getMessage());
+                }
+            }
+        });
+    }
 
 
 //    @FXML
