@@ -51,6 +51,8 @@ public class ClassManagementController implements Initializable {
     @FXML private ListView<Student> studentListView;
     @FXML private TextField newClassNameField;
     @FXML private Button createClassButton;
+    @FXML private ComboBox<String> subjectSelector;
+
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -96,9 +98,10 @@ public class ClassManagementController implements Initializable {
         String last = lastNameField.getText().trim();
         String email = emailField.getText().trim();
         Classroom selectedClass = classSelector.getValue();
+        String subject = subjectSelector.getValue(); // ✅ Get subject
 
-        if (first.isEmpty() || last.isEmpty() || email.isEmpty() || selectedClass == null) {
-            showAlert("Please fill all fields and select a class.");
+        if (first.isEmpty() || last.isEmpty() || email.isEmpty() || selectedClass == null || subject == null) {
+            showAlert("Please fill all fields and select a class and subject.");
             return;
         }
 
@@ -110,6 +113,7 @@ public class ClassManagementController implements Initializable {
             firstNameField.clear();
             lastNameField.clear();
             emailField.clear();
+            subjectSelector.getSelectionModel().clearSelection();
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Failed to add student to the database.");
