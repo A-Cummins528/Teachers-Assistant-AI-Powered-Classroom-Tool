@@ -13,6 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <AnchorPane prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.teamalfred.controllers.ClassManagementController">
    <children>
       <Label fx:id="headerLabel" layoutX="40.0" layoutY="20.0" text="Manage Attendance" textFill="WHITE">
@@ -43,6 +45,22 @@
          <TextField fx:id="firstNameField" promptText="First Name" />
          <TextField fx:id="lastNameField" promptText="Last Name" />
          <TextField fx:id="emailField" promptText="Email" />
+         <ComboBox fx:id="subjectSelector" prefWidth="150">
+            <items>
+               <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="English"/>
+                  <String fx:value="Maths"/>
+                  <String fx:value="Science"/>
+                  <String fx:value="History"/>
+                  <String fx:value="Geography"/>
+                  <String fx:value="Health"/>
+                  <String fx:value="Art"/>
+                  <String fx:value="Technology"/>
+                  <String fx:value="PE"/>
+               </FXCollections>
+            </items>
+         </ComboBox>
+
          <Button fx:id="addStudentButton" onAction="#handleAddStudent" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Add Student" />
 
          <Separator />
