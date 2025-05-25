@@ -80,4 +80,8 @@ public class Classroom {
     public String toString() {
         return name;
     }
+
+    public String getClassName() {
+        return name;
+    }
 }

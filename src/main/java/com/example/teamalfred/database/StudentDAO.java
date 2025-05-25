@@ -71,3 +71,4 @@ public interface StudentDAO {
      */
     List<Student> getStudentsByClassId(int classId) throws SQLException;
 }
+

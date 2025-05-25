@@ -19,35 +19,68 @@ public class DatabaseSchemaManager {
      *
      * @throws SQLException if the database connection cannot be established or the query fails.
      */
-    public void initializeSchema() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "firstName VARCHAR NOT NULL, " +
-                "lastName VARCHAR NOT NULL, " +
-                "mobile VARCHAR NOT NULL, " +
-                "email VARCHAR NOT NULL UNIQUE, " +
-                "password VARCHAR NOT NULL, " +
-                "userType VARCHAR NOT NULL CHECK (userType IN ('teacher', 'student')), " + // Teacher or Student
-                "grade INTEGER, " + // Can be NULL
-                "className VARCHAR" + // Can be NULL
-                ")";
-        String createAssessmentsTable = "CREATE TABLE IF NOT EXISTS assessments (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "title TEXT NOT NULL, " +
-                "subject TEXT NOT NULL, " +
-                "dueDate TEXT NOT NULL, " +
-                "status TEXT NOT NULL, " +
-                "type TEXT, " +
-                "studentId INTEGER, " +
-                "FOREIGN KEY (studentId) REFERENCES users(id) ON DELETE CASCADE" +
-                ");";
 
-        Connection conn = getConnection(); // Get the shared connection
-        // Use try-with-resources ONLY for the Statement
-        try (Statement stmt = conn.createStatement()) {
+    public void initializeSchema() throws SQLException {
+        Connection conn = getConnection();
+        try (Statement stmt = conn.createStatement())
+        {
+
+            // 1. Preserve existing users table (uses TABLE_NAME constant)
+            String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "firstName VARCHAR NOT NULL, " +
+                    "lastName VARCHAR NOT NULL, " +
+                    "mobile VARCHAR NOT NULL, " +
+                    "email VARCHAR NOT NULL UNIQUE, " +
+                    "password VARCHAR NOT NULL, " +
+                    "userType VARCHAR NOT NULL CHECK (userType IN ('teacher', 'student')), " +
+                    "grade INTEGER, " +
+                    "className VARCHAR)";
             stmt.execute(sql);
+
+            // 2. Classrooms table
+            String classesTable = "CREATE TABLE IF NOT EXISTS classes (" +
+                    "class_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "class_name TEXT NOT NULL)";
+            stmt.execute(classesTable);
+
+            // 3. Students table
+            String studentsTable = "CREATE TABLE IF NOT EXISTS students (" +
+                    "student_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "first_name TEXT NOT NULL, " +
+                    "last_name TEXT NOT NULL, " +
+                    "email TEXT, " +
+                    "class_id INTEGER, " +
+                    "subject TEXT NOT NULL, " +
+                    "FOREIGN KEY (class_id) REFERENCES classes(class_id))";
+            stmt.execute(studentsTable);
+            // 4. Attendance table
+            String attendanceTable = "CREATE TABLE IF NOT EXISTS attendance (" +
+                    "student_id INTEGER, " +
+                    "class_id INTEGER, " +
+                    "date TEXT, " +
+                    "present BOOLEAN, " +
+                    "absent BOOLEAN, " +
+                    "late BOOLEAN, " +
+                    "excused BOOLEAN, " +
+                    "notes TEXT, " +
+                    "PRIMARY KEY (student_id, class_id, date), " +
+                    "FOREIGN KEY (student_id) REFERENCES students(student_id), " +
+                    "FOREIGN KEY (class_id) REFERENCES classes(class_id))";
+            stmt.execute(attendanceTable);
+            String createAssessmentsTable = "CREATE TABLE IF NOT EXISTS assessments (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "title TEXT NOT NULL, " +
+                    "subject TEXT NOT NULL, " +
+                    "dueDate TEXT NOT NULL, " +
+                    "status TEXT NOT NULL, " +
+                    "type TEXT, " +
+                    "studentId INTEGER, " +
+                    "FOREIGN KEY (studentId) REFERENCES users(id) ON DELETE CASCADE" +
+                    ");";
+            stmt.execute(createAssessmentsTable);
+
         }
-        // DO NOT close the connection here - it's managed by DatabaseConnection
     }
 
     /**
@@ -56,41 +89,6 @@ public class DatabaseSchemaManager {
      *
      * @throws SQLException if the database connection cannot be established or the query fails.
      */
-
-//    public void initializeAssessmentSchema() throws SQLException {
-//        String createAssessmentsTable = "CREATE TABLE IF NOT EXISTS assessments (" +
-//                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-//                "title TEXT NOT NULL, " +
-//                "subject TEXT NOT NULL, " +
-//                "dueDate TEXT NOT NULL, " +
-//                "status TEXT NOT NULL" +
-//                ");";
-//
-//        Connection conn = getConnection(); // Get the shared connection
-//        // Use try-with-resources ONLY for the Statement
-//
-//        try (Statement stmt = conn.createStatement()) {
-//            stmt.execute(createAssessmentsTable);
-//        }
-//
-//        // DO NOT close the connection here - it's managed by DatabaseConnection
-//    } JUSTIN FIX THIS, THIS NEEDS TO BE INITIALISE BROTHER.
-
-    public void createStudentsTable() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS students (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "firstName TEXT NOT NULL," +
-                "lastName TEXT NOT NULL," +
-                "email TEXT NOT NULL," +
-                "subject TEXT NOT NULL)";
-
-        Connection conn = getConnection(); // Get the shared connection
-
-        try (Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-        }
-    }
-
     public void dropTable() throws SQLException {
         String sql = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
