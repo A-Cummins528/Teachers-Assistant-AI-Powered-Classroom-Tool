@@ -11,6 +11,5 @@ public interface StudentDAO {
 
     List<Student> getAllStudents() throws SQLException;
     void deleteStudent(int studentId) throws SQLException;
-
 }
 

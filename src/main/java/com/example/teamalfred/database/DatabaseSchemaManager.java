@@ -19,9 +19,11 @@ public class DatabaseSchemaManager {
      *
      * @throws SQLException if the database connection cannot be established or the query fails.
      */
+
     public void initializeSchema() throws SQLException {
-        try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement()) {
+        Connection conn = getConnection();
+        try (Statement stmt = conn.createStatement())
+        {
 
             // 1. Preserve existing users table (uses TABLE_NAME constant)
             String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
@@ -51,7 +53,6 @@ public class DatabaseSchemaManager {
                     "class_id INTEGER, " +
                     "FOREIGN KEY (class_id) REFERENCES classes(class_id))";
             stmt.execute(studentsTable);
-
             // 4. Attendance table
             String attendanceTable = "CREATE TABLE IF NOT EXISTS attendance (" +
                     "student_id INTEGER, " +
