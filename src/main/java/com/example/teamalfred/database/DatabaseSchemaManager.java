@@ -51,7 +51,7 @@ public class DatabaseSchemaManager {
                     "last_name TEXT NOT NULL, " +
                     "email TEXT, " +
                     "class_id INTEGER, " +
-                    "subject TEXT NOT NULL, " +
+                    "subject TEXT, " +
                     "FOREIGN KEY (class_id) REFERENCES classes(class_id))";
             stmt.execute(studentsTable);
             // 4. Attendance table
@@ -71,7 +71,7 @@ public class DatabaseSchemaManager {
             String createAssessmentsTable = "CREATE TABLE IF NOT EXISTS assessments (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                     "title TEXT NOT NULL, " +
-                    "subject TEXT NOT NULL, " +
+                    "subject TEXT, " +
                     "dueDate TEXT NOT NULL, " +
                     "status TEXT NOT NULL, " +
                     "type TEXT, " +
