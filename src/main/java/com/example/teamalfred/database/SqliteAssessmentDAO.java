@@ -100,7 +100,7 @@ public class SqliteAssessmentDAO implements AssessmentDAO {
         return list;
     }
     public void insertAssessmentForSubject(String title, String subject, String dueDate, String status, String type) throws SQLException {
-        String getStudentsSql = "SELECT id FROM students WHERE subject = ?";
+        String getStudentsSql = "SELECT student_id FROM students WHERE subject = ?";
         String insertSql = "INSERT INTO assessments (title, subject, dueDate, status, type, studentId) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (
@@ -116,7 +116,7 @@ public class SqliteAssessmentDAO implements AssessmentDAO {
                 insertStmt.setString(3, dueDate);
                 insertStmt.setString(4, status);
                 insertStmt.setString(5, type);
-                insertStmt.setInt(6, rs.getInt("id"));
+                insertStmt.setInt(6, rs.getInt("student_id"));
 
                 insertStmt.addBatch();
             }

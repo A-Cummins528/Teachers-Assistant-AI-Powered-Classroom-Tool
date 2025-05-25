@@ -76,7 +76,7 @@ public class DatabaseSchemaManager {
                     "status TEXT NOT NULL, " +
                     "type TEXT, " +
                     "studentId INTEGER, " +
-                    "FOREIGN KEY (studentId) REFERENCES users(id) ON DELETE CASCADE" +
+                    "FOREIGN KEY (studentId) REFERENCES students(student_id) ON DELETE CASCADE" +
                     ");";
             stmt.execute(createAssessmentsTable);
 
