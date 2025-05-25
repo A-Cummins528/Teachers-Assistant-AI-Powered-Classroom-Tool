@@ -29,7 +29,7 @@ public class Student {
         this.subject = subject;
         this.classId = classId;
     }
-    public Student(String firstName, String lastName, String email, int classId) {
+    public Student(String firstName, String lastName, String email,int classId, String subject) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

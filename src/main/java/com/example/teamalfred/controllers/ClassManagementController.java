@@ -106,7 +106,7 @@ public class ClassManagementController implements Initializable {
         }
 
         try {
-            Student student = new Student(first, last, email, selectedClass.getId());
+            Student student = new Student(first, last, email, selectedClass.getId(),subject);
             StudentDAO dao = new SqliteStudentDAO();
             dao.createStudent(student);
             loadStudentsForSelectedClass(); // Refresh list
