@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.teamalfred.controllers.EditAssessmentController"
+      spacing="10" alignment="CENTER" style="-fx-padding: 20; -fx-background-color: #2e2e2e;">
+    <TextField fx:id="titleField" promptText="Title"/>
+    <ComboBox fx:id="subjectComboBox" promptText="Subject"/>
+    <DatePicker fx:id="dueDatePicker" promptText="Due Date"/>
+    <ComboBox fx:id="typeComboBox" promptText="Type"/>
+    <Button text="Update Assessment" onAction="#handleUpdate"/>
+</VBox>
+

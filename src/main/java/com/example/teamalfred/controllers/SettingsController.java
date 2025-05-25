@@ -3,7 +3,6 @@ package com.example.teamalfred.controllers;
 import com.example.teamalfred.database.UserDAO;
 import com.example.teamalfred.database.SqliteUserDAO;
 import com.example.teamalfred.database.User;
-import com.example.teamalfred.controllers.MessageController;
 import com.example.teamalfred.main.UserSession; // Assuming you might update session
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +13,6 @@ import javafx.scene.control.Alert; // For feedback messages
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 

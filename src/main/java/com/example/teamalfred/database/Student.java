@@ -10,7 +10,7 @@ public class Student {
     private String lastName;    // Last name of the student
     private String email;       // Contact email
     private int classId;        // ID of the class/group this student is part of
-
+    private String subject;
     /**
      * Constructor to create a Student object with all relevant data.
      *
@@ -19,13 +19,18 @@ public class Student {
      * @param lastName  Student's last name
      * @param email     Student's email address
      * @param classId   ID of the class this student belongs to
+     * @param subject   Subject of the Student
      */
-    public Student(int id, String firstName, String lastName, String email, int classId) {
+    public Student(int id, String firstName, String lastName, String email, int classId, String subject) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.subject = subject;
         this.classId = classId;
+    }
+
+    public Student(int studentId, String firstName, String lastName, String email, int classId) {
     }
 
     /**
@@ -64,6 +69,12 @@ public class Student {
     public int getClassId() {
         return classId;
     }
+    /**
+     * @return Subject of the Student
+     */
+    public String getSubject() {
+        return subject;
+    }
 
     /**
      * @return The student's unique ID
@@ -72,3 +83,5 @@ public class Student {
         return id;
     }
 }
+
+

@@ -4,7 +4,6 @@ import com.example.teamalfred.database.UserDAO;
 import com.example.teamalfred.database.SqliteUserDAO;
 import com.example.teamalfred.database.User;
 import com.example.teamalfred.main.UserSession;
-import com.example.teamalfred.controllers.MessageController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
