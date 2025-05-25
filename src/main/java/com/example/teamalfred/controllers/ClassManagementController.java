@@ -140,7 +140,6 @@ public class ClassManagementController implements Initializable {
         setupAttendanceTableColumns();
         setupClassSelector();
         setupFilterSelector();
-        setupRowClickHandler();
         attendanceTable.setEditable(true);
         attendanceTable.setItems(filteredData);
         try {
@@ -168,11 +167,36 @@ public class ClassManagementController implements Initializable {
         excusedColumn.setCellValueFactory(data -> data.getValue().excusedProperty());
         notesColumn.setCellValueFactory(data -> data.getValue().notesProperty());
 
+        // Clickable name cell
+        studentNameColumn.setCellFactory(column -> {
+            return new TableCell<StudentAttendance, String>() {
+                @Override
+                protected void updateItem(String name, boolean empty) {
+                    super.updateItem(name, empty);
+                    if (empty || name == null) {
+                        setText(null);
+                        setOnMouseClicked(null);
+                        setStyle("");
+                    } else {
+                        setText(name);
+                        setStyle("-fx-text-fill: blue; -fx-underline: true;"); // Optional: make it look clickable
+                        setOnMouseClicked(event -> {
+                            if (event.getClickCount() == 1) {
+                                StudentAttendance student = getTableView().getItems().get(getIndex());
+                                showStudentMonthlyStats(student.getStudentId(), student.studentNameProperty().get());
+                            }
+                        });
+                    }
+                }
+            };
+        });
+
         presentColumn.setCellFactory(tc -> editableCheckbox());
         absentColumn.setCellFactory(tc -> editableCheckbox());
         lateColumn.setCellFactory(tc -> editableCheckbox());
         excusedColumn.setCellFactory(tc -> editableCheckbox());
     }
+
 
     private CheckBoxTableCell<StudentAttendance, Boolean> editableCheckbox() {
         CheckBoxTableCell<StudentAttendance, Boolean> cell = new CheckBoxTableCell<>();
@@ -198,19 +222,6 @@ public class ClassManagementController implements Initializable {
         filterSelector.setItems(FXCollections.observableArrayList(FILTER_ALL, FILTER_ABSENT_ONLY));
         filterSelector.getSelectionModel().selectFirst();
         filterSelector.setOnAction(e -> applyFilter());
-    }
-
-    private void setupRowClickHandler() {
-        attendanceTable.setRowFactory(tv -> {
-            TableRow<StudentAttendance> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (!row.isEmpty() && event.getClickCount() == 1) {
-                    StudentAttendance student = row.getItem();
-                    showStudentMonthlyStats(student.getStudentId(), student.studentNameProperty().get());
-                }
-            });
-            return row;
-        });
     }
 
     private void applyFilter() {
