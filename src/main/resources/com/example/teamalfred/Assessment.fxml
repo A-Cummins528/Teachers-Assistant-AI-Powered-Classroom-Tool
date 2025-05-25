@@ -9,67 +9,14 @@
       <Label layoutX="40.0" layoutY="30.0" text="Assessments" textFill="WHITE">
          <font><Font name="Arial Bold" size="36.0" /></font>
       </Label>
-
-      <SplitPane dividerPositions="0.5" layoutX="40.0" layoutY="100.0" orientation="HORIZONTAL" prefHeight="500.0" prefWidth="1080.0">
-         <items>
-            <!-- Left pane: List of subjects -->
-            <VBox prefWidth="120.0" spacing="10" style="-fx-background-color: #2f3136;">
-               <Label text="Subjects" textFill="WHITE" />
-               <ListView fx:id="subjectListView" prefHeight="471.0" prefWidth="400.0" />
-            </VBox>
-
-            <!-- Right pane: List of students -->
-            <VBox prefWidth="830.0" spacing="10">
-               <Label fx:id="studentsLabel" text="Select a subject to view students." textFill="WHITE" />
-               <TableView fx:id="studentsTable" prefHeight="264.0" prefWidth="533.0">
-                  <columns>
-                     <TableColumn fx:id="studentNameColumn" prefWidth="300" text="Student Name" />
-                     <TableColumn fx:id="emailColumn" prefWidth="300" text="Email" />
-                     <TableColumn fx:id="addAssessmentColumn" prefWidth="120.0" text="Actions" />
-                  </columns>
-               </TableView>
-
-               <!-- New label + table for assessments -->
-               <Label fx:id="assessmentsLabel" text="Assessments for selected student:" textFill="WHITE" />
-               <TableView fx:id="assessmentsTable" prefHeight="180.0">
-                  <columns>
-                     <TableColumn fx:id="assessmentTitleColumn" prefWidth="200" text="Title" />
-                     <TableColumn fx:id="assessmentSubjectColumn" prefWidth="150" text="Subject" />
-                     <TableColumn fx:id="assessmentDueColumn" prefWidth="150" text="Due Date" />
-                     <TableColumn fx:id="assessmentStatusColumn" prefWidth="100" text="Status" />
-                  </columns>
-               </TableView>
-            </VBox>
-         </items>
-      </SplitPane>
-
-      <Button fx:id="addAssessmentToSubjectBtn"
-              text="Add Assessment to Subject"
-              layoutX="700.0"
-              layoutY="70.0"
-              onAction="#handleAddAssessmentToSubject"
-              prefWidth="250.0"/>
-
-
-<!--      <Button fx:id="addAssessmentBtn"-->
-<!--              text="Add New Assessment"-->
-<!--              layoutX="40.0"-->
-<!--              layoutY="520.0"-->
-<!--              prefWidth="200.0"-->
-<!--              onAction="#handleAddAssessment"/>-->
-
-<!--      <Button fx:id="editAssessmentBtn"-->
-<!--              text="Edit Selected"-->
-<!--              layoutX="480.0"-->
-<!--              layoutY="520.0"-->
-<!--              prefWidth="200.0"-->
-<!--              onAction="#handleEditAssessment"/>-->
-
-<!--      <Button fx:id="deleteAssessmentBtn"-->
-<!--              text="Delete Selected"-->
-<!--              layoutX="260.0"-->
-<!--              layoutY="520.0"-->
-<!--              prefWidth="200.0"-->
-<!--              onAction="#handleDeleteAssessment"/>-->
    </children>
+   <!-- Assessment Section TableView for Quizzes -->
+   <TableView fx:id="quizTableView" layoutX="279.0" layoutY="136.0" prefHeight="325.0" prefWidth="585.0">
+      <columns>
+         <TableColumn fx:id="quizNameColumn" prefWidth="200.0" text="Quiz Name" />
+         <TableColumn fx:id="questionCountColumn" prefWidth="100.0" text="Questions" />
+         <TableColumn fx:id="quizAverageColumn" prefWidth="100.0" text="Average Score" />
+      </columns>
+   </TableView>
+
 </AnchorPane>

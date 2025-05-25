@@ -3,6 +3,7 @@ package com.example.teamalfred.controllers;
 import com.example.teamalfred.database.UserDAO;
 import com.example.teamalfred.database.SqliteUserDAO;
 import com.example.teamalfred.database.User;
+import com.example.teamalfred.controllers.MessageController;
 import com.example.teamalfred.main.UserSession; // Assuming you might update session
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert; // For feedback messages
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,7 +30,7 @@ public class SettingsController {
     @FXML private TextField emailSettings; // Consider making this non-editable or handle uniqueness carefully
     @FXML private PasswordField passwordSettings;
     @FXML private PasswordField passwordSettingsConfirm;
-
+    @FXML private BorderPane rootPane; // This now refers to your BorderPane root
     @FXML private Label invalidFirstname;
     @FXML private Label invalidLastname;
     @FXML private Label invalidMobile;
@@ -37,6 +39,9 @@ public class SettingsController {
     @FXML private Label invalidPasswordConfirm; // Added: Ensure this fx:id exists in your FXML
 
     private static final int MIN_REQUIRED_VALID_FIELDS = 4; // For name, lastname, mobile, email
+
+
+    private double currentFontSize = 14.0;
 
     // Call this to set the current user before showing the Settings page
     public void setCurrentUser(User user) {
@@ -49,7 +54,9 @@ public class SettingsController {
         }
         populateFields(user);
     }
+    
 
+    // Fills in the text fields with user info
     private void populateFields(User user) {
         firstNameSettings.setText(user.getFirstName());
         lastNameSettings.setText(user.getLastName());
@@ -59,6 +66,7 @@ public class SettingsController {
         // User types new password if they want to change it.
     }
 
+    // Runs when the user clicks 'Update'
     @FXML
     public void updateUserDetails(ActionEvent event) {
         clearAllValidationLabels();
@@ -88,7 +96,7 @@ public class SettingsController {
 
         if (proceedWithUpdate && validFieldsCounter >= MIN_REQUIRED_VALID_FIELDS) {
             try {
-                User userToUpdate = new User(); // Use default constructor
+                User userToUpdate = new User();
                 userToUpdate.setId(currentUser.getId());
                 userToUpdate.setFirstName(updatedFirstname);
                 userToUpdate.setLastName(updatedLastname);
@@ -99,7 +107,7 @@ public class SettingsController {
                     Optional<User> existingUserByNewEmail = userDAO.findUserByEmail(updatedEmail);
                     if (existingUserByNewEmail.isPresent()) {
                         setInvalidLabel(invalidEmail, true, "Email already in use.");
-                        return; // Stop update
+                        return;
                     }
                 }
                 userToUpdate.setEmail(updatedEmail);
@@ -107,19 +115,17 @@ public class SettingsController {
 
                 // Set password
                 if (newPlainTextPassword != null && !newPlainTextPassword.isEmpty()) {
-                    userToUpdate.setPassword(newPlainTextPassword); // Hashes the new password
+                    userToUpdate.setPassword(newPlainTextPassword);
                 } else {
-                    userToUpdate.setPersistedPassword(currentUser.getPassword()); // Keep old hashed password
+                    userToUpdate.setPersistedPassword(currentUser.getPassword());
                 }
 
-                // Preserve non-editable fields from currentUser
-                // These fields are not changed on this settings page.
-                userToUpdate.setUserType(currentUser.getUserType()); // Assumes direct UserRole enum setter
+                userToUpdate.setUserType(currentUser.getUserType());
                 userToUpdate.setGrade(currentUser.getGrade());
                 userToUpdate.setClassName(currentUser.getClassName());
 
                 userDAO.updateUser(userToUpdate);
-                this.currentUser = userToUpdate; // SettingsController's instance is now the updated one
+                this.currentUser = userToUpdate;
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Profile updated successfully!");
 
 
@@ -140,6 +146,28 @@ public class SettingsController {
         }
     }
 
+    // Handles account deletion when delete button is clicked
+    @FXML
+    private void handleDeleteAccount(ActionEvent event) {
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirm Deletion");
+        confirmAlert.setHeaderText("Are you sure you want to delete your account?");
+        confirmAlert.setContentText("This action cannot be undone.");
+
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                userDAO.deleteUser(currentUser.getId());
+                UserSession.clearSession();
+                switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Deletion Failed", "An error occurred while deleting the account.");
+            }
+        }
+    }
+
+    // Resets all validation error labels
     private void clearAllValidationLabels() {
         setInvalidLabel(invalidFirstname, false, "");
         setInvalidLabel(invalidLastname, false, "");
@@ -149,7 +177,8 @@ public class SettingsController {
         setInvalidLabel(invalidPasswordConfirm, false, "");
     }
 
-    private void clearInputs() { // Not strictly needed if fields are repopulated or scene changes
+    // Clears all inputs (not currently used)
+    private void clearInputs() {
         firstNameSettings.clear();
         lastNameSettings.clear();
         mobileSettings.clear();
@@ -159,6 +188,7 @@ public class SettingsController {
         clearAllValidationLabels();
     }
 
+    // Checks if the first name is valid
     private String validateFirstname() {
         String fname = firstNameSettings.getText().trim();
         if (fname.matches("[a-zA-Z\\s'-]{2,}")) {
@@ -168,6 +198,7 @@ public class SettingsController {
         return "Invalid";
     }
 
+    // Checks if the last name is valid
     private String validateLastname() {
         String lname = lastNameSettings.getText().trim();
         if (lname.matches("[a-zA-Z\\s'-]{2,}")) {
@@ -177,15 +208,17 @@ public class SettingsController {
         return "Invalid";
     }
 
+    // Checks if the mobile number is a valid Australian number
     private String validateMobile() {
-        String mobile = mobileSettings.getText().replaceAll("\\s+", "");
-        if (mobile.matches("^04\\d{8}$")) { // Example: Australian mobile
+        String mobile = mobileSettings.getText().replaceAll("\s+", "");
+        if (mobile.matches("^04\\d{8}$")) {
             return mobile;
         }
         setInvalidLabel(invalidMobile, true, "Aus mobile: 04XXXXXXXX.");
         return "Invalid";
     }
 
+    // Checks if the email address is in a valid format
     private String validateEmail() {
         String email = emailSettings.getText().trim().toLowerCase();
         if (email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
@@ -195,54 +228,51 @@ public class SettingsController {
         return "Invalid";
     }
 
-    /**
-     * Validates password fields.
-     * @return The new plain text password if valid and intended for change,
-     * null if fields are empty (no change intended),
-     * or "Invalid" if there's a validation error.
-     */
+    // Validates passwords and makes sure they match and are secure
     private String validatePassword() {
         String pass = passwordSettings.getText();
         String confirmPass = passwordSettingsConfirm.getText();
 
         // If both fields are empty, user does not intend to change password
         if (pass.isEmpty() && confirmPass.isEmpty()) {
-            setInvalidLabel(invalidPassword, false, ""); // Clear any previous message
+            setInvalidLabel(invalidPassword, false, "");
             setInvalidLabel(invalidPasswordConfirm, false, "");
-            return null; // Signifies no change
+            return null;
         }
 
         // If one is empty and other is not, it's an error
         if (pass.isEmpty() || confirmPass.isEmpty()){
             setInvalidLabel(invalidPassword, true, "Both password fields required to change, or leave both empty.");
-            setInvalidLabel(invalidPasswordConfirm, true, ""); // Clear confirm specific if main is issue
+            setInvalidLabel(invalidPasswordConfirm, true, "");
             return "Invalid";
         }
 
 
         if (pass.length() < 7) {
             setInvalidLabel(invalidPassword, true, "Password min 7 characters.");
-            setInvalidLabel(invalidPasswordConfirm, false, ""); // Clear confirm if length is issue
+            setInvalidLabel(invalidPasswordConfirm, false, "");
             return "Invalid";
         }
-        setInvalidLabel(invalidPassword, false, ""); // Clear general password error if length is OK
+        setInvalidLabel(invalidPassword, false, "");
 
         if (!pass.equals(confirmPass)) {
             setInvalidLabel(invalidPasswordConfirm, true, "Passwords do not match.");
             return "Invalid";
         }
-        setInvalidLabel(invalidPasswordConfirm, false, ""); // Clear confirm error if they match
+        setInvalidLabel(invalidPasswordConfirm, false, "");
 
-        return pass; // Valid new password
+        return pass;
     }
 
+    // Shows error messages beside input fields
     private void setInvalidLabel(Label label, boolean isInvalid, String message) {
         if (label != null) {
             label.setText(isInvalid ? message : "");
-            label.setVisible(isInvalid); // Make sure label is visible only when there's a message
+            label.setVisible(isInvalid);
         }
     }
 
+    // Displays an alert popup with a given message
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -251,9 +281,47 @@ public class SettingsController {
         alert.showAndWait();
     }
 
+    // Goes back to the Dashboard when cancel is pressed
     @FXML
-    private void handleCancel(ActionEvent event) { // Or handleGoBackToDashboard
-        // Assuming Dashboard is the main screen after login
+    private void handleCancel(ActionEvent event) {
         switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
+    }
+    @FXML
+    private void increaseFontSize() {
+        currentFontSize += 2;
+        applyFontSize();
+    }
+
+    @FXML
+    private void decreaseFontSize() {
+        currentFontSize = Math.max(10, currentFontSize - 2);
+        applyFontSize();
+    }
+
+    private void applyFontSize() {
+        if (rootPane != null) {
+            rootPane.setStyle("-fx-font-size: " + currentFontSize + "px;");
+        }
+    }
+    @FXML
+    private void handleGoToDashboard(ActionEvent event) {
+        switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
+    }
+
+    @FXML
+    private void handleGoToSettings(ActionEvent event) {
+        switchScene.switchScene(event, "/com/example/teamalfred/SettingsPage.fxml");
+    }
+
+    @FXML
+    private void handleGoToProfile(ActionEvent event) {
+        switchScene.switchScene(event, "/com/example/teamalfred/UpdateProfilePage.fxml");
+    }
+
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        MessageController.resetSession();
+        UserSession.clearSession(); // clear current user session
+        switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
     }
 }

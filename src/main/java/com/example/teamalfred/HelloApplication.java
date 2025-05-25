@@ -2,11 +2,11 @@ package com.example.teamalfred;
 
 import com.example.teamalfred.database.DatabaseConnection;
 import com.example.teamalfred.database.DatabaseSchemaManager;
+import com.example.teamalfred.database.TestStudentDataGenerator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -24,6 +24,7 @@ public class HelloApplication extends Application {
             DatabaseSchemaManager schemaManager = new DatabaseSchemaManager();
             schemaManager.initializeSchema();
             schemaManager.createStudentsTable();
+
 
             // 3. Load login scene
             stg = stage;

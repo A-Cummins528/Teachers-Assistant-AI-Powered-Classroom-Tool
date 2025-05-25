@@ -1,6 +1,7 @@
 package com.example.teamalfred.database;
 
 import com.example.teamalfred.database.User;
+import com.example.teamalfred.database.UserDAO;
 
 import java.sql.Connection; // Import required JDBC classes
 import java.sql.PreparedStatement;
@@ -236,7 +237,8 @@ public class SqliteUserDAO implements UserDAO {
         user.setEmail(rs.getString(COL_EMAIL));
         String hashedPasswordFromDb = rs.getString(COL_PASSWORD);
         user.setPersistedPassword(hashedPasswordFromDb);
-        User.UserRole.valueOf(rs.getString(COL_USER_TYPE).toUpperCase());
+        User.UserRole.valueOf(rs.getString(COL_USER_TYPE).toUpperCase()); // this supposedly does nothing. because you reference it as the one below elsewhere.
+        user.setUserType(rs.getString(COL_USER_TYPE));
         user.setGrade(rs.getString(COL_GRADE));
         user.setClassName(rs.getString(COL_CLASS_NAME));
         return user;

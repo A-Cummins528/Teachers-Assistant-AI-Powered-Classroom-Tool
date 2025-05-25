@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx"
-            prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;" fx:controller="com.example.teamalfred.controllers.messaging.MessageController">
+            prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;" fx:controller="com.example.teamalfred.controllers.MessageController">
    <children>
 
       <!-- Top title -->
@@ -17,6 +17,7 @@
 
       <!-- Top-right "New Message" button -->
       <Button fx:id="newMessageButton" layoutX="980.0" layoutY="35.0" text="New Message"
+              onAction="#handleNewMessageButton"
               style="-fx-background-color: #3a3f47; -fx-text-fill: white; -fx-font-size: 14px;"/>
 
       <!-- Main messaging layout -->
