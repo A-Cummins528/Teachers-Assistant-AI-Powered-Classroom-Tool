@@ -23,7 +23,6 @@ public class HelloApplication extends Application {
             // 2. Initialize schema (create table if missing)
             DatabaseSchemaManager schemaManager = new DatabaseSchemaManager();
             schemaManager.initializeSchema();
-            schemaManager.createStudentsTable();
 
 
             // 3. Load login scene

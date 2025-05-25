@@ -51,7 +51,7 @@ public class DatabaseSchemaManager {
                     "last_name TEXT NOT NULL, " +
                     "email TEXT, " +
                     "class_id INTEGER, " +
-                    "subject TEXT NOT NULL)" +
+                    "subject TEXT NOT NULL, " +
                     "FOREIGN KEY (class_id) REFERENCES classes(class_id))";
             stmt.execute(studentsTable);
             // 4. Attendance table
