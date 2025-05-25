@@ -12,13 +12,14 @@ public class SqliteStudentDAO implements StudentDAO {
 
     @Override
     public void createStudent(Student student) throws SQLException {
-        String sql = "INSERT INTO students (first_name, last_name, email, class_id) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO students (first_name, last_name, email, class_id,subject) VALUES (?, ?, ?, ?,?)";
         try (Connection conn = DatabaseConnection.getInstance();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, student.getFirstName());
             stmt.setString(2, student.getLastName());
             stmt.setString(3, student.getEmail());
             stmt.setInt(4, student.getClassId());
+            stmt.setString(5, student.getSubject() != null ? student.getSubject() : "General");
             stmt.executeUpdate();
         }
     }
@@ -125,7 +126,9 @@ public class SqliteStudentDAO implements StudentDAO {
                 rs.getString("first_name"),
                 rs.getString("last_name"),
                 rs.getString("email"),
-                rs.getInt("class_id")
+                rs.getInt("class_id"),
+                rs.getString("subject")
         );
     }
+
 }
