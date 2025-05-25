@@ -1,9 +1,6 @@
 package com.example.teamalfred.controllers;
 
-import com.example.teamalfred.database.Assessment;
-import com.example.teamalfred.database.SqliteAssessmentDAO;
-import com.example.teamalfred.database.Student;
-import com.example.teamalfred.database.StudentDAO;
+import com.example.teamalfred.database.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,7 +57,8 @@ public class AssessmentsViewController {
     private ObservableList<Student> studentsInSubject;
     private ObservableList<Assessment> masterData;
     private final SqliteAssessmentDAO dao = new SqliteAssessmentDAO();
-    private final StudentDAO studentDAO = new StudentDAO();
+    private final StudentDAO studentDAO = new SqliteStudentDAO();
+
 
     public AssessmentsViewController() throws SQLException {
         // Constructor must declare or handle SQLException because dao throws it

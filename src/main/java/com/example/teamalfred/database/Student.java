@@ -30,6 +30,9 @@ public class Student {
         this.classId = classId;
     }
 
+    public Student(int studentId, String firstName, String lastName, String email, int classId) {
+    }
+
     /**
      * Gets the full name of the student by combining first and last name.
      *

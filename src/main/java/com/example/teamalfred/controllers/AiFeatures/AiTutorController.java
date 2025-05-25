@@ -3,12 +3,9 @@ package com.example.teamalfred.controllers.AiFeatures;
 import com.example.teamalfred.controllers.SwitchSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * Controller for the AI Tutor scene.

@@ -31,6 +31,16 @@ public class DatabaseSchemaManager {
                 "grade INTEGER, " + // Can be NULL
                 "className VARCHAR" + // Can be NULL
                 ")";
+        String createAssessmentsTable = "CREATE TABLE IF NOT EXISTS assessments (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "title TEXT NOT NULL, " +
+                "subject TEXT NOT NULL, " +
+                "dueDate TEXT NOT NULL, " +
+                "status TEXT NOT NULL, " +
+                "type TEXT, " +
+                "studentId INTEGER, " +
+                "FOREIGN KEY (studentId) REFERENCES users(id) ON DELETE CASCADE" +
+                ");";
 
         Connection conn = getConnection(); // Get the shared connection
         // Use try-with-resources ONLY for the Statement
