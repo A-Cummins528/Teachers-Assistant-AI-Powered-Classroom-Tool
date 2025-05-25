@@ -19,7 +19,7 @@ public class SqliteStudentDAO implements StudentDAO {
             stmt.setString(2, student.getLastName());
             stmt.setString(3, student.getEmail());
             stmt.setInt(4, student.getClassId());
-            stmt.setString(5, student.getSubject() != null ? student.getSubject() : "General");
+            stmt.setString(5, student.getSubject());
             stmt.executeUpdate();
         }
     }
