@@ -18,18 +18,19 @@ import java.util.Optional;
  * sending messages, and switching between conversations.
  */
 public class MessageController {
+    private static MessageController instance; // Holds the controller instance
 
     // Our DB manager for handling message and conversation tables
     private final MessagingDatabaseManager dbManager = new MessagingDatabaseManager();
 
     // UI elements from FXML file
-    @FXML private TextField messageInput;           // Input field for typing new messages
-    @FXML private VBox messageContainer;            // Container to hold all messages for a conversation
-    @FXML private VBox conversationList;            // Sidebar showing list of all conversations
-    @FXML private Button sendButton;                // Button to send messages
+    @FXML private TextField messageInput;
+    @FXML private VBox messageContainer;
+    @FXML private VBox conversationList;
+    @FXML private Button sendButton;
 
     // Stores the ID of the currently selected conversation
-    private static int currentConversationId = 1;
+    private static int currentConversationId = -1;
 
     /**
      * Utility method to show popup alerts (for errors, info, etc.)
@@ -47,19 +48,23 @@ public class MessageController {
      * Sets up the database schema and loads conversations/messages.
      */
     public void initialize() {
+        // Save this instance so static methods can access instance fields
+        instance = this;
+
         try {
             // Ensure the necessary message tables exist
-            try (Connection conn = DatabaseConnection.getInstance()) {
-                dbManager.initializeSchema();
-            }
+            dbManager.initializeSchema();
         } catch (SQLException e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Database Error", "Could not initialize message tables.");
             return;
         }
 
-        // Load messages for the current conversation and display all conversations
-        loadMessages();
+        // Disable message input and send button initially — no conversation selected yet
+        messageInput.setDisable(true);
+        sendButton.setDisable(true);
+
+        // Load conversations (messages won't load until a convo is selected)
         loadConversations();
 
         // Set what happens when the user clicks "Send"
@@ -78,7 +83,13 @@ public class MessageController {
      * Resets the current conversation (can be called from other controllers if needed)
      */
     public static void resetSession() {
-        currentConversationId = -1;
+        if (instance != null) {
+            currentConversationId = -1;
+            instance.messageInput.setDisable(true);
+            instance.sendButton.setDisable(true);
+            instance.messageContainer.getChildren().clear();
+            instance.conversationList.getChildren().clear();
+        }
     }
 
     /**
@@ -86,6 +97,11 @@ public class MessageController {
      */
     private void loadMessages() {
         messageContainer.getChildren().clear();  // Clear old messages
+
+        if (currentConversationId < 0) {
+            // No valid conversation selected — nothing to load
+            return;
+        }
 
         String query = "SELECT senderID, content, timestamp FROM messages WHERE conversationID = ? ORDER BY timestamp";
 
@@ -169,6 +185,10 @@ public class MessageController {
                     loadConversations();
                     loadMessages();
 
+                    // Enable input and send button now that convo exists
+                    messageInput.setDisable(false);
+                    sendButton.setDisable(false);
+
                     // Highlight the conversation just opened
                     for (var node : conversationList.getChildren()) {
                         if (node.getUserData() instanceof Integer id && id == newConversationId) {
@@ -193,6 +213,11 @@ public class MessageController {
      * @param content The message text.
      */
     private void sendMessage(String content) {
+        if (currentConversationId < 0) {
+            // No valid conversation selected - just return
+            return;
+        }
+
         String insert = "INSERT INTO messages (conversationID, senderID, content, timestamp) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
 
         try (Connection conn = DatabaseConnection.getInstance();
@@ -263,40 +288,37 @@ public class MessageController {
      * @param conversationId The convo's ID.
      * @param name           User X / User Y
      * @param lastMessage    Most recent message
-     * @param time           Timestamp string
-     * @return A styled HBox preview
+     * @param timestamp      Timestamp of that message
+     * @return An HBox UI element that can be clicked to open the conversation.
      */
-    private HBox createConversationPreviewBox(int conversationId, String name, String lastMessage, String time) {
-        HBox previewBox = new HBox();
-        previewBox.setPrefHeight(50);
-        previewBox.setStyle("-fx-padding: 10; -fx-background-color: #3a3f47;");
-        previewBox.setSpacing(10);
-
-        VBox textContainer = new VBox();
-        textContainer.setPrefWidth(190);
-        textContainer.setSpacing(3);
-
+    private HBox createConversationPreviewBox(int conversationId, String name, String lastMessage, String timestamp) {
         Label nameLabel = new Label(name);
-        nameLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+        nameLabel.setStyle("-fx-font-weight: bold;");
 
-        Label messageSnippet = new Label(lastMessage);
-        messageSnippet.setStyle("-fx-text-fill: #CCCCCC; -fx-font-size: 12;");
-        messageSnippet.setMaxWidth(180);
+        Label lastMsgLabel = new Label(lastMessage != null ? lastMessage : "");
+        lastMsgLabel.setStyle("-fx-text-fill: #555555;");
+        lastMsgLabel.setMaxWidth(150);
+        lastMsgLabel.setWrapText(true);
 
-        Label timestamp = new Label(time != null && time.length() >= 16 ? time.substring(11, 16) : "");
-        timestamp.setStyle("-fx-text-fill: #AAAAAA; -fx-font-size: 11;");
-        timestamp.setPrefWidth(60);
+        Label timeLabel = new Label(timestamp != null ? timestamp.substring(11, 16) : "");
+        timeLabel.setStyle("-fx-text-fill: #888888; -fx-font-size: 10px;");
 
-        textContainer.getChildren().addAll(nameLabel, messageSnippet);
-        previewBox.getChildren().addAll(textContainer, timestamp);
+        VBox textContainer = new VBox(nameLabel, lastMsgLabel);
+        textContainer.setSpacing(2);
 
-        // Store ID for later
+        HBox previewBox = new HBox(textContainer, timeLabel);
+        previewBox.setSpacing(10);
         previewBox.setUserData(conversationId);
+        previewBox.setStyle("-fx-padding: 10; -fx-border-color: lightgray; -fx-border-width: 0 0 1 0;");
 
-        // Clicking it switches the chat
-        previewBox.setOnMouseClicked(e -> {
-            currentConversationId = (int) previewBox.getUserData();
+        // Clicking this box loads the conversation messages
+        previewBox.setOnMouseClicked(event -> {
+            currentConversationId = conversationId;
             loadMessages();
+            messageInput.setDisable(false);
+            sendButton.setDisable(false);
+
+            // Highlight this selected conversation
             highlightSelectedConversation(previewBox);
         });
 
@@ -304,16 +326,14 @@ public class MessageController {
     }
 
     /**
-     * Changes the background colour of the selected conversation so it's visually active.
+     * Highlights the selected conversation box, removing highlight from others.
      *
-     * @param selectedBox The selected conversation HBox.
+     * @param selectedBox The convo box clicked by the user.
      */
     private void highlightSelectedConversation(HBox selectedBox) {
-        // Reset style for all boxes
         for (var node : conversationList.getChildren()) {
-            node.setStyle("-fx-padding: 10; -fx-background-color: #3a3f47;");
+            node.setStyle("-fx-padding: 10; -fx-border-color: lightgray; -fx-border-width: 0 0 1 0;");
         }
-        // Highlight the selected one
-        selectedBox.setStyle("-fx-padding: 10; -fx-background-color: #1f8ef1;");
+        selectedBox.setStyle("-fx-padding: 10; -fx-border-color: #3b82f6; -fx-border-width: 0 0 2 0; -fx-background-color: #e0f0ff;");
     }
 }
