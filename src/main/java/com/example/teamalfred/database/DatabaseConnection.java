@@ -19,6 +19,13 @@ public class DatabaseConnection {
     private static String activeDbUrl = null; // Store the URL of the *current* active instance
     private static String testDbUrlOverride = null; // Holds the override URL for testing
 
+    /**
+     * Sets the default database URL for new connections.
+     * Closes any existing connection to ensure the new URL is used on the next
+     * call to {@link #getInstance()} if no test URL is set.
+     *
+     * @param newUrl The new default database URL string (e.g., "jdbc:sqlite:another_database.db").
+     */
     public static void setDatabaseUrl(String newUrl) {
         DEFAULT_DB_URL = newUrl;
         instance = null; // force reconnect on next use
@@ -119,7 +126,3 @@ public class DatabaseConnection {
         testDbUrlOverride = null; // Remove the test URL override
     }
 }
-
-
-// TODO: Throw a custom exception instead of printing errors to System.err
-// TODO: Implement closeInstance() elsewhere when shutting down the application
