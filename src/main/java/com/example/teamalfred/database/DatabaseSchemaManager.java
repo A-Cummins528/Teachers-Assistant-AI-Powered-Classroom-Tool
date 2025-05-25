@@ -47,24 +47,24 @@ public class DatabaseSchemaManager {
      * @throws SQLException if the database connection cannot be established or the query fails.
      */
 
-    public void initializeAssessmentSchema() throws SQLException {
-        String createAssessmentsTable = "CREATE TABLE IF NOT EXISTS assessments (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "title TEXT NOT NULL, " +
-                "subject TEXT NOT NULL, " +
-                "dueDate TEXT NOT NULL, " +
-                "status TEXT NOT NULL" +
-                ");";
-
-        Connection conn = getConnection(); // Get the shared connection
-        // Use try-with-resources ONLY for the Statement
-
-        try (Statement stmt = conn.createStatement()) {
-            stmt.execute(createAssessmentsTable);
-        }
-
-        // DO NOT close the connection here - it's managed by DatabaseConnection
-    }
+//    public void initializeAssessmentSchema() throws SQLException {
+//        String createAssessmentsTable = "CREATE TABLE IF NOT EXISTS assessments (" +
+//                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+//                "title TEXT NOT NULL, " +
+//                "subject TEXT NOT NULL, " +
+//                "dueDate TEXT NOT NULL, " +
+//                "status TEXT NOT NULL" +
+//                ");";
+//
+//        Connection conn = getConnection(); // Get the shared connection
+//        // Use try-with-resources ONLY for the Statement
+//
+//        try (Statement stmt = conn.createStatement()) {
+//            stmt.execute(createAssessmentsTable);
+//        }
+//
+//        // DO NOT close the connection here - it's managed by DatabaseConnection
+//    } JUSTIN FIX THIS, THIS NEEDS TO BE INITIALISE BROTHER.
 
     public void createStudentsTable() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS students (" +

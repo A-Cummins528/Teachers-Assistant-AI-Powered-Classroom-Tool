@@ -5,10 +5,61 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1728cf51-1cd3-499f-bc49-5f819aa5b33e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class_management_test.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class_management_test.db-shm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class_management_test.db-wal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiLessonPlansController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiTutorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/OllamaResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/ResponseListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/ClassManagementController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/MessageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/AttendanceDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/AttendanceRecord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/Classroom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/ClassroomDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteAttendanceDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteClassroomDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteStudentDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/TestStudentDataGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiLessonPlans.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/teamalfred/controllers/aifeatures/OllamaResponseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiLessonPlans.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiLessonPlans.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiQuiz/AiQuizController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiQuizController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiQuiz/OllamaResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiQuiz/OllamaResponseFetcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/OllamaResponseFetcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiQuiz/ResponseListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/LogInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/LogInController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/SettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/SignUpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/switchSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/switchSceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/DatabaseSchemaManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/DatabaseSchemaManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/MessagingDatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/MessagingDatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/StudentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/StudentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/main/UserSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/main/UserSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiQuiz.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiQuiz.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiTutor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiTutor.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/Assessment.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/Assessment.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/ClassManagement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/ClassManagement.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/Dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/LogIn.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/LogIn.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/Message.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/Message.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/SettingsPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/SettingsPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/SignUp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/SignUp.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/UpdateProfilePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/UpdateProfilePage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/UserProfilesPage(DEFUNCT).fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +112,7 @@
     "Maven.teamAlfred [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature-ai-lesson-plans",
+    "git-widget-placeholder": "Merging justin",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "C:/Users/adama/OneDrive/Documents/GitHub/TeamAlfred/src/main/java/com/example/teamalfred/controllers/AiFeatures",
     "last_opened_file_path": "C:/Users/adama/OneDrive/Documents/GitHub/TeamAlfred/src/main/resources/com/example/teamalfred",
