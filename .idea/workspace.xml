@@ -6,6 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="1728cf51-1cd3-499f-bc49-5f819aa5b33e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/ClassManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/ClassManagementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/Assessment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/Assessment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/AttendanceDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/AttendanceDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/DatabaseSchemaManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/DatabaseSchemaManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteAssessmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteAssessmentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteAttendanceDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteAttendanceDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteClassroomDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteClassroomDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteStudentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteStudentDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/Student.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +74,8 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -124,6 +134,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.39" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -134,5 +151,9 @@
       <updated>1747026869484</updated>
     </task>
     <servers />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

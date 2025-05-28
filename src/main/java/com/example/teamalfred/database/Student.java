@@ -29,6 +29,15 @@ public class Student {
         this.subject = subject;
         this.classId = classId;
     }
+
+    /**
+     *
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param classId
+     * @param subject
+     */
     public Student(String firstName, String lastName, String email,int classId, String subject) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -91,6 +100,10 @@ public class Student {
         return id;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return firstName + " " + lastName;

@@ -16,12 +16,17 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import java.io.IOException;
 
+/**
+ * Controller for the main dashboard of the application.
+ * Manages navigation between different sections and provides
+ * features like logout, settings, and dynamic font resizing.
+ */
 public class DashboardController {
 
-    @FXML
-    private Label displayUserName;
+    @FXML private Label displayUserName;
     @FXML private StackPane contentPane;
-    // ToggleButtons for each navigation item:
+
+    // Navigation toggle buttons
     @FXML private ToggleButton classManagementToggle;
     @FXML private ToggleButton assessmentToggle;
     @FXML private ToggleButton analyticsToggle;
@@ -31,32 +36,42 @@ public class DashboardController {
     @FXML private ToggleButton aiQuizToggle;
     @FXML private ToggleButton settingsToggle;
     @FXML private ToggleButton aiLessonPlansToggle;
-    @FXML private AnchorPane dashboardRoot; // root of the dashboard layout
 
-    private double currentFontSize = 14.0; // base font size
+    @FXML private AnchorPane dashboardRoot;
 
-    // Define styles for active/inactive toggle buttons:
+    private double currentFontSize = 14.0;
+
+    // Style constants
     private static final String ACTIVE_BUTTON_STYLE =
             "-fx-background-color: lightblue; -fx-text-fill: white; -fx-alignment: center; -fx-border-radius: 4;";
     private static final String INACTIVE_BUTTON_STYLE =
             "-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: center; -fx-border-radius: 4;";
 
-    // ToggleGroup to make buttons exclusive
     private ToggleGroup navGroup = new ToggleGroup();
     private final SwitchSceneController switchScene = new SwitchSceneController();
     private User currentUser;
 
+    /**
+     * Sets the current user and updates the user greeting label.
+     *
+     * @param user The user currently logged in.
+     */
     public void setUser(User user) {
         this.currentUser = user;
         if (user != null) {
             displayUserName.setText("Hey there, " + user.getFirstName());
         }
+        // Optionally retrieve user from session for consistency
         User currentUser = UserSession.getInstance().getLoggedInUser();
     }
 
+    /**
+     * Initializes the controller after FXML components are loaded.
+     * Sets up navigation button groups and styles.
+     */
     @FXML
     private void initialize() {
-        // Add all navigation toggle buttons to one ToggleGroup for mutual exclusivity
+        // Group navigation buttons for mutual exclusivity
         classManagementToggle.setToggleGroup(navGroup);
         assessmentToggle.setToggleGroup(navGroup);
         analyticsToggle.setToggleGroup(navGroup);
@@ -66,16 +81,18 @@ public class DashboardController {
         settingsToggle.setToggleGroup(navGroup);
         aiLessonPlansToggle.setToggleGroup(navGroup);
 
-
-        if (messageToggle != null) {  // in case "Message" toggle exists
+        if (messageToggle != null) {
             messageToggle.setToggleGroup(navGroup);
-            // Optional: initialization logic here
         }
     }
 
+    /**
+     * Loads the Settings page and passes the current user to its controller.
+     *
+     * @param event The ActionEvent triggered by clicking the settings button.
+     */
     @FXML
     private void handleGoToSettings(ActionEvent event) {
-        System.out.println("howdy");
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/teamalfred/UpdateProfilePage.fxml"));
             Parent root = loader.load();
@@ -84,16 +101,21 @@ public class DashboardController {
             controller.setCurrentUser(currentUser);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
             Scene newScene = new Scene(root, stage.getScene().getWidth(), stage.getScene().getHeight());
             stage.setScene(newScene);
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Handles navigation between different dashboard sections.
+     * Dynamically loads FXML content into the content pane.
+     *
+     * @param event The ActionEvent from a toggle button click.
+     */
     @FXML
     private void handleNavigation(ActionEvent event) {
-        // Determine which toggle was clicked
         ToggleButton clickedButton = (ToggleButton) event.getSource();
         String fxmlToLoad = null;
 
@@ -112,32 +134,29 @@ public class DashboardController {
         } else if (clickedButton == aiQuizToggle) {
             fxmlToLoad = "/com/example/teamalfred/AiQuiz.fxml";
         } else if (clickedButton == settingsToggle) {
-        fxmlToLoad = "/com/example/teamalfred/SettingsPage.fxml";
+            fxmlToLoad = "/com/example/teamalfred/SettingsPage.fxml";
         } else if (clickedButton == aiLessonPlansToggle) {
-        fxmlToLoad = "/com/example/teamalfred/AiLessonPlans.fxml";
+            fxmlToLoad = "/com/example/teamalfred/AiLessonPlans.fxml";
         }
-
-
-
 
         if (fxmlToLoad != null) {
             try {
-                // Load the FXML content for the selected section
                 Parent newContent = FXMLLoader.load(getClass().getResource(fxmlToLoad));
-                // Replace the content of the contentPane with the new content
                 contentPane.getChildren().setAll(newContent);
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        // Update styles: highlight the active button, reset others
         updateToggleStyles(clickedButton);
     }
-    /** Utility method to update the background style of toggles, highlighting the active one. */
+
+    /**
+     * Updates the visual style of toggle buttons to indicate the active section.
+     *
+     * @param activeToggle The toggle button that was clicked.
+     */
     private void updateToggleStyles(ToggleButton activeToggle) {
-        // Set all toggles to the inactive style, then override the active one
         classManagementToggle.setStyle(INACTIVE_BUTTON_STYLE);
         assessmentToggle.setStyle(INACTIVE_BUTTON_STYLE);
         analyticsToggle.setStyle(INACTIVE_BUTTON_STYLE);
@@ -147,37 +166,44 @@ public class DashboardController {
         settingsToggle.setStyle(INACTIVE_BUTTON_STYLE);
         aiLessonPlansToggle.setStyle(INACTIVE_BUTTON_STYLE);
 
-
-        if (activeToggle == aiLessonPlansToggle) {
-            activeToggle.setStyle(ACTIVE_BUTTON_STYLE);
-        }
         if (messageToggle != null) {
             messageToggle.setStyle(INACTIVE_BUTTON_STYLE);
         }
-        System.out.println("activeToggle == assessmentToggle? " + (activeToggle == assessmentToggle));
-        System.out.println("activeToggle == resourcesToggle? " + (activeToggle == resourcesToggle));
-        System.out.println("activeToggle == aiTutorToggle? " + (activeToggle == aiTutorToggle));
-        System.out.println("activeToggle == messageToggle? " + (activeToggle == messageToggle));
-        // Set the clicked toggle's style to the active highlight color
+
         activeToggle.setStyle(ACTIVE_BUTTON_STYLE);
     }
 
+    /**
+     * Logs the user out and switches back to the login scene.
+     *
+     * @param event The logout button's ActionEvent.
+     */
     @FXML
     private void handleLogout(ActionEvent event) {
         switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
     }
+
+    /**
+     * Increases the dashboard's font size.
+     */
     @FXML
     private void increaseFontSize() {
         currentFontSize += 2;
         applyFontSize();
     }
 
+    /**
+     * Decreases the dashboard's font size, with a minimum limit.
+     */
     @FXML
     private void decreaseFontSize() {
-        currentFontSize = Math.max(10, currentFontSize - 2); // prevent shrinking too small
+        currentFontSize = Math.max(10, currentFontSize - 2);
         applyFontSize();
     }
 
+    /**
+     * Applies the current font size setting to the dashboard root.
+     */
     private void applyFontSize() {
         if (dashboardRoot != null) {
             dashboardRoot.setStyle("-fx-font-size: " + currentFontSize + "px;");
