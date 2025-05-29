@@ -13,16 +13,25 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Controller for adding a new assessment to a specific student.
+ * Handles user input, form validation, and database insertion.
+ */
 public class AddAssessmentController {
 
+    // UI components for input fields
     @FXML private TextField titleField;
     @FXML private DatePicker dueDatePicker;
     @FXML private ComboBox<String> typeComboBox;
     @FXML private ComboBox<String> subjectComboBox;
 
+    // DAO to interact with the assessment database
     private final SqliteAssessmentDAO dao;
+
+    // The student to whom the new assessment will be assigned
     private Student selectedStudent;
 
+    // Static block to handle DAO instantiation with exception
     {
         try {
             dao = new SqliteAssessmentDAO();
@@ -31,6 +40,9 @@ public class AddAssessmentController {
         }
     }
 
+    /**
+     * Initializes combo boxes with predefined values for type and subject.
+     */
     @FXML
     public void initialize() {
         typeComboBox.setItems(FXCollections.observableArrayList("Report", "Exam", "Quiz"));
@@ -39,6 +51,10 @@ public class AddAssessmentController {
         ));
     }
 
+    /**
+     * Handles the submission of the assessment form. Validates inputs,
+     * calculates status, and inserts the assessment into the database.
+     */
     @FXML
     private void handleSubmit() {
         String title = titleField.getText().trim();
@@ -46,11 +62,11 @@ public class AddAssessmentController {
         String subject = subjectComboBox.getValue();
         LocalDate due = dueDatePicker.getValue();
 
+        // Validate the student and all fields
         if (selectedStudent == null) {
             showAlert("No student selected for this assessment.");
             return;
         }
-
         if (title.isEmpty()) {
             showAlert("Please enter a title.");
             return;
@@ -69,7 +85,7 @@ public class AddAssessmentController {
         }
 
         try {
-            // Determine status based on due date
+            // Determine the assessment status based on the due date
             LocalDate today = LocalDate.now();
             long daysLate = ChronoUnit.DAYS.between(due, today);
             String status;
@@ -82,16 +98,16 @@ public class AddAssessmentController {
                 status = "Closed";
             }
 
-            // Format date
+            // Format the due date as a string
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String formattedDueDate = due.format(formatter);
 
-            // Create and insert assessment
+            // Create assessment object and insert into DB
             Assessment newAssessment = new Assessment(title, subject, formattedDueDate, status, type);
             newAssessment.setStudentId(selectedStudent.getId());
             dao.insertAssessment(newAssessment);
 
-            // Close the popup
+            // Close the popup window after successful submission
             Stage stage = (Stage) titleField.getScene().getWindow();
             stage.close();
 
@@ -101,11 +117,19 @@ public class AddAssessmentController {
         }
     }
 
+    /**
+     * Displays an alert dialog with a specific message.
+     * @param msg Message to display in the alert
+     */
     private void showAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR, msg);
         alert.showAndWait();
     }
 
+    /**
+     * Sets the student who will be assigned the new assessment.
+     * @param student the student object
+     */
     public void setStudent(Student student) {
         this.selectedStudent = student;
     }
