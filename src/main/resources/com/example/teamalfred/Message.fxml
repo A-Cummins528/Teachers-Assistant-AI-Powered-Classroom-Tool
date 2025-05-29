@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx"
-            prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;" fx:controller="com.example.teamalfred.controllers.MessageController">
+<AnchorPane prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.teamalfred.controllers.MessageController">
    <children>
 
       <!-- Top title -->
       <Label layoutX="40.0" layoutY="30.0" text="Message View" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="36.0"/>
+            <Font name="Arial Bold" size="36.0" />
          </font>
       </Label>
 
       <!-- Top-right "New Message" button -->
-      <Button fx:id="newMessageButton" layoutX="980.0" layoutY="35.0" text="New Message"
-              onAction="#handleNewMessageButton"
-              style="-fx-background-color: #3a3f47; -fx-text-fill: white; -fx-font-size: 14px;"/>
+      <Button fx:id="newMessageButton" layoutX="1022.0" layoutY="63.0" onAction="#handleNewMessageButton" style="-fx-background-color: #3a3f47; -fx-text-fill: white; -fx-font-size: 14px;" text="New Message" />
 
       <!-- Main messaging layout -->
       <HBox layoutX="40.0" layoutY="100.0" prefHeight="550.0" prefWidth="1087.0" spacing="20.0">
 
          <!-- Left panel: conversation list -->
-         <VBox fx:id="conversationList" prefWidth="250.0" prefHeight="550.0"
-               style="-fx-background-color: #2c2f33; -fx-padding: 0;">
+         <VBox fx:id="conversationList" prefHeight="550.0" prefWidth="250.0" style="-fx-background-color: #2c2f33; -fx-padding: 0;">
             <!-- Conversation previews go here -->
          </VBox>
 
          <!-- Right panel: chat and message typing -->
-         <VBox prefWidth="817.0" prefHeight="550.0" spacing="10.0">
+         <VBox prefHeight="550.0" prefWidth="817.0" spacing="10.0">
 
             <!-- Scrollable message view -->
-            <ScrollPane fx:id="messageScrollPane" fitToWidth="true" prefHeight="480.0"
-                        style="-fx-background-color: transparent;">
+            <ScrollPane fx:id="messageScrollPane" fitToWidth="true" prefHeight="480.0" style="-fx-background-color: transparent;">
                <content>
                   <VBox fx:id="messageContainer" spacing="10.0" style="-fx-padding: 10;">
                      <!-- Messages load here -->
@@ -43,10 +43,9 @@
             </ScrollPane>
 
             <!-- Message input box -->
-            <HBox spacing="10.0" alignment="CENTER_LEFT" prefHeight="50.0" style="-fx-padding: 0 10 0 10;">
-               <TextField fx:id="messageInput" promptText="Type your message..." prefWidth="700.0"
-                          style="-fx-background-color: #3a3f47; -fx-text-fill: white; -fx-prompt-text-fill: #888888;"/>
-               <Button fx:id="sendButton" text="Send" style="-fx-background-color: #1f8ef1; -fx-text-fill: white;"/>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" spacing="10.0" style="-fx-padding: 0 10 0 10;">
+               <TextField fx:id="messageInput" prefHeight="25.0" prefWidth="729.0" promptText="Type your message..." style="-fx-background-color: #3a3f47; -fx-text-fill: white; -fx-prompt-text-fill: #888888;" />
+               <Button fx:id="sendButton" style="-fx-background-color: #1f8ef1; -fx-text-fill: white;" text="Send" />
             </HBox>
 
          </VBox>
