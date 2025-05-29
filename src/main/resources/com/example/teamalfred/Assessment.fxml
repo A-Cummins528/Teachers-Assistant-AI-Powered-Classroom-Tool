@@ -10,18 +10,18 @@
          <font><Font name="Arial Bold" size="36.0" /></font>
       </Label>
 
-      <SplitPane dividerPositions="0.5" layoutX="40.0" layoutY="100.0" orientation="HORIZONTAL" prefHeight="500.0" prefWidth="1080.0">
+      <SplitPane dividerPositions="0.3293135435992579" layoutX="40.0" layoutY="100.0" orientation="HORIZONTAL" prefHeight="500.0" prefWidth="1080.0">
          <items>
             <!-- Left pane: List of subjects -->
-            <VBox prefWidth="120.0" spacing="10" style="-fx-background-color: #2f3136;">
+            <VBox prefHeight="498.0" prefWidth="414.0" spacing="10" style="-fx-background-color: #2f3136;">
                <Label text="Subjects" textFill="WHITE" />
                <ListView fx:id="subjectListView" prefHeight="471.0" prefWidth="400.0" />
             </VBox>
 
             <!-- Right pane: List of students -->
-            <VBox prefWidth="830.0" spacing="10">
+            <VBox prefHeight="498.0" prefWidth="558.0" spacing="10">
                <Label fx:id="studentsLabel" text="Select a subject to view students." textFill="WHITE" />
-               <TableView fx:id="studentsTable" prefHeight="264.0" prefWidth="533.0">
+               <TableView fx:id="studentsTable" prefHeight="257.0" prefWidth="601.0">
                   <columns>
                      <TableColumn fx:id="studentNameColumn" prefWidth="300" text="Student Name" />
                      <TableColumn fx:id="emailColumn" prefWidth="300" text="Email" />
@@ -43,13 +43,13 @@
          </items>
       </SplitPane>
 
-      <Button fx:id="addAssessmentToSubjectBtn"
-              text="Add Assessment to Subject"
-              layoutX="700.0"
-              layoutY="70.0"
-              onAction="#handleAddAssessmentToSubject"
-              prefWidth="250.0"/>
-
+      <Button fx:id="addAssessmentToSubjectBtn" layoutX="380.0" layoutY="70.0" onAction="#handleAddAssessmentToSubject" prefWidth="250.0" text="Add Assessment to Subject" />
+      <Button fx:id="deleteAssessmentBySubjectBtn" layoutX="645.0" layoutY="70.0" onAction="#handleDeleteAssessmentsBySubject" prefWidth="250.0" text="Delete Assessments by Subject" />
+      <Button fx:id="deleteSelectedAssessmentBtn"
+              layoutX="970.0" layoutY="630.0"
+              text="Delete Selected"
+              onAction="#handleDeleteSelectedAssessment"
+              prefWidth="150.0" />
 
 <!--      <Button fx:id="addAssessmentBtn"-->
 <!--              text="Add New Assessment"-->
