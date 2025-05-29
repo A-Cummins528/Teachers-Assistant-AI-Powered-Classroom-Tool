@@ -31,10 +31,13 @@ public class DashboardController {
     @FXML private ToggleButton aiQuizToggle;
     @FXML private ToggleButton settingsToggle;
     @FXML private ToggleButton aiLessonPlansToggle;
-
     @FXML private AnchorPane dashboardRoot;
 
-    private double currentFontSize = 14.0;
+    private double fontSize = 14.0;
+    private final double MIN_FONT_SIZE = 12.0;
+    private final double MAX_FONT_SIZE = 18.0;
+
+
 
     // Style constants
     private static final String ACTIVE_BUTTON_STYLE =
@@ -150,32 +153,28 @@ public class DashboardController {
         switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
     }
 
-    /**
-     * Increases the dashboard's font size.
-     */
     @FXML
     private void increaseFontSize() {
-        currentFontSize += 2;
-        applyFontSize();
-    }
-
-    /**
-     * Decreases the dashboard's font size, with a minimum limit.
-     */
-    @FXML
-    private void decreaseFontSize() {
-        currentFontSize = Math.max(10, currentFontSize - 2);
-        applyFontSize();
-    }
-
-    /**
-     * Applies the current font size setting to the dashboard root.
-     */
-    private void applyFontSize() {
-        if (dashboardRoot != null) {
-            dashboardRoot.setStyle("-fx-font-size: " + currentFontSize + "px;");
+        if (fontSize < MAX_FONT_SIZE) {
+            fontSize += 2;
+            applyFontSize();
         }
     }
+
+    @FXML
+    private void decreaseFontSize() {
+        if (fontSize > MIN_FONT_SIZE) {
+            fontSize -= 2;
+            applyFontSize();
+        }
+    }
+
+    private void applyFontSize() {
+        if (contentPane != null) {
+            contentPane.setStyle("-fx-font-size: " + fontSize + "px;");
+        }
+    }
+
 
 
 }

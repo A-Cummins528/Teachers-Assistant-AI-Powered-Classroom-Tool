@@ -61,15 +61,4 @@ public class AiQuizController {
         OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
         fetcher.fetchAsynchronousOllamaResponse(model, fullPrompt, new MyResponseListener());
     }
-
-    /**
-     * Called when the "Back to Dashboard" button is clicked.
-     * Navigates the user back to the main dashboard scene.
-     * @param event The action event triggered by the button click.
-     */
-    @FXML
-    public void onBackToDashboardClicked(ActionEvent event) {
-        SwitchSceneController switcher = new SwitchSceneController();
-        switcher.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
-    }
 }

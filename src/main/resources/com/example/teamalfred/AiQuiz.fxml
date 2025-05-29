@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
-            xmlns="http://javafx.com/javafx/17.0.12"
-            fx:controller="com.example.teamalfred.controllers.AiFeatures.AiQuizController"
-            prefHeight="698.0" prefWidth="1167.0"
-            style="-fx-background-color: #25282c;">
+<AnchorPane prefHeight="698.0" prefWidth="1167.0" style="-fx-background-color: #25282c;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.teamalfred.controllers.AiFeatures.AiQuizController">
     <children>
         <Label layoutX="40.0" layoutY="30.0" text="Generate a Quiz using AI!" textFill="WHITE">
             <font>
@@ -24,13 +23,8 @@
 
         <TextField fx:id="topicTextField" layoutX="160.0" layoutY="95.0" prefWidth="400.0" />
 
-        <Button fx:id="generateQuizButton" layoutX="580.0" layoutY="95.0" text="Generate Quiz" onAction="#onGenerateQuizClicked"
-                style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+        <Button fx:id="generateQuizButton" layoutX="580.0" layoutY="95.0" onAction="#onGenerateQuizClicked" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Generate Quiz" />
 
-        <Button fx:id="backToDashboardButton" layoutX="720.0" layoutY="95.0" text="Back to Dashboard" onAction="#onBackToDashboardClicked"
-                style="-fx-background-color: #f44336; -fx-text-fill: white;" />
-
-        <TextArea fx:id="quizOutputArea" layoutX="40.0" layoutY="160.0" prefWidth="1087.0" prefHeight="500.0" wrapText="true"
-                  style="-fx-control-inner-background: #1c2832; -fx-text-fill: white; -fx-font-size: 14px;" editable="false"/>
+        <TextArea fx:id="quizOutputArea" editable="false" layoutX="40.0" layoutY="160.0" prefHeight="500.0" prefWidth="1087.0" style="-fx-control-inner-background: #1c2832; -fx-text-fill: white; -fx-font-size: 14px;" wrapText="true" />
     </children>
 </AnchorPane>

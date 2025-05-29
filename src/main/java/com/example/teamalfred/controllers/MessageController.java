@@ -14,7 +14,7 @@ import java.util.Optional;
 
 /**
  * This class handles the messaging UI logic for displaying conversations and sending messages.
- * It's connected to the FXML UI and handles user interaction like loading messages,
+ * It's connected to the FXML UI and handles user i nteraction like loading messages,
  * sending messages, and switching between conversations.
  */
 public class MessageController {
