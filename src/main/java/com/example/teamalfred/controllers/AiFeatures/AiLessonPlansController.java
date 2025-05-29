@@ -36,7 +36,7 @@ public class AiLessonPlansController {
             lessonPlanOutput.setText("Please enter a topic.");
             return;
         }
-        
+
         Platform.runLater(() -> lessonPlanOutput.setText("Generating lesson plan, please wait..."));
 
         Platform.runLater(() -> {
