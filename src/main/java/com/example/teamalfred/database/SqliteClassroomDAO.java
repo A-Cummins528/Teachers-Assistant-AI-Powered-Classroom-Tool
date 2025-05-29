@@ -4,8 +4,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * SQLite implementation of the {@link ClassroomDAO} interface.
+ * Provides methods for interacting with the 'classes' table in the database.
+ */
 public class SqliteClassroomDAO implements ClassroomDAO {
 
+    /**
+     * Inserts a new classroom into the database.
+     *
+     * @param classroom The {@link Classroom} object containing the name of the class to be created.
+     * @throws SQLException If a database access error occurs or the SQL statement is invalid.
+     */
     @Override
     public void createClassroom(Classroom classroom) throws SQLException {
         String sql = "INSERT INTO classes (class_name) VALUES (?)";
@@ -16,6 +26,12 @@ public class SqliteClassroomDAO implements ClassroomDAO {
         }
     }
 
+    /**
+     * Retrieves all classrooms from the database.
+     *
+     * @return A list of {@link Classroom} objects representing all classrooms stored in the database.
+     * @throws SQLException If a database access error occurs.
+     */
     @Override
     public List<Classroom> getAllClassrooms() throws SQLException {
         List<Classroom> classrooms = new ArrayList<>();
@@ -34,7 +50,13 @@ public class SqliteClassroomDAO implements ClassroomDAO {
         return classrooms;
     }
 
-
+    /**
+     * Retrieves a specific classroom from the database by its ID.
+     *
+     * @param classId The ID of the classroom to retrieve.
+     * @return A {@link Classroom} object if found, otherwise {@code null}.
+     * @throws SQLException If a database access error occurs or the query is invalid.
+     */
     @Override
     public Classroom getClassroomById(int classId) throws SQLException {
         String sql = "SELECT * FROM classes WHERE class_id = ?";

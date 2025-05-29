@@ -1,6 +1,8 @@
 package com.example.teamalfred.database;
 
+
 public class Assessment {
+
     private int id;
     private String title;
     private String subject;
@@ -9,6 +11,14 @@ public class Assessment {
     private String type;
     private int studentId;
 
+    /**
+     *
+     * @param title
+     * @param subject
+     * @param dueDate
+     * @param status
+     * @param type
+     */
     public Assessment(String title, String subject, String dueDate, String status, String type) {
         this.title = title;
         this.subject = subject;
@@ -16,6 +26,7 @@ public class Assessment {
         this.status = status;
         this.type = type;
     }
+
     public int getStudentId() {
         return studentId;
     }

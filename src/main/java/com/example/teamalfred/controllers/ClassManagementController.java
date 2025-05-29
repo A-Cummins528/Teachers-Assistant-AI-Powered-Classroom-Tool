@@ -18,6 +18,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for managing classes, students, and attendance.
+ * Handles UI logic for creating classes, managing students, recording attendance,
+ * and displaying student attendance summaries.
+ */
 public class ClassManagementController implements Initializable {
 
     private static final String FILTER_ALL = "All";
@@ -53,7 +58,11 @@ public class ClassManagementController implements Initializable {
     @FXML private Button createClassButton;
     @FXML private ComboBox<String> subjectSelector;
 
-
+    /**
+     * Displays an alert with the specified message.
+     *
+     * @param message The message to display.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
@@ -61,12 +70,21 @@ public class ClassManagementController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Sets the currently logged-in user and updates the header label.
+     *
+     * @param user The current user.
+     */
     public void setCurrentUser(User user) {
         this.currentUser = user;
         if (headerLabel != null) {
             headerLabel.setText("Welcome, " + user.getFirstName());
         }
     }
+
+    /**
+     * Handles creation of a new class using the input field value.
+     */
     @FXML
     private void handleCreateClass() {
         String className = newClassNameField.getText().trim();
@@ -87,18 +105,26 @@ public class ClassManagementController implements Initializable {
         }
     }
 
+    /**
+     * Refreshes the class selection dropdown with up-to-date class data.
+     *
+     * @throws SQLException If database access fails.
+     */
     private void refreshClassSelector() throws SQLException {
         List<Classroom> updated = new SqliteClassroomDAO().getAllClassrooms();
         classSelector.setItems(FXCollections.observableArrayList(updated));
     }
 
+    /**
+     * Handles adding a new student to the selected class.
+     */
     @FXML
     private void handleAddStudent() {
         String first = firstNameField.getText().trim();
         String last = lastNameField.getText().trim();
         String email = emailField.getText().trim();
         Classroom selectedClass = classSelector.getValue();
-        String subject = subjectSelector.getValue(); // ✅ Get subject
+        String subject = subjectSelector.getValue();
 
         if (first.isEmpty() || last.isEmpty() || email.isEmpty() || selectedClass == null || subject == null) {
             showAlert("Please fill all fields and select a class and subject.");
@@ -106,10 +132,10 @@ public class ClassManagementController implements Initializable {
         }
 
         try {
-            Student student = new Student(first, last, email, selectedClass.getId(),subject);
+            Student student = new Student(first, last, email, selectedClass.getId(), subject);
             StudentDAO dao = new SqliteStudentDAO();
             dao.createStudent(student);
-            loadStudentsForSelectedClass(); // Refresh list
+            loadStudentsForSelectedClass();
             firstNameField.clear();
             lastNameField.clear();
             emailField.clear();
@@ -120,6 +146,9 @@ public class ClassManagementController implements Initializable {
         }
     }
 
+    /**
+     * Handles removal of the selected student from the list and database.
+     */
     @FXML
     private void handleRemoveStudent() {
         Student selected = studentListView.getSelectionModel().getSelectedItem();
@@ -130,14 +159,16 @@ public class ClassManagementController implements Initializable {
 
         try {
             new SqliteStudentDAO().deleteStudent(selected.getId());
-            loadStudentsForSelectedClass();  // refresh UI
+            loadStudentsForSelectedClass();
         } catch (SQLException e) {
             e.printStackTrace();
             showAlert("Failed to remove student.");
         }
     }
 
-
+    /**
+     * Initializes the controller and UI components.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DatabaseConnection.setDatabaseUrl("jdbc:sqlite:database.db");
@@ -146,6 +177,7 @@ public class ClassManagementController implements Initializable {
         setupFilterSelector();
         attendanceTable.setEditable(true);
         attendanceTable.setItems(filteredData);
+
         try {
             ClassroomDAO classroomDAO = new SqliteClassroomDAO();
             List<Classroom> classrooms = classroomDAO.getAllClassrooms();
@@ -153,7 +185,7 @@ public class ClassManagementController implements Initializable {
 
             if (!classrooms.isEmpty()) {
                 classSelector.getSelectionModel().selectFirst();
-                loadStudentsForSelectedClass(); // Load students for that class
+                loadStudentsForSelectedClass();
             }
             classSelector.setOnAction(e -> loadStudentsForSelectedClass());
 
@@ -163,6 +195,9 @@ public class ClassManagementController implements Initializable {
         }
     }
 
+    /**
+     * Configures the attendance table columns and interactions.
+     */
     private void setupAttendanceTableColumns() {
         studentNameColumn.setCellValueFactory(data -> data.getValue().studentNameProperty());
         presentColumn.setCellValueFactory(data -> data.getValue().presentProperty());
@@ -171,28 +206,25 @@ public class ClassManagementController implements Initializable {
         excusedColumn.setCellValueFactory(data -> data.getValue().excusedProperty());
         notesColumn.setCellValueFactory(data -> data.getValue().notesProperty());
 
-        // Clickable name cell
-        studentNameColumn.setCellFactory(column -> {
-            return new TableCell<StudentAttendance, String>() {
-                @Override
-                protected void updateItem(String name, boolean empty) {
-                    super.updateItem(name, empty);
-                    if (empty || name == null) {
-                        setText(null);
-                        setOnMouseClicked(null);
-                        setStyle("");
-                    } else {
-                        setText(name);
-                        setStyle("-fx-text-fill: blue; -fx-underline: true;"); // Optional: make it look clickable
-                        setOnMouseClicked(event -> {
-                            if (event.getClickCount() == 1) {
-                                StudentAttendance student = getTableView().getItems().get(getIndex());
-                                showStudentMonthlyStats(student.getStudentId(), student.studentNameProperty().get());
-                            }
-                        });
-                    }
+        studentNameColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String name, boolean empty) {
+                super.updateItem(name, empty);
+                if (empty || name == null) {
+                    setText(null);
+                    setOnMouseClicked(null);
+                    setStyle("");
+                } else {
+                    setText(name);
+                    setStyle("-fx-text-fill: blue; -fx-underline: true;");
+                    setOnMouseClicked(event -> {
+                        if (event.getClickCount() == 1) {
+                            StudentAttendance student = getTableView().getItems().get(getIndex());
+                            showStudentMonthlyStats(student.getStudentId(), student.studentNameProperty().get());
+                        }
+                    });
                 }
-            };
+            }
         });
 
         presentColumn.setCellFactory(tc -> editableCheckbox());
@@ -201,13 +233,20 @@ public class ClassManagementController implements Initializable {
         excusedColumn.setCellFactory(tc -> editableCheckbox());
     }
 
-
+    /**
+     * Provides a reusable editable checkbox cell.
+     *
+     * @return A CheckBoxTableCell.
+     */
     private CheckBoxTableCell<StudentAttendance, Boolean> editableCheckbox() {
         CheckBoxTableCell<StudentAttendance, Boolean> cell = new CheckBoxTableCell<>();
         cell.setEditable(true);
         return cell;
     }
 
+    /**
+     * Initializes the class selector ComboBox.
+     */
     private void setupClassSelector() {
         try {
             List<Classroom> classrooms = classroomDAO.getAllClassrooms();
@@ -222,12 +261,18 @@ public class ClassManagementController implements Initializable {
         }
     }
 
+    /**
+     * Sets up the filter options for attendance data.
+     */
     private void setupFilterSelector() {
         filterSelector.setItems(FXCollections.observableArrayList(FILTER_ALL, FILTER_ABSENT_ONLY));
         filterSelector.getSelectionModel().selectFirst();
         filterSelector.setOnAction(e -> applyFilter());
     }
 
+    /**
+     * Applies filter to show all or only absent students.
+     */
     private void applyFilter() {
         String selected = filterSelector.getSelectionModel().getSelectedItem();
         if (FILTER_ABSENT_ONLY.equals(selected)) {
@@ -237,6 +282,9 @@ public class ClassManagementController implements Initializable {
         }
     }
 
+    /**
+     * Loads students and attendance data for the selected class.
+     */
     private void loadStudentsForSelectedClass() {
         Classroom selectedClass = classSelector.getValue();
         if (selectedClass == null) {
@@ -245,21 +293,15 @@ public class ClassManagementController implements Initializable {
         }
 
         try {
-            StudentDAO studentDAO = new SqliteStudentDAO();
-            AttendanceDAO attendanceDAO = new SqliteAttendanceDAO();
-
             String date = attendanceDatePicker.getValue() != null
                     ? attendanceDatePicker.getValue().toString()
                     : "";
 
-            // Retrieve attendance records for that class on the selected date
             Map<Integer, AttendanceRecord> attendanceMap =
                     attendanceDAO.getAttendanceMapForClassAndDate(selectedClass.getId(), date);
 
-            // Retrieve students for the selected class
             List<Student> students = studentDAO.getStudentsByClassId(selectedClass.getId());
 
-            // Populate attendance table
             attendanceData.clear();
             for (Student s : students) {
                 AttendanceRecord record = attendanceMap.getOrDefault(
@@ -277,7 +319,6 @@ public class ClassManagementController implements Initializable {
                 ));
             }
 
-            // ✅ Populate student list view for removal
             studentListView.setItems(FXCollections.observableArrayList(students));
 
         } catch (SQLException e) {
@@ -286,7 +327,9 @@ public class ClassManagementController implements Initializable {
         }
     }
 
-
+    /**
+     * Saves the attendance records entered in the table to the database.
+     */
     @FXML
     private void handleSaveAttendance() {
         Classroom selectedClass = classSelector.getValue();
@@ -315,6 +358,12 @@ public class ClassManagementController implements Initializable {
         }
     }
 
+    /**
+     * Shows a monthly attendance summary for a student.
+     *
+     * @param studentId   The ID of the student.
+     * @param studentName The name of the student.
+     */
     private void showStudentMonthlyStats(int studentId, String studentName) {
         try {
             YearMonth currentMonth = YearMonth.now();
@@ -331,6 +380,9 @@ public class ClassManagementController implements Initializable {
         }
     }
 
+    /**
+     * Opens a dialog to create a new class.
+     */
     @FXML
     private void showCreateClassDialog() {
         TextInputDialog dialog = new TextInputDialog();
@@ -354,7 +406,9 @@ public class ClassManagementController implements Initializable {
         });
     }
 
-
+    /**
+     * Represents a student's attendance record for UI binding.
+     */
     public static class StudentAttendance {
         private final int studentId;
         private final SimpleStringProperty studentName = new SimpleStringProperty();

@@ -14,10 +14,20 @@ public class DatabaseSchemaManager {
     private static final String TABLE_NAME = "users";
 
     /**
-     * Creates the 'users' table if it does not already exist.
-     * Does NOT close the connection obtained from DatabaseConnection.
+     * Initializes the database schema by creating necessary tables if they do not already exist.
+     * <p>
+     * The following tables are created:
+     * <ul>
+     *     <li><b>users</b>: Stores user information (teachers and students) with constraints to ensure data integrity.</li>
+     *     <li><b>classes</b>: Stores class information including class IDs and names.</li>
+     *     <li><b>students</b>: Stores student details, links to a class, and includes subject information.</li>
+     *     <li><b>attendance</b>: Tracks attendance per student per class per date, with status flags (present, absent, etc.).</li>
+     *     <li><b>assessments</b>: Stores student assessments, including title, subject, due date, status, and type.</li>
+     * </ul>
+     * <p>
+     * Tables are only created if they do not already exist in the database.
      *
-     * @throws SQLException if the database connection cannot be established or the query fails.
+     * @throws SQLException if a database access error occurs or the SQL execution fails
      */
 
     public void initializeSchema() throws SQLException {
