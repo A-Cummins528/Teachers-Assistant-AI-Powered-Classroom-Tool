@@ -20,7 +20,7 @@ public class SettingsController {
 
     private final UserDAO userDAO = new SqliteUserDAO();
     private final SwitchSceneController switchScene = new SwitchSceneController();
-    private User currentUser; // 🔄 still used, but now sourced from session
+    private User currentUser;
 
     @FXML private TextField firstNameSettings;
     @FXML private TextField lastNameSettings;
@@ -119,7 +119,7 @@ public class SettingsController {
                 userToUpdate.setClassName(currentUser.getClassName());
 
                 userDAO.updateUser(userToUpdate);
-                UserSession.getInstance().setLoggedInUser(userToUpdate); // refresh session user
+                UserSession.getInstance().setLoggedInUser(userToUpdate);
                 passwordSettings.clear();
                 passwordSettingsConfirm.clear();
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Profile updated successfully!");

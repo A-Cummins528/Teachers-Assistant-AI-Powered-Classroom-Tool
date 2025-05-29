@@ -36,11 +36,9 @@ public class AiLessonPlansController {
             lessonPlanOutput.setText("Please enter a topic.");
             return;
         }
-
-        // Show loading text in the TextArea
+        
         Platform.runLater(() -> lessonPlanOutput.setText("Generating lesson plan, please wait..."));
 
-        // Optionally show a popup
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Generating...");

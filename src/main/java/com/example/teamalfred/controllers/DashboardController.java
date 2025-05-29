@@ -149,7 +149,7 @@ public class DashboardController {
     @FXML
     private void handleLogout(ActionEvent event) {
         MessageController.resetSession();
-        UserSession.clearSession(); // clear current user session
+        UserSession.clearSession();
         switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
     }
 
