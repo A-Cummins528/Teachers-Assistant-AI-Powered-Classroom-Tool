@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1728cf51-1cd3-499f-bc49-5f819aa5b33e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/javadocs.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/javadocs.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiLessonPlansController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiLessonPlansController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/SettingsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +77,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
@@ -78,7 +86,7 @@
       <recent name="C:\Users\adama\OneDrive\Documents\GitHub\TeamAlfred\src\main\resources\com\example\teamalfred" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.teamAlfred [test]">
+  <component name="RunManager" selected="Application.HelloApplication">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.teamalfred.HelloApplication" />
       <module name="teamAlfred" />
@@ -124,8 +132,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Maven.teamAlfred [test]" />
         <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Maven.teamAlfred [test]" />
       </list>
     </recent_temporary>
   </component>

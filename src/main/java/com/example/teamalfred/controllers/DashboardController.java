@@ -153,6 +153,11 @@ public class DashboardController {
         switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
     }
 
+    /**
+     * Increases the font size of the content pane by 2 units,
+     * up to the defined maximum font size.
+     * This improves accessibility for users who require larger texts.
+     */
     @FXML
     private void increaseFontSize() {
         if (fontSize < MAX_FONT_SIZE) {
@@ -161,6 +166,11 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Decreases the font size of the content pane by 2 units,
+     * down to the defined minimum font size.
+     * Useful for users who prefer a more compact UI.
+     */
     @FXML
     private void decreaseFontSize() {
         if (fontSize > MIN_FONT_SIZE) {
@@ -169,12 +179,13 @@ public class DashboardController {
         }
     }
 
+    /**
+     * Applies the current font size to the content pane's style.
+     * This updates the display dynamically based on user preference.
+     */
     private void applyFontSize() {
         if (contentPane != null) {
             contentPane.setStyle("-fx-font-size: " + fontSize + "px;");
         }
     }
-
-
-
 }

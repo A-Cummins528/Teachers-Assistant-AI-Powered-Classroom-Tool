@@ -16,6 +16,10 @@ import javafx.scene.layout.BorderPane;
 import java.sql.SQLException;
 import java.util.Optional;
 
+/**
+ * Controller for managing user settings including updating profile details,
+ * changing passwords, deleting accounts, and font resizing.
+ */
 public class SettingsController {
 
     private final UserDAO userDAO = new SqliteUserDAO();
@@ -39,13 +43,19 @@ public class SettingsController {
     private static final int MIN_REQUIRED_VALID_FIELDS = 4;
     private double currentFontSize = 14.0;
 
+    /**
+     * Initializes the controller by setting the current user and populating the fields.
+     */
     @FXML
     public void initialize() {
         setCurrentUser();
     }
 
+    /**
+     * Sets the current user from the session and populates the form fields.
+     */
     private void setCurrentUser() {
-        currentUser = UserSession.getInstance().getLoggedInUser();
+        currentUser = UserSession.getLoggedInUser();
         if (currentUser == null) {
             System.err.println("SettingsController: currentUser is null!");
             return;
@@ -53,6 +63,11 @@ public class SettingsController {
         populateFields(currentUser);
     }
 
+    /**
+     * Populates text fields with the current user's data.
+     *
+     * @param user the current logged-in user
+     */
     private void populateFields(User user) {
         firstNameSettings.setText(user.getFirstName());
         lastNameSettings.setText(user.getLastName());
@@ -60,6 +75,12 @@ public class SettingsController {
         emailSettings.setText(user.getEmail());
     }
 
+    /**
+     * Validates and updates user details. If validations pass,
+     * updates the user in the database and session.
+     *
+     * @param event the button event triggering the update
+     */
     @FXML
     public void updateUserDetails(ActionEvent event) {
         clearAllValidationLabels();
@@ -92,7 +113,7 @@ public class SettingsController {
 
         if (proceedWithUpdate && validFieldsCounter >= MIN_REQUIRED_VALID_FIELDS) {
             try {
-                User currentUser = UserSession.getInstance().getLoggedInUser();
+                User currentUser = UserSession.getLoggedInUser();
                 User userToUpdate = new User();
                 userToUpdate.setId(currentUser.getId());
                 userToUpdate.setFirstName(updatedFirstname);
@@ -137,6 +158,12 @@ public class SettingsController {
         }
     }
 
+    /**
+     * Prompts the user to confirm deletion and removes the account if confirmed.
+     * Redirects to the login page upon successful deletion.
+     *
+     * @param event the delete button event
+     */
     @FXML
     private void handleDeleteAccount(ActionEvent event) {
         setCurrentUser();
@@ -148,7 +175,7 @@ public class SettingsController {
         Optional<ButtonType> result = confirmAlert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                User currentUser = UserSession.getInstance().getLoggedInUser();
+                User currentUser = UserSession.getLoggedInUser();
                 userDAO.deleteUser(currentUser.getId());
                 UserSession.clearSession();
                 switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
@@ -159,6 +186,9 @@ public class SettingsController {
         }
     }
 
+    /**
+     * Clears all validation labels and hides them.
+     */
     private void clearAllValidationLabels() {
         setInvalidLabel(invalidFirstname, false, "");
         setInvalidLabel(invalidLastname, false, "");
@@ -168,6 +198,12 @@ public class SettingsController {
         setInvalidLabel(invalidPasswordConfirm, false, "");
     }
 
+    /**
+     * Validates the first name input field.
+     * Accepts letters, spaces, apostrophes, and hyphens, minimum 2 characters.
+     *
+     * @return the valid first name or "Invalid" if it doesn't pass.
+     */
     private String validateFirstname() {
         String fname = firstNameSettings.getText().trim();
         if (fname.matches("[a-zA-Z\\s'-]{2,}")) return fname;
@@ -175,6 +211,12 @@ public class SettingsController {
         return "Invalid";
     }
 
+    /**
+     * Validates the last name input field.
+     * Accepts letters, spaces, apostrophes, and hyphens, minimum 2 characters.
+     *
+     * @return the valid last name or "Invalid" if it doesn't pass.
+     */
     private String validateLastname() {
         String lname = lastNameSettings.getText().trim();
         if (lname.matches("[a-zA-Z\\s'-]{2,}")) return lname;
@@ -182,13 +224,25 @@ public class SettingsController {
         return "Invalid";
     }
 
+    /**
+     * Validates the mobile number format for Australian numbers.
+     * Must begin with 04 and contain exactly 10 digits.
+     *
+     * @return the valid mobile number or "Invalid".
+     */
     private String validateMobile() {
-        String mobile = mobileSettings.getText().replaceAll("\s+", "");
+        String mobile = mobileSettings.getText().replaceAll(" +", "");
         if (mobile.matches("^04\\d{8}$")) return mobile;
         setInvalidLabel(invalidMobile, true, "Aus mobile: 04XXXXXXXX.");
         return "Invalid";
     }
 
+    /**
+     * Validates the email address against a regex pattern.
+     * Ensures a proper format for email input.
+     *
+     * @return the valid email address or "Invalid".
+     */
     private String validateEmail() {
         String email = emailSettings.getText().trim().toLowerCase();
         if (email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) return email;
@@ -196,6 +250,12 @@ public class SettingsController {
         return "Invalid";
     }
 
+    /**
+     * Validates the new password and confirmation fields.
+     * Password must be at least 7 characters and match the confirmation.
+     *
+     * @return the password if valid, "Invalid" if not, or null if both fields are empty.
+     */
     private String validatePassword() {
         String pass = passwordSettings.getText();
         String confirmPass = passwordSettingsConfirm.getText();
@@ -240,7 +300,14 @@ public class SettingsController {
     }
 
 
-
+    /**
+     * Updates a label's visibility and message for validation feedback.
+     * Controls its visibility, text content, and layout management.
+     *
+     * @param label the JavaFX Label to modify
+     * @param isInvalid true if the label should be shown
+     * @param message the message to display
+     */
     private void setInvalidLabel(Label label, boolean isInvalid, String message) {
         if (label != null) {
             label.setText(message);
@@ -249,6 +316,13 @@ public class SettingsController {
         }
     }
 
+    /**
+     * Displays an alert dialog box with the provided message, title, and type.
+     *
+     * @param alertType the type of alert (e.g., INFORMATION, ERROR)
+     * @param title the title of the alert dialog
+     * @param message the content message of the alert
+     */
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -257,23 +331,38 @@ public class SettingsController {
         alert.showAndWait();
     }
 
+    /**
+     * Navigates away from the Settings page and back to the Dashboard.
+     *
+     * @param event the ActionEvent triggered by clicking cancel
+     */
     @FXML
     private void handleCancel(ActionEvent event) {
         switchScene.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
     }
 
+    /**
+     * Increases the font size used within the settings view for accessibility.
+     */
     @FXML
     private void increaseFontSize() {
         currentFontSize += 2;
         applyFontSize();
     }
 
+    /**
+     * Decreases the font size within the settings view, with a lower bound of 10px.
+     */
     @FXML
     private void decreaseFontSize() {
         currentFontSize = Math.max(10, currentFontSize - 2);
         applyFontSize();
     }
 
+    /**
+     * Applies the current font size setting to the root pane’s inline CSS.
+     * Updates UI components to reflect font size changes.
+     */
     private void applyFontSize() {
         if (rootPane != null) {
             rootPane.setStyle("-fx-font-size: " + currentFontSize + "px;");
