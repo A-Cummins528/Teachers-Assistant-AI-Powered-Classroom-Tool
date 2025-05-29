@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -49,20 +48,16 @@
                   <PasswordField fx:id="passwordSignupConfirm" layoutX="108.0" layoutY="585.0" prefHeight="35.0" prefWidth="335.0" promptText="Confirm Password" style="-fx-background-radius: 30; -fx-background-color: #f0f0f0;" />
 
 
-                  <Button fx:id="signupButton" layoutX="181.0" layoutY="635.0" mnemonicParsing="false" onAction="#userSignup" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1c2832; -fx-background-radius: 30;" text="Sign Up" textFill="WHITE">
+                  <Button fx:id="signupButton" layoutX="184.0" layoutY="627.0" mnemonicParsing="false" onAction="#userSignup" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #1c2832; -fx-background-radius: 30;" text="Sign Up" textFill="WHITE">
                      <font>
                         <Font name="Al Nile Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="signInSignupButton" layoutX="178.0" layoutY="670.0" mnemonicParsing="false" onAction="#handleLoginRedirect" style="-fx-background-color: #FFFFFF;" text="Already have an account? Sign In" textFill="#9a8d8d">
+                  <Button fx:id="signInSignupButton" layoutX="179.0" layoutY="662.0" mnemonicParsing="false" onAction="#handleLoginRedirect" style="-fx-background-color: #FFFFFF;" text="Already have an account? Sign In" textFill="#9a8d8d">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Button>
-                  <HBox layoutX="479.0" layoutY="729.0" spacing="10.0">
-                     <Button onAction="#increaseFontSize" text="A+" />
-                     <Button onAction="#decreaseFontSize" text="A-" />
-                  </HBox>
 
                </children>
             </AnchorPane>

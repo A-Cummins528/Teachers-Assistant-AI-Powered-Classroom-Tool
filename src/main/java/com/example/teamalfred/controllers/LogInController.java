@@ -149,21 +149,4 @@ public class LogInController {
         // Switch to the sign-up scene
         switchScene.switchScene(event,"/com/example/teamalfred/SignUp.fxml");
     }
-    @FXML
-    private void increaseFontSize() {
-        currentFontSize += 2;
-        applyFontSize();
-    }
-
-    @FXML
-    private void decreaseFontSize() {
-        currentFontSize = Math.max(10, currentFontSize - 2);
-        applyFontSize();
-    }
-
-    private void applyFontSize() {
-        if (loginRoot != null) {
-            loginRoot.setStyle("-fx-font-size: " + currentFontSize + "px;");
-        }
-    }
 }

@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import com.example.teamalfred.controllers.AiFeatures.OllamaResponse;
+
 
 /**
  * Controller for the AI Tutor scene.
@@ -19,17 +21,17 @@ public class AiTutorController {//implements Initializable {
     /** Text area to display the AI's response or assistance. */
     @FXML private TextArea promptOutputArea;
 
-    /**
-     * Initializes the controller after its root element has been completely processed.
-     * Sends an initial system prompt to the LLM to set its behavior and persona
-     * as a helpful AI assistant for high school students and teachers.
-     * The response from this initial prompt is displayed.
-     *
-     * @param location The location used to resolve relative paths for the root object, or
-     * {@code null} if the location is not known.
-     * @param resources The resources used to localize the root object, or {@code null} if
-     * the root object was not localized.
-     */
+//    /**
+//     * Initializes the controller after its root element has been completely processed.
+//     * Sends an initial system prompt to the LLM to set its behavior and persona
+//     * as a helpful AI assistant for high school students and teachers.
+//     * The response from this initial prompt is displayed.
+//     *
+//     * @param location The location used to resolve relative paths for the root object, or
+//     * {@code null} if the location is not known.
+//     * @param resources The resources used to localize the root object, or {@code null} if
+//     * the root object was not localized.
+//     */
 //    @Override
 //    public void initialize(URL location, ResourceBundle resources) {
 //        String initialPrompt = "Context: You are an AI assistant designed to help high school students and teachers. " +
@@ -92,17 +94,5 @@ public class AiTutorController {//implements Initializable {
         OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
         fetcher.fetchAsynchronousOllamaResponse(model, fullPrompt, response ->
                 promptOutputArea.setText(response.getResponse()));
-    }
-
-    /**
-     * Handles the action when the "Back to Dashboard" button is clicked.
-     * Navigates the user back to the main dashboard scene.
-     *
-     * @param event The action event triggered by the button click.
-     */
-    @FXML
-    public void onBackToDashboardClicked(ActionEvent event) {
-        SwitchSceneController switcher = new SwitchSceneController();
-        switcher.switchScene(event, "/com/example/teamalfred/Dashboard.fxml");
     }
 }

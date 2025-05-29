@@ -286,33 +286,4 @@ public class SignUpController {
     private void handleLoginRedirect(ActionEvent event) {
         switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
     }
-
-    /**
-     * Increases the font size of the sign-up form.
-     * Called by a UI control.
-     */
-    @FXML
-    private void increaseFontSize() {
-        currentFontSize += 2;
-        applyFontSize();
-    }
-
-    /**
-     * Decreases the font size of the sign-up form, with a minimum limit.
-     * Called by a UI control.
-     */
-    @FXML
-    private void decreaseFontSize() {
-        currentFontSize = Math.max(10, currentFontSize - 2); // Ensure font size doesn't go below 10
-        applyFontSize();
-    }
-
-    /**
-     * Applies the current font size to the root pane of the sign-up form.
-     */
-    private void applyFontSize() {
-        if (signUpRoot != null) {
-            signUpRoot.setStyle("-fx-font-size: " + currentFontSize + "px;");
-        }
-    }
 }
