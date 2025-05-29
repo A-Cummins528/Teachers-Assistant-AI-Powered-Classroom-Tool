@@ -29,8 +29,6 @@ public class DashboardController {
     // Navigation toggle buttons
     @FXML private ToggleButton classManagementToggle;
     @FXML private ToggleButton assessmentToggle;
-    @FXML private ToggleButton analyticsToggle;
-    @FXML private ToggleButton resourcesToggle;
     @FXML private ToggleButton aiTutorToggle;
     @FXML private ToggleButton messageToggle;
     @FXML private ToggleButton aiQuizToggle;
@@ -74,8 +72,6 @@ public class DashboardController {
         // Group navigation buttons for mutual exclusivity
         classManagementToggle.setToggleGroup(navGroup);
         assessmentToggle.setToggleGroup(navGroup);
-        analyticsToggle.setToggleGroup(navGroup);
-        resourcesToggle.setToggleGroup(navGroup);
         aiTutorToggle.setToggleGroup(navGroup);
         aiQuizToggle.setToggleGroup(navGroup);
         settingsToggle.setToggleGroup(navGroup);
@@ -94,7 +90,7 @@ public class DashboardController {
     @FXML
     private void handleGoToSettings(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/teamalfred/UpdateProfilePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/teamalfred/SettingsPage.fxml"));
             Parent root = loader.load();
 
             SettingsController controller = loader.getController();
@@ -123,10 +119,6 @@ public class DashboardController {
             fxmlToLoad = "/com/example/teamalfred/ClassManagement.fxml";
         } else if (clickedButton == assessmentToggle) {
             fxmlToLoad = "/com/example/teamalfred/Assessment.fxml";
-        } else if (clickedButton == analyticsToggle) {
-            fxmlToLoad = "/com/example/teamalfred/Analytics.fxml";
-        } else if (clickedButton == resourcesToggle) {
-            fxmlToLoad = "/com/example/teamalfred/Resources.fxml";
         } else if (clickedButton == aiTutorToggle) {
             fxmlToLoad = "/com/example/teamalfred/AiTutor.fxml";
         } else if (clickedButton == messageToggle) {
@@ -159,8 +151,6 @@ public class DashboardController {
     private void updateToggleStyles(ToggleButton activeToggle) {
         classManagementToggle.setStyle(INACTIVE_BUTTON_STYLE);
         assessmentToggle.setStyle(INACTIVE_BUTTON_STYLE);
-        analyticsToggle.setStyle(INACTIVE_BUTTON_STYLE);
-        resourcesToggle.setStyle(INACTIVE_BUTTON_STYLE);
         aiTutorToggle.setStyle(INACTIVE_BUTTON_STYLE);
         aiQuizToggle.setStyle(INACTIVE_BUTTON_STYLE);
         settingsToggle.setStyle(INACTIVE_BUTTON_STYLE);
@@ -180,6 +170,8 @@ public class DashboardController {
      */
     @FXML
     private void handleLogout(ActionEvent event) {
+        MessageController.resetSession();
+        UserSession.clearSession(); // clear current user session
         switchScene.switchScene(event, "/com/example/teamalfred/LogIn.fxml");
     }
 
@@ -209,4 +201,6 @@ public class DashboardController {
             dashboardRoot.setStyle("-fx-font-size: " + currentFontSize + "px;");
         }
     }
+
+
 }
