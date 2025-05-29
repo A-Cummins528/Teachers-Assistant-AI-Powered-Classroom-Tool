@@ -32,7 +32,8 @@
 
                 <PasswordField fx:id="passwordSettings" promptText="New Password" />
                 <PasswordField fx:id="passwordSettingsConfirm" promptText="Confirm New Password" />
-                <Label fx:id="invalidPassword" textFill="red" />
+                <Label fx:id="invalidPassword" textFill="red" visible="false" />
+                <Label fx:id="invalidPasswordConfirm" textFill="red" visible="false" />
 
                 <HBox spacing="10">
                     <Button onAction="#updateUserDetails" text="Update" />

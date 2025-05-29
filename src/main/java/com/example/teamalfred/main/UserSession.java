@@ -55,6 +55,11 @@ public class UserSession {
      *
      * @return The logged-in user (User object).
      */
+
+    public void setLoggedInUser(User user) {
+        this.loggedInUser = user;
+    }
+
     public static User getLoggedInUser() {
         return loggedInUser;
     }

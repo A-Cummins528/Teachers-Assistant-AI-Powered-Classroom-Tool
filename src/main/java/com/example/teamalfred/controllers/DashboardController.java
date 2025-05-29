@@ -11,9 +11,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import java.io.IOException;
 
 /**
@@ -79,28 +76,6 @@ public class DashboardController {
 
         if (messageToggle != null) {
             messageToggle.setToggleGroup(navGroup);
-        }
-    }
-
-    /**
-     * Loads the Settings page and passes the current user to its controller.
-     *
-     * @param event The ActionEvent triggered by clicking the settings button.
-     */
-    @FXML
-    private void handleGoToSettings(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/teamalfred/SettingsPage.fxml"));
-            Parent root = loader.load();
-
-            SettingsController controller = loader.getController();
-            controller.setCurrentUser(currentUser);
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene newScene = new Scene(root, stage.getScene().getWidth(), stage.getScene().getHeight());
-            stage.setScene(newScene);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
