@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.example.teamalfred","l":"com.example.teamalfred"},{"m":"com.example.teamalfred","l":"com.example.teamalfred.controllers"},{"m":"com.example.teamalfred","l":"com.example.teamalfred.database"}];updateSearchResults();
