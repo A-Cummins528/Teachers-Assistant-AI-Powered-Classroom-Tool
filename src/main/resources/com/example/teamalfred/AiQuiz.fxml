@@ -25,6 +25,6 @@
 
         <Button fx:id="generateQuizButton" layoutX="580.0" layoutY="95.0" onAction="#onGenerateQuizClicked" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Generate Quiz" />
 
-        <TextArea fx:id="quizOutputArea" editable="false" layoutX="40.0" layoutY="160.0" prefHeight="500.0" prefWidth="1087.0" style="-fx-control-inner-background: #1c2832; -fx-text-fill: white; -fx-font-size: 14px;" wrapText="true" />
+        <TextArea fx:id="outputArea" editable="false" layoutX="40.0" layoutY="160.0" prefHeight="500.0" prefWidth="1087.0" style="-fx-control-inner-background: #1c2832; -fx-text-fill: white; -fx-font-size: 14px;" wrapText="true" />
     </children>
 </AnchorPane>

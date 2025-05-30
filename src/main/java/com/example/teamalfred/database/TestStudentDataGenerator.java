@@ -1,6 +1,4 @@
 package com.example.teamalfred.database;
-import com.example.teamalfred.database.Student;
-import com.example.teamalfred.database.SqliteStudentDAO;
 
 import java.sql.SQLException;
 import java.util.Random;

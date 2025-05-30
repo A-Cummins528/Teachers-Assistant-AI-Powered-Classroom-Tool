@@ -9,11 +9,11 @@
 
 <AnchorPane prefHeight="600" prefWidth="800" style="-fx-background-color: #25282c;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.teamalfred.controllers.AiFeatures.AiLessonPlansController">
 
-    <TextField fx:id="topicInput" layoutX="50.0" layoutY="124.0" prefWidth="500" promptText="Enter lesson topic..." />
+    <TextField fx:id="topicTextField" layoutX="50.0" layoutY="124.0" prefWidth="500" promptText="Enter lesson topic..." />
 
     <Button fx:id="generateButton" layoutX="571.0" layoutY="124.0" mnemonicParsing="false" onAction="#handleGenerateLessonPlan" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Generate" />
 
-    <TextArea fx:id="lessonPlanOutput" editable="false" layoutX="50.0" layoutY="166.0" prefHeight="350" prefWidth="700" promptText="Lesson plan will appear here..." style="-fx-control-inner-background: #1c2832; -fx-text-fill: white; -fx-font-size: 14px;" wrapText="true" />
+    <TextArea fx:id="outputArea" editable="false" layoutX="50.0" layoutY="166.0" prefHeight="350" prefWidth="700" promptText="Lesson plan will appear here..." style="-fx-control-inner-background: #1c2832; -fx-text-fill: white; -fx-font-size: 14px;" wrapText="true" />
 
     <Button fx:id="exportButton" layoutX="636.0" layoutY="541.0" mnemonicParsing="false" onAction="#handleExportLessonPlan" text="Export Lesson Plan" />
    <Label layoutX="50.0" layoutY="27.0" prefHeight="61.0" prefWidth="474.0" text="Lesson Planner" textFill="WHITE">

@@ -1,7 +1,6 @@
 package com.example.teamalfred.database;
 
 import java.util.Objects;// Import Objects for equals and hashCode
-// com.example.teamalfred.database.UserDAO; // Not used in this class, consider removing
 import org.mindrot.jbcrypt.BCrypt;
 
 /**

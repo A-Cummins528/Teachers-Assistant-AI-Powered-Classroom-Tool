@@ -1,17 +1,29 @@
+/**
+ * AiQuizController manages the logic for generating AI-powered quizzes.
+ * 
+ * This controller:
+ * - Accepts a topic input from the user
+ * - Sends it to an AI backend to retrieve a list of quiz questions
+ * - Parses and displays the quiz questions in the output area
+ * - Allows users to export the quiz as a file
+ *
+ * It inherits shared behaviors from BaseAiController to manage UI state and alerts.
+ */
 package com.example.teamalfred.controllers.AiFeatures;
 
-import com.example.teamalfred.controllers.SwitchSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.application.Platform;
+import java.io.IOException;
 
 /**
  * Controller for the AiQuiz scene.
  * Handles generating a quiz from a topic using a local LLM.
  */
-public class AiQuizController {
+public class AiQuizController extends BaseAiController{
 
     /** Text field for user to input the quiz topic. */
     @FXML
@@ -37,28 +49,29 @@ public class AiQuizController {
                 + "At the end, include an answer key listing the correct answer for each question. "
                 + "Only include the quiz and the answer key in your response.";
 
-        // Show loading text in the TextArea
-        quizOutputArea.setText("Generating AI quiz, please wait...");
+        outputArea.setText("Generating AI quiz, please wait...");
 
-        // Show a popup
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Generating...");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Please wait while your AI quiz is being generated. " +
-                            "This might take one or two minutes depending on your hardware.");
-                    alert.show();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Generating...");
+        alert.setHeaderText(null);
+        alert.setContentText("Please wait while your AI quiz is being generated. " +
+                "This might take one or two minutes depending on your hardware.");
+        alert.show();
 
-        class MyResponseListener implements ResponseListener {
-            @Override
-            public void onResponseReceived(OllamaResponse response) {
-                quizOutputArea.setText(response.getResponse());
+        new Thread(() -> {
+            try {
+                String response = sendRequestToLLM(fullPrompt);
+                Platform.runLater(() -> {
+                    alert.close();
+                    outputArea.setText(response);
+                });
+            } catch (IOException e) {
+                Platform.runLater(() -> {
+                    alert.close();
+                    displayError("Failed to generate quiz: " + e.getMessage());
+                });
             }
-        }
-
-        String apiURL = "http://127.0.0.1:11434/api/generate/";
-        String model = "gemma3"; // Replace with your actual model if different
-
-        OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
-        fetcher.fetchAsynchronousOllamaResponse(model, fullPrompt, new MyResponseListener());
+        }).start();
     }
+
 }
