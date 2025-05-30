@@ -1,3 +1,4 @@
+/*
 module com.example.teamalfred {
     requires javafx.controls;
     requires javafx.fxml;
@@ -26,3 +27,5 @@ module com.example.teamalfred {
     exports com.example.teamalfred.controllers.AiFeatures;
     opens com.example.teamalfred.controllers.AiFeatures to javafx.fxml;
 }
+
+ */
