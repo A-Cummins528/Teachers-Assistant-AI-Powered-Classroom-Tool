@@ -1,85 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-<<<<<<< Updated upstream
-=======
-  <component name="AnalysisUIOptions">
-    <option name="ANALYZE_INJECTED_CODE" value="false" />
-  </component>
->>>>>>> Stashed changes
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1728cf51-1cd3-499f-bc49-5f819aa5b33e" name="Changes" comment="">
-<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/HelloApplication.java" afterDir="false" />
-=======
-      <change afterPath="$PROJECT_DIR$/.github/workflows/maven.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/allclasses-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/allpackages-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/HelloApplication.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/Main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/controllers/DashboardController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/controllers/LogIn.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/controllers/LogInController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/controllers/SignUpController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/controllers/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/controllers/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/controllers/switchSceneController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/database/DatabaseConnection.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/database/DatabaseUserDAO.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/database/IUserDAO.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/database/User.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/database/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/database/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/com/example/teamalfred/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/com.example.teamalfred/module-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/copy.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/element-list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/help-doc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/index-files/index-1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/index-files/index-10.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/index-files/index-11.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/index-files/index-2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/index-files/index-3.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/index-files/index-4.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/index-files/index-5.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/index-files/index-6.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/index-files/index-7.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/index-files/index-8.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/index-files/index-9.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/legal/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/legal/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/legal/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/legal/jquery.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/legal/jqueryUI.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/link.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/member-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/module-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/overview-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/package-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/resources/glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/resources/x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/script-dir/jquery-3.7.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/script-dir/jquery-ui.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/script-dir/jquery-ui.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/search-page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/search.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/stylesheet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/tag-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadoc/type-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/main/UserSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/main/UserSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/concac.java" afterDir="false" />
->>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +55,6 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.HelloApplication.executor": "Run",
-    "Maven.teamAlfred [org.apache.maven.plugins:maven-javadoc-plugin:3.4.0:javadoc].executor": "Run",
     "Maven.teamAlfred [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",

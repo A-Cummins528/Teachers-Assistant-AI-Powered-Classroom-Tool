@@ -50,9 +50,3 @@ jobs:
           path: target/surefire-reports/*.xml # Path to test results (Surefire default)
           reporter: java-junit # Format of test results
           # fail-on-error: true # You might remove this - let the 'mvn verify' step handle the failure status
-      - name: Generate Javadoc
-        run: mvn javadoc:javadoc
-      - name: Publish Javadoc
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: target/docs/javadoc

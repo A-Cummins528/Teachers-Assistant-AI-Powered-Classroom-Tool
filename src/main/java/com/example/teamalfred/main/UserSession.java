@@ -3,73 +3,65 @@ package com.example.teamalfred.main;
 import com.example.teamalfred.database.User;
 
 /**
- * Manages the session for the currently logged-in user using the Singleton pattern.
- * <p>
- * This class ensures there is only one active user session at a time, and provides
- * global access to session data throughout the application.
+ * This class is used to store and access the currently logged-in user throughout the app.
+ * It's kind of like a global session manager.
+ *
+ * We use the Singleton pattern here to make sure there's only ever one active session at a time.
  */
 public class UserSession {
 
-    /** The singleton instance of the UserSession. */
+    // Singleton instance - there should only ever be one session at once
     private static UserSession instance;
 
-    /** The user currently logged in. */
+    // The user that is currently logged in
     private static User loggedInUser = null;
 
     /**
-     * Private constructor to prevent direct instantiation.
-     * Use {@link #initSession(User)} to start a session.
+     * Private constructor so that no one can create a session directly from outside.
+     * We use initSession() to start a session properly.
      *
-     * @param user The user who has logged in.
+     * @param user The user that has just logged in.
      */
     private UserSession(User user) {
-        loggedInUser = user;
+        // Store the logged-in user
+        this.loggedInUser = user;
     }
 
     /**
-     * Initializes the session for a logged-in user.
-     * This method should be called once, right after a successful login.
-     * Subsequent calls will have no effect if a session already exists.
+     * Starts the session if it's not already started.
+     * Should be called right after a successful login.
      *
      * @param user The user object representing the logged-in user.
      */
     public static void initSession(User user) {
         if (instance == null) {
+            // Only set the session if it hasn't been started already
             instance = new UserSession(user);
         }
     }
 
     /**
-     * Returns the singleton instance of the active user session.
+     * Returns the current UserSession instance (if you need to check something about it).
      *
-     * @return The active {@code UserSession} instance, or {@code null} if no session exists.
+     * @return The active UserSession (can be null if no one is logged in).
      */
     public static UserSession getInstance() {
         return instance;
     }
 
     /**
-     * Returns the user currently logged in.
+     * Returns the user that is currently logged in.
+     * This is super handy for checking who the current user is in any part of the app.
      *
-     * @return The {@code User} object representing the logged-in user, or {@code null} if no user is logged in.
+     * @return The logged-in user (User object).
      */
     public static User getLoggedInUser() {
         return loggedInUser;
     }
 
     /**
-     * Updates the logged-in user for the session.
-     * This can be used if user data changes and needs to be refreshed in the session.
-     *
-     * @param user The updated {@code User} object.
-     */
-    public void setLoggedInUser(User user) {
-        loggedInUser = user;
-    }
-
-    /**
-     * Clears the current session and logs out the user.
-     * This resets the session to its initial state.
+     * Clears the current session, usually called during logout.
+     * This will effectively "log out" the user.
      */
     public static void clearSession() {
         instance = null;
