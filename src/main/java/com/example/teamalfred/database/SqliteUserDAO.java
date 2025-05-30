@@ -1,8 +1,5 @@
 package com.example.teamalfred.database;
 
-import com.example.teamalfred.database.User;
-import com.example.teamalfred.database.UserDAO;
-
 import java.sql.Connection; // Import required JDBC classes
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

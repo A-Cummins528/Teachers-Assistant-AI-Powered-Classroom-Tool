@@ -2,6 +2,7 @@
 <project version="4">
   <component name="AnalysisUIOptions">
     <option name="ANALYZE_INJECTED_CODE" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
@@ -9,100 +10,25 @@
   <component name="ChangeListManager">
     <list default="true" id="1728cf51-1cd3-499f-bc49-5f819aa5b33e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db-shm" beforeDir="false" afterPath="$PROJECT_DIR$/database.db-shm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db-wal" beforeDir="false" afterPath="$PROJECT_DIR$/database.db-wal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/allclasses-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/allpackages-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/HelloApplication.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/HelloApplication.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AddAssessmentController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AddAssessmentController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AddAssessmentToSubjectController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AddAssessmentToSubjectController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/AiLessonPlansController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/AiLessonPlansController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/AiQuizController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/AiQuizController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/AiTutorController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/AiTutorController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/OllamaResponse.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/OllamaResponse.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/OllamaResponseFetcher.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/OllamaResponseFetcher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/OllamaResponseTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/OllamaResponseTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/ResponseListener.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/ResponseListener.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AiFeatures/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AnalyticsController.StatEntry.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AnalyticsController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AssessmentsViewController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/AssessmentsViewController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/ClassManagementController.StudentAttendance.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/ClassManagementController.StudentAttendance.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/ClassManagementController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/ClassManagementController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/DashboardController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/DashboardController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/EditAssessmentController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/EditAssessmentController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/LogInController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/LogInController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/MessageController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/MessageController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/SettingsController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/SettingsController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/SignUpController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/SignUpController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/SwitchSceneController.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/SwitchSceneController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/controllers/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/Assessment.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/Assessment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/AssessmentDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/AssessmentDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/AttendanceDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/AttendanceDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/AttendanceRecord.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/AttendanceRecord.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/Classroom.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/Classroom.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/ClassroomDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/ClassroomDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/DatabaseConnection.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/DatabaseConnection.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/DatabaseConnectionTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/DatabaseConnectionTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/DatabaseSchemaManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/DatabaseSchemaManager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/DatabaseSchemaManagerTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/DatabaseSchemaManagerTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/MessagingDatabaseManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/MessagingDatabaseManager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/SqliteAssessmentDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/SqliteAssessmentDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/SqliteAttendanceDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/SqliteAttendanceDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/SqliteClassroomDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/SqliteClassroomDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/SqliteStudentDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/SqliteStudentDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/SqliteUserDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/SqliteUserDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/SqliteUserDAOTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/SqliteUserDAOTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/Student.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/Student.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/StudentDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/StudentDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/TestStudentDataGenerator.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/TestStudentDataGenerator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/User.UserRole.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/User.UserRole.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/User.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/User.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/UserDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/UserDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/UserTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/UserTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/database/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/main/UserSession.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/main/UserSession.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/main/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/main/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/main/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/main/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/com/example/teamalfred/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/help-doc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-10.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-11.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-12.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-13.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-14.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-15.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-15.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-16.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-16.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-17.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-17.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-18.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-18.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-5.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-7.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-8.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index-files/index-9.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/member-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/overview-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/overview-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/javadocs/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/javadocs/type-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AddAssessmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AddAssessmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AddAssessmentToSubjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AddAssessmentToSubjectController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiLessonPlansController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiLessonPlansController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiQuizController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiQuizController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiTutorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/AiTutorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AnalyticsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiLessonPlans.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiLessonPlans.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiQuiz.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiQuiz.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiTutor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/teamalfred/AiTutor.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/BaseAiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AiFeatures/BaseAiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AssessmentsViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/AssessmentsViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/ClassManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/ClassManagementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/EditAssessmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/EditAssessmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/LogInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/LogInController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/MessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/MessageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/SettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/SignUpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/SwitchSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/controllers/SwitchSceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/SqliteUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/TestStudentDataGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/TestStudentDataGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/teamalfred/database/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/teamalfred/database/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/teamalfred/database/UserTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,24 +79,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.teamAlfred [test].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;refactoring-&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/adama/OneDrive/Documents/GitHub/TeamAlfred/src/main/java/com/example/teamalfred/controllers/AiFeatures&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/adama/OneDrive/Documents/GitHub/TeamAlfred/src/main/resources/com/example/teamalfred&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "Maven.teamAlfred [package].executor": "Run",
+    "Maven.teamAlfred [test].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "refactoring-",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "C:/Users/adama/OneDrive/Documents/GitHub/TeamAlfred/src/main/java/com/example/teamalfred/controllers/AiFeatures",
+    "last_opened_file_path": "C:/Users/adama/OneDrive/Documents/GitHub/TeamAlfred/src/main/resources/com/example/teamalfred",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\adama\OneDrive\Documents\GitHub\TeamAlfred\src\main\resources\com\example\teamalfred" />

@@ -11,7 +11,6 @@
  */
 package com.example.teamalfred.controllers.AiFeatures;
 
-import com.example.teamalfred.controllers.SwitchSceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
