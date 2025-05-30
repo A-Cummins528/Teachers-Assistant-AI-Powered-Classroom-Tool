@@ -28,8 +28,7 @@ jobs:
       - name: Build and Generate Javadocs
         run: mvn --batch-mode package
 
-      - name: Upload Javadocs
-        uses: actions/upload-artifact@v4
+      - name: Publish Javadoc
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          name: javadoc
-          path: target/docs/javadoc
+          folder: target/docs/javadoc
