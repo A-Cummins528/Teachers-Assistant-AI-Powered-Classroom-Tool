@@ -107,7 +107,7 @@ https://github.com/A-Cummins528/Teachers-Assistant-AI-Powered-Classroom-Tool.git
 
 ## 5. Project Origin & Future Direction
 
-This project was originally a collaborative effort for a university assessment by **Team Alfred**. I would like to acknowledge the contributions and teamwork from the original members:
+This project was originally a collaborative effort for a university assessment by **Team Alfred**. I would like to acknowledge the valuable contributions and teamwork from my original teammates:
 
  - Joshua Madams
 
@@ -117,5 +117,5 @@ This project was originally a collaborative effort for a university assessment b
 
  - Justin Coglan
 
-This repository is based on that initial team submission. I am now maintaining and expanding this project solo. Future work will involve refactoring the existing codebase, fixing bugs, and implementing new features to further develop the "AcademiAI" concept.
+This repository is based on that initial team submission. I am now maintaining and expanding this project solo, with plans to refactor the code, fix bugs, and implement new features.
 ![Lesson Planner](assets/images/LessonPlanner.gif)
