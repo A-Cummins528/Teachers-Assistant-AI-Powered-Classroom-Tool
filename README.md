@@ -54,36 +54,31 @@ As this was a team project, my role involved both technical implementation and p
 	
 - Expanded the database schema and DAO layer to support new features like Teacher/Student user types, grades, and classes.
 
-  - **AI (LLM) Feature Implementation:** 
+  ### **AI (LLM) Feature Implementation:** 
 	
-	- Implemented the **"AI Quiz Creator"** feature, integrating with a local Gemma 3 model (via Ollama) to generate quizzes.
+- Implemented the **"AI Quiz Creator"** feature, integrating with a local Gemma 3 model (via Ollama) to generate quizzes.
 
-	- Developed the **"AI Tutor"** chat feature, providing users with real-time, AI-powered assistance.
+- Developed the **"AI Tutor"** chat feature, providing users with real-time, AI-powered assistance.
 
-	- Improved UX by adding visual feedback to the user while the LLM is processing a request.
+- Improved UX by adding visual feedback to the user while the LLM is processing a request.
 
-  - **Test-Driven Development (TDD) & Refactoring:** 
+  ### **Test-Driven Development (TDD) & Refactoring:** 
 
-	- Drove the project's testing strategy by writing a comprehensive suite of **14+ unit tests** for the entire database layer (``DatabaseConnection``, ``DatabaseSchemaManager``, ``SqliteUserDAO``).
+- Drove the project's testing strategy by writing a comprehensive suite of **14+ unit tests** for the entire database layer (``DatabaseConnection``, ``DatabaseSchemaManager``, ``SqliteUserDAO``).
 
-	- Authored unit tests for the AI (Ollama) response models.
+- Authored unit tests for the AI (Ollama) response models.
 
-	- Refactored the database layer to adhere to the **Single Responsibility Principle (SRP)**, enhancing modularity and testability.
+- Refactored the database layer to adhere to the **Single Responsibility Principle (SRP)**, enhancing modularity and testability.
 
-  - **CI/CD & Documentation:**
+  ### **CI/CD & Documentation:**
 	
-	- Contributed to the CI/CD pipeline by adding the **Maven Javadoc Plugin** to the ``pom.xml`` and fixing ``.yml`` permissions to enable unit tests in the build.
+- Contributed to the CI/CD pipeline by adding the **Maven Javadoc Plugin** to the ``pom.xml`` and fixing ``.yml`` permissions to enable unit tests in the build.
 
-	- Wrote extensive Javadoc comments for the database and model classes, and included Javadocs in version control.
+- Wrote extensive Javadoc comments for the database and model classes, and included Javadocs in version control.
 
-  - **Agile Project Management:**
+  ### **Agile Project Management:**
 
     - Took a lead role in the Agile process, organizing weekly stand-up meetings, sprint planning sessions, and retrospectives.
 
     - Maintained all project artifacts, including meeting notes, user stories, and the product backlog, to ensure the team stayed on track with assessment milestones.
 
-### Agile Project Management
-
-    Scrum/Agile Facilitation: I took a lead role in the Agile process, organizing weekly stand-up meetings, sprint planning sessions, and retrospectives.
-
-    Artifact Management: Maintained all project artifacts, including meeting notes, user stories, and the product backlog, ensuring the team stayed on track with the assessment milestones.
