@@ -8,10 +8,12 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/
 *.iws
 *.iml
 *.ipr
 database.db
+database.db-shm
 
 ### Eclipse ###
 .apt_generated
@@ -34,6 +36,7 @@ build/
 
 ### VS Code ###
 .vscode/
+.vs/
 
 ### Mac OS ###
 .DS_Store
